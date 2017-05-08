@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+}
+
+.loginParentContainer{
+    width: 100vw;;
+    height: 100vh;;
+    position: relative;
+}
+
+
+.loginImg1{
+
+    height: 99vh;
+    width: 100vw;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+
+}
+
+.loginChildContainer1{
+
+    position: absolute;
+    background-color: white;
+    top:50%;
+    left: 50%;
+    transform:translate(-50%,-50%)
+
+}
+.loginChildContainer2{
+    text-align: center;
+}
+
+.loginImg2{
+
+    width:30%;
+
+}
+h3{
+    color:lightslategray;
+}
+
+a img{
+    width:260px;
+}
