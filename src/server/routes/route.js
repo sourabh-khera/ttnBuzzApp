@@ -4,9 +4,9 @@
 
 let GoogleStrategy=require("../auth/googleAuth");
 let expressSession=require("express-session");
-//let bodyparser=require("body-parser");
 let passport=require("passport");
-
+const postController=require("../api/post/post.controller")
+const userController=require("../api/users/users.controller")
 
 module.exports=(app)=> {
 
@@ -18,9 +18,18 @@ module.exports=(app)=> {
 
     app.get("/login/google", passport.authenticate('google', {scope: ['profile', 'email']}));
 
+
     app.get("/oauth2callback", passport.authenticate('google', {
         successRedirect: "/buzz",
         failureRedirect: "/"
     }))
+
+    app.get("/logout",(req,res)=>{
+        req.logout();
+        res.redirect("/")
+    })
+
+    app.post("/post",postController.createPost)
+    app.get("/post",userController.fetchUserData)
 
 }

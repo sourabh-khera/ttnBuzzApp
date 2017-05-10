@@ -19,7 +19,7 @@ export default class Login extends React.Component {
                     <div className="loginChildContainer2">
                         <img src={LoginImg2} className="loginImg2"/>
                         <h3>Create Your Own Buzz</h3>
-                        <a href="http://localhost:3000/login/google"><img src={LoginImg3}/></a>
+                        <a href="/login/google"><img src={LoginImg3}/></a>
                     </div>
                 </div>
 

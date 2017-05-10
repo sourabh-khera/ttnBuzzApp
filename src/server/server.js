@@ -9,12 +9,14 @@ const app=express();
 const webpack=require("webpack");
 const webpackmiddleware=require("webpack-dev-middleware");
 const webpackconfig=require("../../webpack.config")
-const path=require("path")
+const path=require("path");
+const bodyParser=require("body-parser")
 
 
 
 const compiler=webpack(webpackconfig);
 
+app.use(bodyParser())
 app.use(webpackmiddleware(compiler,{
     hot:true,
     publicPath:'/',
@@ -25,7 +27,19 @@ app.use(webpackmiddleware(compiler,{
 }));
  router(app);
 
-    app.get("/*",function(req, res) {
+
+loggedIn=(req,res,next)=>{
+    if(req.url=="/"){
+        next();
+    }else
+        if(req.user){
+            next()
+        }else{
+            res.redirect("/")
+        }
+    }
+
+    app.get("/*",loggedIn,(req, res) =>{
        // console.log("----------hello")
         res.sendFile(path.resolve('src/client','./index.html'));
     })

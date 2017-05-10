@@ -1,8 +1,25 @@
 import React from 'react'
 import Cameraicon from "../../assets/images/Camera-icon.png"
+import {connect} from "react-redux"
+import {createPost,fetchPost} from "../../action/index"
+ class Creatbuzz extends React.Component {
 
+    constructor(){
+        super();
+        this.state={
+            postBody:"",
+        }
+    }
 
-export default class Creatbuzz extends React.Component {
+    onchange=(event)=>{
+        this.setState({postBody:event.target.value})
+    }
+
+    createPost=(postBody)=>{
+        this.props.dispatch(createPost(postBody))
+        this.setState({postBody:""})
+
+    }
     render() {
         return (
             <div>
@@ -11,7 +28,7 @@ export default class Creatbuzz extends React.Component {
                         Create buzz
                     </div>
                     <div className="input">
-                        <textarea placeholder="Share your thought..."></textarea>
+                        <textarea value={this.state.postBody} placeholder="Share your thought..." onChange={(event)=>this.onchange(event)}></textarea>
                     </div>
                     <div className="buzzfooter">
                         <div className="category">
@@ -23,7 +40,7 @@ export default class Creatbuzz extends React.Component {
 
                                 <input type="file" />
                             </div>
-                            <input type="submit" value="submit" />
+                            <input type="submit" value="submit" onClick={()=>this.createPost(this.state.postBody)}/>
                         </div>
                     </div>
                 </div>
@@ -31,3 +48,7 @@ export default class Creatbuzz extends React.Component {
         )
     }
 }
+
+
+const CreateBuzzContainer=connect(state=>state)(Creatbuzz)
+export default CreateBuzzContainer

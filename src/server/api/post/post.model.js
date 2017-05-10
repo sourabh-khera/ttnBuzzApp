@@ -1,34 +1,24 @@
 /**
  * Created by sourabh on 8/5/17.
  */
-const Postmongoose=require("../../constants/constant")
 
-const postSchema = new Postmongoose.mongoose.Schema({
+const Mongoose=require("mongoose");
+const PostSchema = Mongoose.Schema({
 
-    createdBy: {
-        type: String,
-    },
+    postedBy: { type:Mongoose.Schema.Types.ObjectId,ref:'User' },
+    postBody:{type:String},
+
     image: {
         type: String,
     },
+
     likes:{
         type:Array
     },
     dislikes:{
         type:Array,
     },
-    comment: [
-        {
-            userId: {
-                type: Number
-            },
-            commentBody: {
-                type: String,
-            },
 
-        }
-    ]
+},{versionKey:false,timestamps:true});
 
-},{versionKey:false,timestamp:true});
-
-module.exports=Postmongoose.mongoose.model("posts",postSchema)
+module.exports = Mongoose.model("Post", PostSchema)

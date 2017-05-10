@@ -3,3 +3,9 @@
  */
 
 
+exports.fetchUserData=(req,res)=>{
+    const userId=req.user;
+
+    userService.userData(userId,res)
+
+}

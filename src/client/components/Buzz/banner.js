@@ -5,6 +5,7 @@
 import React from "react"
 import BannerImg1 from "../../assets/images/tothenew.jpg"
 import BannerImg2 from "../../assets/images/Road_Trip-cover-photo-26153.jpg"
+import {Link} from "react-router-dom"
 export default class Banner extends React.Component{
 
     render(){
@@ -17,7 +18,7 @@ export default class Banner extends React.Component{
 
                   </div>
                     <div className="bannerChildContainer2">
-                        <button type="button" className="btn btn-success">LogOut</button>
+                        <button type="button" className="btn btn-success"><a href="/logout">Logout</a></button>
                     </div>
                     <div className="bannerChildContainer3">
                         <img className="bannerImg2" src={BannerImg2}/>

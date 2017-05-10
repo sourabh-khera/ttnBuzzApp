@@ -2,8 +2,8 @@
  * Created by sourabh on 5/5/17.
  */
 
-const Usermongoose=require("../../constants/constant");
-let usersSchema=new Usermongoose.mongoose.Schema({
+const Mongoose=require("mongoose");
+const UsersSchema=new Mongoose.Schema({
 
     name:{
        type:String,
@@ -16,14 +16,10 @@ let usersSchema=new Usermongoose.mongoose.Schema({
     },
     role:{
         type:String,
-        default:"User"
+        default:"Developer"
     },
-    datecreated:{
-        type:Date,
-        default:Date.now,
-    }
 
-},{versionKey:false})
+},{versionKey:false,timestamps:true})
 
-module.exports=Usermongoose.mongoose.model('users',usersSchema)
+module.exports=Mongoose.model('User',UsersSchema)
 

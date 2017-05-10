@@ -7,7 +7,9 @@ import Login from "../client/container/login"
 import  "./css/login.css"
 import "./css/banner.css"
 import "./css/buzzComponent.css"
+import "./css/profile.css"
 import {BrowserRouter as Router,Route} from "react-router-dom"
+import Profile from "./container/viewProfile"
 import BuzzComponent from "../client/components/Buzz/BuzzComponent"
 
 export default class App extends React.Component{
@@ -17,8 +19,10 @@ export default class App extends React.Component{
         return(
             <Router>
             <div>
+
                 <Route exact path="/" component={Login}/>
                 <Route path="/buzz" component={BuzzComponent}/>
+
             </div>
             </Router>
         )

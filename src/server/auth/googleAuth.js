@@ -2,9 +2,9 @@
  * Created by sourabh on 4/5/17.
  */
 const googleAuthConstants = require("../constants/constant");
-let passport = require("passport");
-let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-let userSchema=require("./users/users.model")
+const passport = require("passport");
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const userSchema=require("../api/users/users.model")
 exports.useGoogle = () => {
     passport.use(new GoogleStrategy({
 
