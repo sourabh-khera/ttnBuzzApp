@@ -4,7 +4,13 @@
 import {
     createPostStarted,
     createPostSuccess,
-    createPostFailure
+    createPostFailure,
+    // fetchUserStarted,
+    // fetchUserSuccess,
+    // fetchUserFailure,
+    fetchPostStarted,
+    fetchPostSuccess,
+    fetchPostFailure
 } from "./actions"
 import fetch from "isomorphic-fetch"
 
@@ -19,11 +25,11 @@ export const createPost = (postData) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({data: postData})
+            body: JSON.stringify(postData)
         })
             .then(response => response.json())
-            .then(postData => {
-                dispatch(createPostSuccess(postData))
+            .then(data => {
+                dispatch(createPostSuccess(data.posts))
             }).catch((err) => {
             dispatch(createPostFailure(err))
         })
@@ -31,19 +37,37 @@ export const createPost = (postData) => {
 }
 
 
-export const fetchUserDetails = (postData) => {
+export const fetchUserDetails = (userData) => {
 
     return (dispatch) => {
-        dispatch(createPostStarted())
+        dispatch(createStarted())
         fetch("http://localhost:3000/post", {
             credentials: "include",
             method: "get",
-           })
+        })
             .then(response => response.json())
             .then(userData => {
                 dispatch(createPostSuccess(userData))
             }).catch((err) => {
             dispatch(createPostFailure(err))
+        })
+    }
+}
+
+
+export const fetchPostDetails = () => {
+
+    return (dispatch) => {
+        dispatch(fetchPostStarted())
+        fetch("http://localhost:3000/post", {
+            credentials: "include",
+            method: "get",
+        })
+            .then(response => response.json())
+            .then(data => {
+                dispatch(fetchPostSuccess(data.posts))
+            }).catch((err) => {
+            dispatch(fetchPostFailure(err))
         })
     }
 }

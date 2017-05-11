@@ -24,12 +24,14 @@ module.exports=(app)=> {
         failureRedirect: "/"
     }))
 
-    app.get("/logout",(req,res)=>{
+    app.get("/logout",(req,res) => {
         req.logout();
         res.redirect("/")
     })
 
     app.post("/post",postController.createPost)
-    app.get("/post",userController.fetchUserData)
+    app.get("/post",postController.fetchPostData)
+
+
 
 }

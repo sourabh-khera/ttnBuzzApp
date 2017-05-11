@@ -18,6 +18,9 @@ const PostSchema = Mongoose.Schema({
     dislikes:{
         type:Array,
     },
+    status:{
+        type:String,
+    }
 
 },{versionKey:false,timestamps:true});
 

@@ -3,26 +3,29 @@
  */
 
 
-const postModel=require("./post.model")
-exports.post=(postData,user,res)=>{
+const postModel = require("./post.model")
 
-    postModel.create({postBody:postData,postedBy:user._id},(err,post)=>{
-        if (err) {
-            res.send({ message: "error while creating user", error: err });
-        } else {
-            populateUserData(res)
-        }
+exports.post = (postData, user, res) => {
+    return new Promise(function(resolve, reject) {
+        postModel.create({ postBody:postData.postBody, status:postData.value, postedBy: user._id }, (err,post) => {
+            if (err) {
+                reject({ message: "error while creating user", error: err })
+            }
+            resolve(post)
+        })
     })
 };
 
-populateUserData=(res)=> {
-    postModel.
-    findOne({})
-        .sort({createdAt:-1})
-    .populate("postedBy")
-    .exec(function (err, post) {
-        if (err) return console.log(err)
-            console.log(post)
-            res.send(post);
-        });
-    }
+exports.populateUserData = () => {
+    return new Promise(function(resolve, reject) {
+        postModel
+            .find({})
+            .sort({createdAt: -1})
+            .populate("postedBy")
+            .exec(function (err, posts) {
+                if (err) reject({messge: "Unable to fetch all posts from the database", error: err})
+                resolve(posts)
+            });
+    })
+}
+

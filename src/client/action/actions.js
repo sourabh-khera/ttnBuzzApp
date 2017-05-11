@@ -5,9 +5,9 @@ import {
     CREATE_POST_STARTED,
     CREATE_POST_SUCCESS,
     CREATE_POST_FAILURE,
-    FETCH_USER_STARTED,
-    FETCH_USER_SUCCESS,
-    FETCH_USER_FAILURE
+    FETCH_POST_STARTED,
+    FETCH_POST_SUCCESS,
+    FETCH_POST_FAILURE
 
 
 } from "../constants/constants"
@@ -18,21 +18,35 @@ export const createPostStarted = () => {
 }
 
 export const createPostSuccess = (postData) => {
-    return {type: CREATE_POST_SUCCESS,postData}
+    return {type: CREATE_POST_SUCCESS, postData}
 }
 
 export const createPostFailure = (err) => {
-    return {type: CREATE_POST_FAILURE,err}
+    return {type: CREATE_POST_FAILURE, err}
 }
 
-export const fetchUserStarted = () => {
-    return {type: Fetch_USER_STARTED}
+export const fetchPostStarted = () => {
+    return {type: FETCH_POST_STARTED}
 }
 
-export const fetchUserSuccess = (userData) => {
-    return {type: Fetch_USER_SUCCESS,userData}
+export const fetchPostSuccess = (postData) => {
+    return {type: FETCH_POST_SUCCESS, postData}
 }
 
-export const fetchUserFailure = (err) => {
-    return {type: Fetch_USER_FAILURE,err}
+export const fetchPostFailure = (err) => {
+    return {type: FETCH_POST_FAILURE, err}
 }
+//
+//
+// export const fetchUserStarted = () => {
+//     return {type: Fetch_USER_STARTED}
+// }
+//
+// export const fetchUserSuccess = (userData) => {
+//     return {type: Fetch_USER_SUCCESS,userData}
+// }
+//
+// export const fetchUserFailure = (err) => {
+//     return {type: Fetch_USER_FAILURE,err}
+// }
+//

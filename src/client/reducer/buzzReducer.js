@@ -8,7 +8,10 @@ import {
     CREATE_POST_FAILURE,
     FETCH_USER_STARTED,
     FETCH_USER_SUCCESS,
-    FETCH_USER_FAILURE
+    FETCH_USER_FAILURE,
+    FETCH_POST_STARTED,
+    FETCH_POST_SUCCESS,
+    FETCH_POST_FAILURE
 
 
 }from "../constants/constants"
@@ -33,11 +36,30 @@ export const postReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                postData:[...state.postData,action.postData]
+                postData: action.postData
 
             }
         }
         case CREATE_POST_FAILURE: {
+            return {
+                ...state,
+                error: action.err
+            }
+        }
+        case FETCH_POST_STARTED: {
+            return {
+                ...state
+            }
+        }
+        case FETCH_POST_SUCCESS: {
+
+            return {
+                ...state,
+                postData: action.postData
+
+            }
+        }
+        case FETCH_POST_FAILURE: {
             return {
                 ...state,
                 error: action.err

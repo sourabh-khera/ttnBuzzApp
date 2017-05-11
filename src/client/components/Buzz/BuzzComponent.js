@@ -1,59 +1,68 @@
 import React from 'react'
 import BannerImg1 from "../../assets/images/tothenew.jpg"
 import BannerImg2 from "../../assets/images/Road_Trip-cover-photo-26153.jpg"
-import LeftComponent from "./leftComponent"
-import CreateBuzz from "./createbuzz"
-import Post from "./post"
-import Banner from "./banner"
+import LeftComponent from "./Leftcomponent"
+import CreateBuzz from "./Createbuzz"
+import Post from "./Post"
+import Banner from "./Banner"
 import Createcomplaint from "../complaints/createComplaint"
+import {connect} from "react-redux"
+import {fetchPostDetails} from "../../action/index"
 
-export default class Buzzcomponent extends React.Component {
-    constructor(){
+class Buzzcomponent extends React.Component {
+    constructor() {
         super();
-        this.state={
+        this.state = {
 
-            edit:true
+            edit: true,
+            value: ""
         }
     }
-    updateOnComplaint=()=>{
-        this.setState({edit:false},()=>{
-            console.log("compalint=====",this.state.edit)
+
+    componentDidMount() {
+        this.props.dispatch(fetchPostDetails())
+    }
+
+    updateOnComplaint = () => {
+        this.setState({edit: false}, () => {
+            console.log("compalint=====", this.state.edit)
         })
     }
-    updateOnEdit=()=> {
+    updateOnBuzz = () => {
         this.setState({edit: true}, () => {
             console.log("edit=====", this.state.edit)
         })
     }
 
-    render(){
 
+    render() {
         return (
             <div className="Component">
-                  <Banner/>
+                <Banner/>
                 <div className="containers">
-                    <LeftComponent updateOnComplaint={this.updateOnComplaint} updateOnEdit={this.updateOnEdit}/>
+                    <LeftComponent updateOnComplaint={this.updateOnComplaint} updateOnEdit={this.updateOnBuzz}/>
 
                     <div className="rightpanel">
                         {
-                            (this.state.edit)?
-                                 <div>
-                                     <CreateBuzz/>
-                                     <Post/>
-                                 </div>
-                                    :
+                            (this.state.edit) ?
+                                <div>
+                                    <CreateBuzz changeValue={this.updateValue}/>
+                                    <Post/>
+                                </div>
+                                :
 
-                            <Createcomplaint/>
+                                <Createcomplaint/>
                         }
-
-
-
-
-
-
                     </div>
                 </div>
             </div>
         )
     }
 }
+
+
+const mapStateToProps = (state) => ({
+    postData: state.postData,
+})
+
+export default connect(mapStateToProps)(Buzzcomponent)

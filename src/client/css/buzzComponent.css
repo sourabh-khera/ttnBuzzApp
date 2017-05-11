@@ -214,9 +214,9 @@ textarea::-webkit-input-placeholder {
     margin-right: 10px;
     margin-top: 15px;
     float: left;
-    border:1px solid lightgray;
-    border-radius: 5px;
-    padding: 5px;
+    /*border:1px solid lightgray;*/
+    /*border-radius: 5px;*/
+    /*padding: 5px;*/
 }
 
 .postimage img {
