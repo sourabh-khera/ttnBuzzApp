@@ -12,9 +12,10 @@ const webpackconfig = require("../../webpack.config")
 const path = require("path");
 const bodyParser = require("body-parser")
 
+console.log("+++", process.cwd(), __dirname);
 
+app.use(express.static('./src/server/public'));
 const compiler = webpack(webpackconfig);
-
 app.use(bodyParser())
 app.use(webpackmiddleware(compiler, {
     hot: true,
@@ -25,7 +26,6 @@ app.use(webpackmiddleware(compiler, {
     historyApiFallback: true,
 }));
 router(app);
-
 
 loggedIn = (req, res, next) => {
     if (req.url == "/") {

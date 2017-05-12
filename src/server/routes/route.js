@@ -7,8 +7,23 @@ let expressSession=require("express-session");
 let passport=require("passport");
 const postController=require("../api/post/post.controller")
 const userController=require("../api/users/users.controller")
+const multer=require("multer");
 
-module.exports=(app)=> {
+const storage=multer.diskStorage({
+    destination: (req,file,cb)=>{
+        cb(null,"/home/sourabh/Desktop/ttndbuzzapp/src/server/public/upload")
+    },
+
+    filename: (req,file,cb)=>{
+        cb(null, Date.now()+file.originalname)
+    }
+});
+
+const upload=multer({storage:storage})
+
+
+
+module.exports=(app) => {
 
     app.use(expressSession({secret: '4235234643frsdfd'}),
         passport.initialize(),
@@ -29,7 +44,8 @@ module.exports=(app)=> {
         res.redirect("/")
     })
 
-    app.post("/post",postController.createPost)
+
+    app.post("/post",upload.single('image_path'),postController.createPost)
     app.get("/post",postController.fetchPostData)
 
 

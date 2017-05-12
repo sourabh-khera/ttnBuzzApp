@@ -2,15 +2,13 @@ import React from 'react'
 import UserIcon from "../../assets/images/user-icon-png-pnglogocom.png"
 import Guy from "../../assets/images/guy.jpg"
 import {connect} from "react-redux"
-
-const defaultImageUrl = 'http://webneel.com/sites/default/files/images/project/create-user%20avator-icon%20(12).jpg';
-
 class Post extends React.Component {
     render () {
-        const userDetails = this.props.postData.map((post, i) => {
-        const postBody = post.postBody || null
-        const postImageUrl =   post.image || defaultImageUrl
-        return (
+        const buzzDetails = this.props.postData.map((post, i) => {
+        const postBody = post.postBody
+        const postImageUrl =   post.image
+
+            return (
             <div key={i}>
                 <div className="post">
                     <div className="postheader">
@@ -36,9 +34,12 @@ class Post extends React.Component {
                                 {postBody}
                             </p>
                         </div>
-                        <div className="postimage">
-                            <img src={""} />
-                        </div>
+                        {
+                            (postImageUrl)?
+                            <div className="postimage">
+                                <img src={"/upload/" + postImageUrl}/>
+                            </div>:<span></span>
+                        }
                     </div>
                     <div className="postfooter">
                         <div className="likediscom">
@@ -56,7 +57,7 @@ class Post extends React.Component {
         })
         return (
             <div>
-                {userDetails}
+                {buzzDetails}
             </div>
         )
     }

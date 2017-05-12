@@ -5,13 +5,18 @@
 const postService = require("./post.service")
 exports.createPost = (req,res) => {
     const postData = req.body;
-    postService.post(postData,req.user, res)
+    let Postimage=null
+    if(req.file && req.file.filename) {
+        Postimage=req.file.filename;
+    }
+
+    postService.post(postData,req.user,Postimage, res)
         .then(()=> {
             return postService.populateUserData()
         })
         .then( (posts) => {
             res.send({posts})
-        }).catch(function (error){
+        }).catch(function (error) {
             res.send(error)
         })
 

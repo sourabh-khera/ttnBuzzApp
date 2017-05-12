@@ -3,12 +3,13 @@
  */
 
 import {render} from "react-dom"
-import App from "./client/app"
+import App from "./app"
 import React from "react"
-import store from "./client/store"
+import store from "./store/index"
 import {Provider} from "react-redux"
+const app=document.getElementById("app")
 render(
     <Provider store={store} >
-    <App/>
-    </Provider>,document.getElementById("app")
+        <App/>
+    </Provider>,app
  );
