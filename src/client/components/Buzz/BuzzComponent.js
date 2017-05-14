@@ -7,7 +7,8 @@ import Post from "./Post"
 import Banner from "./Banner"
 import Createcomplaint from "../complaints/createComplaint"
 import {connect} from "react-redux"
-import {fetchPostDetails} from "../../action/index"
+import {fetchPostDetails,fetchUserDetails} from "../../action/index"
+
 
 class Buzzcomponent extends React.Component {
     constructor() {
@@ -19,9 +20,14 @@ class Buzzcomponent extends React.Component {
         }
     }
 
+
     componentDidMount() {
+
         this.props.dispatch(fetchPostDetails())
-    }
+
+     }
+
+
 
     updateOnComplaint = () => {
         this.setState({edit: false}, () => {

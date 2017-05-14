@@ -11,9 +11,9 @@ exports.createPost = (req,res) => {
     }
 
     postService.post(postData,req.user,Postimage, res)
-        .then(()=> {
-            return postService.populateUserData()
-        })
+        .then(
+             postService.populateUserData
+        )
         .then( (posts) => {
             res.send({posts})
         }).catch(function (error) {

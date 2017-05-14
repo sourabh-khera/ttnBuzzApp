@@ -6,7 +6,6 @@
 const postModel = require("./post.model");
 
 exports.post = (postData, user, Postimage,res) => {
-  console.log("postData",postData,  Postimage)
     return new Promise(function(resolve, reject) {
         postModel.create({ postBody:postData.postBody, status:postData.post_value, postedBy: user._id ,image:Postimage}, (err,post) => {
             if (err) {

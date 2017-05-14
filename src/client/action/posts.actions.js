@@ -36,17 +36,4 @@ export const fetchPostSuccess = (postData) => {
 export const fetchPostFailure = (err) => {
     return {type: FETCH_POST_FAILURE, err}
 }
-//
-//
-// export const fetchUserStarted = () => {
-//     return {type: Fetch_USER_STARTED}
-// }
-//
-// export const fetchUserSuccess = (userData) => {
-//     return {type: Fetch_USER_SUCCESS,userData}
-// }
-//
-// export const fetchUserFailure = (err) => {
-//     return {type: Fetch_USER_FAILURE,err}
-// }
-//
+

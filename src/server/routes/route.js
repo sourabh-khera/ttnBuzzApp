@@ -48,6 +48,7 @@ module.exports=(app) => {
     app.post("/post",upload.single('image_path'),postController.createPost)
     app.get("/post",postController.fetchPostData)
 
+    app.get("/user",userController.fetchUserData)
 
 
 }

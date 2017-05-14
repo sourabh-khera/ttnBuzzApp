@@ -15,7 +15,7 @@ import {
 
 
 }from "../constants/constants"
-const initialState = {
+const postState = {
 
     postData: [],
     error: null,
@@ -23,7 +23,7 @@ const initialState = {
 };
 
 
-export const postReducer = (state = initialState, action) => {
+export const postReducer = (state = postState, action) => {
 
     switch (action.type) {
 
@@ -75,33 +75,3 @@ export const postReducer = (state = initialState, action) => {
 
 }
 
-
-export const userReducer = (state = initialState, action) => {
-
-    switch (action.type) {
-
-        case FETCH_USER_STARTED: {
-            return {
-                ...state
-            }
-        }
-        case FETCH_USER_SUCCESS: {
-            const userData=action.userData;
-            return {
-                ...state,
-                userData
-
-            }
-        }
-        case FETCH_USER_FAILURE: {
-            return {
-                ...state,
-                error: action.err
-            }
-        }
-
-        default: {
-            return state
-        }
-    }
-}
