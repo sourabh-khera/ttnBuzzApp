@@ -7,13 +7,19 @@ import {
     createPostFailure,
     fetchPostStarted,
     fetchPostSuccess,
-    fetchPostFailure
+    fetchPostFailure,
+    createLikeStarted,
+    createLikeSuccess,
+    createLikeFailure,
+    createDislikeStarted,
+    createDislikeSuccess,
+    createDislikeFailure
 } from "./posts.actions"
-import fetch from "isomorphic-fetch"
+import fetch from "isomorphic-fetch";
 
 export const createPost = (postData) => {
     return (dispatch) => {
-        dispatch(createPostStarted())
+        dispatch(createPostStarted());
         fetch("http://localhost:3000/post", {
             credentials: "include",
             method: "post",
@@ -26,13 +32,13 @@ export const createPost = (postData) => {
             dispatch(createPostFailure(err))
         })
     }
-}
+};
 
 
 export const fetchPostDetails = () => {
 
     return (dispatch) => {
-        dispatch(fetchPostStarted())
+        dispatch(fetchPostStarted());
         fetch("http://localhost:3000/post", {
             credentials: "include",
             method: "get",
@@ -44,4 +50,44 @@ export const fetchPostDetails = () => {
             dispatch(fetchPostFailure(err))
         })
     }
-}
+};
+
+export const createLikes =(postid,status)=>{
+    return (dispatch) => {
+        dispatch(createLikeStarted());
+        fetch("http://localhost:3000/like", {
+            credentials: "include",
+            method: "post",
+            headers:{'Accept': 'application/json',
+                'Content-Type': 'application/json'},
+            body:JSON.stringify({data:postid,status:status})
+        })
+            .then(response => response.json())
+            .then(countLikes => {
+                dispatch(createLikeSuccess(countLikes))
+            }).catch((err) => {
+            dispatch(createLikeFailure(err))
+        })
+    }
+};
+
+
+
+export const createDisLikes =(postid,status)=>{
+    return (dispatch) => {
+        dispatch(createDislikeStarted());
+        fetch("http://localhost:3000/like", {
+            credentials: "include",
+            method: "post",
+            headers:{'Accept': 'application/json',
+                'Content-Type': 'application/json'},
+            body:JSON.stringify({data:postid,status:status})
+        })
+            .then(response => response.json())
+            .then(numOfDislikes => {
+                dispatch(createDislikeSuccess(numOfDislikes))
+            }).catch((err) => {
+            dispatch(createDislikeFailure(err))
+        })
+    }
+};

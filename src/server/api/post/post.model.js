@@ -11,13 +11,6 @@ const PostSchema = Mongoose.Schema({
     image: {
         type: String,
     },
-
-    likes:{
-        type:Array
-    },
-    dislikes:{
-        type:Array,
-    },
     status:{
         type:String,
     }

@@ -20,14 +20,10 @@ class Buzzcomponent extends React.Component {
         }
     }
 
-
     componentDidMount() {
 
-        this.props.dispatch(fetchPostDetails())
-
-     }
-
-
+           this.props.dispatch(fetchPostDetails())
+    }
 
     updateOnComplaint = () => {
         this.setState({edit: false}, () => {

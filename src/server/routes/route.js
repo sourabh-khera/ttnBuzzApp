@@ -5,8 +5,9 @@
 let GoogleStrategy=require("../auth/googleAuth");
 let expressSession=require("express-session");
 let passport=require("passport");
-const postController=require("../api/post/post.controller")
-const userController=require("../api/users/users.controller")
+const postController=require("../api/post/post.controller");
+const userController=require("../api/users/users.controller");
+const likeController=require("../api/likes/likes.controller");
 const multer=require("multer");
 
 const storage=multer.diskStorage({
@@ -19,7 +20,23 @@ const storage=multer.diskStorage({
     }
 });
 
-const upload=multer({storage:storage})
+
+const loggedIn = (req, res, next) => {
+    if (req.url == "/") {
+        if (req.user) {
+            res.redirect("/buzz")
+
+        } else {
+            res.send('not found')
+        }
+    } else if (req.user) {
+        next()
+    } else {
+        res.redirect("/")
+    }
+};
+
+const upload=multer({storage:storage});
 
 
 
@@ -37,18 +54,20 @@ module.exports=(app) => {
     app.get("/oauth2callback", passport.authenticate('google', {
         successRedirect: "/buzz",
         failureRedirect: "/"
-    }))
+    }));
 
     app.get("/logout",(req,res) => {
         req.logout();
-        res.redirect("/")
-    })
+        res.redirect("/");
+    });
 
 
-    app.post("/post",upload.single('image_path'),postController.createPost)
-    app.get("/post",postController.fetchPostData)
+    app.post("/post",upload.single('image_path'),postController.createPost);
+    app.get("/post", loggedIn, postController.fetchPostData);
 
-    app.get("/user",userController.fetchUserData)
+    app.get("/user",userController.fetchUserData);
+    app.post("/like",likeController.createLike);
+   // app.put("/like",likeController.createDisLike)
 
 
-}
+};

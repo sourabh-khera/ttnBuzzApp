@@ -238,11 +238,9 @@ textarea::-webkit-input-placeholder {
     width: 100%;
 }
 
-.likediscom a {
-    margin-right: 15px;
-    text-decoration: none;
-    color: blue;
-    cursor: pointer;
+
+.likediscom span {
+    margin-right: 10px;
 }
 
 .postcomment {

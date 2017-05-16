@@ -27,21 +27,7 @@ app.use(webpackmiddleware(compiler, {
 }));
 router(app);
 
-loggedIn = (req, res, next) => {
-    if (req.url == "/") {
-        if (req.user) {
-            res.redirect("/buzz")
-        }
-        next();
-    } else if (req.user) {
-        next()
-    } else {
-        res.redirect("/")
-    }
-}
-
-
-app.get("/*", loggedIn, (req, res) => {
+app.get("/*",(req, res) => {
     res.sendFile(path.resolve('src/client', './index.html'));
 })
 

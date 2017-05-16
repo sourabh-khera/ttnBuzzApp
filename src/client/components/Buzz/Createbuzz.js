@@ -43,7 +43,7 @@ class Creatbuzz extends React.Component {
         multipartFormData.append("post_value",this.state.post_value);
         multipartFormData.append("image_path",this.state.image_path);
         this.props.dispatch(createPost(multipartFormData));
-        this.setState({postBody: "",image_path:"",post_value:""})
+        this.setState({postBody: "",image_path:""})
     }
     render() {
         const { showError, errorMessage } = this.state
