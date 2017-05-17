@@ -10,7 +10,7 @@ import "./css/buzzComponent.css"
 import "./css/profile.css"
 import {BrowserRouter as Router,Route} from "react-router-dom"
 import Profile from "./container/Viewprofile"
-import Post from "./components/Buzz/Post"
+import Post from "./components/Buzz/Posts"
 import BuzzComponent from "../client/components/Buzz/BuzzComponent"
 
 export default class App extends React.Component{

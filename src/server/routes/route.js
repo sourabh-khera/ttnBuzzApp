@@ -67,7 +67,8 @@ module.exports=(app) => {
     app.get("/post", loggedIn, postController.fetchPostData);
     app.get("/user",userController.fetchUserData);
     app.post("/like",likeController.createLike);
-    app.get("/like",likeController.fetchlikesData)
-    app.post("/comment",commentController.createComment)
+    app.get("/like",likeController.fetchlikesData);
+    app.post("/comment",commentController.createComment);
+    app.get("/comment",commentController.fetchCommentsData);
 
 };

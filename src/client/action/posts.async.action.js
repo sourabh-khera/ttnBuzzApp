@@ -16,7 +16,10 @@ import {
     createCommentFailure,
     fetchLikesAndDislikeStarted,
     fetchLikesAndDislikeSuccess,
-    fetchLikesAndDislikeFailure
+    fetchLikesAndDislikeFailure,
+    fetchCommentsStarted,
+    fetchCommentsSuccess,
+    fetchCommentsFailure
 } from "./posts.actions"
 import fetch from "isomorphic-fetch";
 
@@ -66,7 +69,7 @@ export const createLikes =(postid,status)=>{
             body:JSON.stringify({data:postid,status:status})
         })
             .then(response => response.json())
-            .then(numofLikes=> {
+            .then(numofLikes => {
                 dispatch(createLikeAndDislikeSuccess(numofLikes.data))
             }).catch((err) => {
             dispatch(createLikeAndDislikeFailure(err))
@@ -94,7 +97,7 @@ export const fetchLikesAndDiislikesDetails = () => {
 
 
 
-export const createComment =(postid,comment)=>{
+export const createComment =(comment,postid)=>{
     return (dispatch) => {
         dispatch(createCommentStarted());
         fetch("http://localhost:3000/comment", {
@@ -105,10 +108,29 @@ export const createComment =(postid,comment)=>{
             body:JSON.stringify({data:comment,id:postid})
         })
             .then(response => response.json())
-            .then(numOfDislikes => {
-                dispatch(createCommentSuccess())
+            .then(comments => {
+                dispatch(createCommentSuccess(comments.data))
             }).catch((err) => {
             dispatch(createCommentFailure(err))
         })
     }
 };
+
+
+export const fetchCommentsDetails = () => {
+    return (dispatch) => {
+        dispatch(fetchCommentsStarted());
+        fetch("http://localhost:3000/comment", {
+            credentials: "include",
+            method: "get",
+        })
+            .then(response => response.json())
+            .then(comments => {
+                console.log("========================",comments)
+                dispatch(fetchCommentsSuccess(comments.data))
+            }).catch((err) => {
+            dispatch(fetchCommentsFailure(err))
+        })
+    }
+};
+

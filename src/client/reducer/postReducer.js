@@ -17,11 +17,15 @@ import {
     CREATE_COMMENT_FAILURE,
     FETCH_LKES_DISLIKES_STARTED,
     FETCH_LIKES_DISLIKES_SUCCESS,
-    FETCH_LIKES_DISLIKES_FAILURE
+    FETCH_LIKES_DISLIKES_FAILURE,
+    FETCH_COMMENTS_STARTED,
+    FETCH_COMMENTS_SUCCESS,
+    FETCH_COMMENTS_FAILURE
 }from "../constants/constants"
 const postState = {
     postData: [],
-     LikeAndDislikeData:[],
+    LikeAndDislikeData:[],
+    commentsData:[],
     error: null,
 };
 
@@ -79,7 +83,7 @@ export const postReducer = (state = postState, action) => {
 
             return {
                 ...state,
-                LikeAndDislikeData:action.numofLikes,
+                LikeAndDislikeData: action.numofLikes,
 
             }
         }
@@ -90,6 +94,24 @@ export const postReducer = (state = postState, action) => {
             }
         }
 
+        case FETCH_LKES_DISLIKES_STARTED: {
+            return {
+                ...state
+            }
+        }
+        case FETCH_LIKES_DISLIKES_SUCCESS: {
+
+            return {
+                ...state,
+                LikeAndDislikeData:action.likesData,
+            }
+        }
+        case FETCH_LIKES_DISLIKES_FAILURE: {
+            return {
+                ...state,
+                error: action.err
+            }
+        }
 
         case CREATE_COMMENT_STARTED: {
             return {
@@ -101,6 +123,7 @@ export const postReducer = (state = postState, action) => {
 
             return {
                 ...state,
+                commentsData:action.comments
             }
         }
         case CREATE_COMMENT_FAILURE: {
@@ -109,6 +132,28 @@ export const postReducer = (state = postState, action) => {
                 error: action.err
             }
         }
+
+
+        case FETCH_COMMENTS_STARTED: {
+            return {
+                ...state
+            }
+        }
+        case FETCH_COMMENTS_SUCCESS: {
+
+            return {
+                ...state,
+                commentsData: action.comments
+
+            }
+        }
+        case FETCH_COMMENTS_FAILURE: {
+            return {
+                ...state,
+                error: action.err
+            }
+        }
+
 
         default: {
             return state

@@ -9,13 +9,10 @@ exports.likes = (postid, userid,Likestatus) => {
     return new Promise((resolve, reject) => {
 
             likesModel.update({postId:postid,likedBy:userid},{$set:{status:Likestatus}},{upsert:true},(err,data)=>{
-                    if(err){
-
-                        reject({message:"error while liking",error:err})
-                    }else{
-
-                        resolve(data)
-                    }
+                if (err) {
+                    reject({message:"error while liking",error:err})
+                }
+                resolve(data)
             })
     })
 };

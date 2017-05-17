@@ -3,11 +3,11 @@ import BannerImg1 from "../../assets/images/tothenew.jpg"
 import BannerImg2 from "../../assets/images/Road_Trip-cover-photo-26153.jpg"
 import LeftComponent from "./Leftcomponent"
 import CreateBuzz from "./Createbuzz"
-import Post from "./Post"
+import Post from "./Posts"
 import Banner from "./Banner"
 import Createcomplaint from "../complaints/createComplaint"
 import {connect} from "react-redux"
-import {fetchPostDetails,fetchUserDetails} from "../../action/index"
+import {fetchPostDetails,fetchUserDetails,fetchLikesAndDiislikesDetails,fetchCommentsDetails} from "../../action/index"
 
 
 class Buzzcomponent extends React.Component {
@@ -23,6 +23,8 @@ class Buzzcomponent extends React.Component {
     componentDidMount() {
 
            this.props.dispatch(fetchPostDetails())
+           this.props.dispatch(fetchLikesAndDiislikesDetails())
+            this.props.dispatch(fetchCommentsDetails())
     }
 
     updateOnComplaint = () => {
@@ -49,7 +51,11 @@ class Buzzcomponent extends React.Component {
                             (this.state.edit) ?
                                 <div>
                                     <CreateBuzz changeValue={this.updateValue}/>
-                                    <Post/>
+                                    {
+                                        this.props.postData.map((post, i) => (
+                                            <Post posts= {post} key={i}/>
+                                        ))
+                                    }
                                 </div>
                                 :
 
