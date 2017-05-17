@@ -9,17 +9,19 @@ import {
     FETCH_POST_STARTED,
     FETCH_POST_SUCCESS,
     FETCH_POST_FAILURE,
-    CREATE_LIKE_STARTED,
-    CREATE_LIKE_SUCCESS,
-    CREATE_LIKE_FAILURE,
-    CREATE_DISLIKE_STARTED,
-    CREATE_DISLIKE_SUCCESS,
-    CREATE_DISLIKE_FAILURE
+    CREATE_LIKE_DISLIKE_STARTED,
+    CREATE_LIKE_DISLIKE_SUCCESS,
+    CREATE_LIKE_DISLIKE_FAILURE,
+    CREATE_COMMENT_STARTED,
+    CREATE_COMMENT_SUCCESS,
+    CREATE_COMMENT_FAILURE,
+    FETCH_LKES_DISLIKES_STARTED,
+    FETCH_LIKES_DISLIKES_SUCCESS,
+    FETCH_LIKES_DISLIKES_FAILURE
 }from "../constants/constants"
 const postState = {
     postData: [],
-     likes:0,
-     disLikes:0,
+     LikeAndDislikeData:[],
     error: null,
 };
 
@@ -68,39 +70,40 @@ export const postReducer = (state = postState, action) => {
         }
 
 
-        case CREATE_LIKE_STARTED: {
+        case CREATE_LIKE_DISLIKE_STARTED: {
             return {
                 ...state
             }
         }
-        case CREATE_LIKE_SUCCESS: {
+        case CREATE_LIKE_DISLIKE_SUCCESS: {
 
             return {
                 ...state,
-                likes:action.countLikes.likecount,
-                disLikes:action.countLikes.dislikecount
+                LikeAndDislikeData:action.numofLikes,
+
             }
         }
-        case CREATE_LIKE_FAILURE: {
+        case CREATE_LIKE_DISLIKE_FAILURE: {
             return {
                 ...state,
                 error: action.err
             }
         }
-        case CREATE_DISLIKE_STARTED: {
+
+
+        case CREATE_COMMENT_STARTED: {
             return {
                 ...state
             }
         }
-        case CREATE_DISLIKE_SUCCESS: {
+
+        case CREATE_COMMENT_SUCCESS: {
 
             return {
                 ...state,
-                disLikes:action.numOfDislikes.dislikecount,
-                likes:action.numOfDislikes.likecount
             }
         }
-        case CREATE_DISLIKE_FAILURE: {
+        case CREATE_COMMENT_FAILURE: {
             return {
                 ...state,
                 error: action.err

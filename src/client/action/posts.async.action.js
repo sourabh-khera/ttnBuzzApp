@@ -8,12 +8,15 @@ import {
     fetchPostStarted,
     fetchPostSuccess,
     fetchPostFailure,
-    createLikeStarted,
-    createLikeSuccess,
-    createLikeFailure,
-    createDislikeStarted,
-    createDislikeSuccess,
-    createDislikeFailure
+    createLikeAndDislikeStarted,
+    createLikeAndDislikeSuccess,
+    createLikeAndDislikeFailure,
+    createCommentStarted,
+    createCommentSuccess,
+    createCommentFailure,
+    fetchLikesAndDislikeStarted,
+    fetchLikesAndDislikeSuccess,
+    fetchLikesAndDislikeFailure
 } from "./posts.actions"
 import fetch from "isomorphic-fetch";
 
@@ -54,7 +57,7 @@ export const fetchPostDetails = () => {
 
 export const createLikes =(postid,status)=>{
     return (dispatch) => {
-        dispatch(createLikeStarted());
+        dispatch(createLikeAndDislikeStarted());
         fetch("http://localhost:3000/like", {
             credentials: "include",
             method: "post",
@@ -63,31 +66,49 @@ export const createLikes =(postid,status)=>{
             body:JSON.stringify({data:postid,status:status})
         })
             .then(response => response.json())
-            .then(countLikes => {
-                dispatch(createLikeSuccess(countLikes))
+            .then(numofLikes=> {
+                dispatch(createLikeAndDislikeSuccess(numofLikes.data))
             }).catch((err) => {
-            dispatch(createLikeFailure(err))
+            dispatch(createLikeAndDislikeFailure(err))
+        })
+    }
+};
+
+
+export const fetchLikesAndDiislikesDetails = () => {
+
+    return (dispatch) => {
+        dispatch(fetchLikesAndDislikeStarted());
+        fetch("http://localhost:3000/like", {
+            credentials: "include",
+            method: "get",
+        })
+            .then(response => response.json())
+            .then(postLikes => {
+                dispatch(fetchLikesAndDislikeSuccess(postLikes.data))
+            }).catch((err) => {
+            dispatch(fetchLikesAndDislikeFailure(err))
         })
     }
 };
 
 
 
-export const createDisLikes =(postid,status)=>{
+export const createComment =(postid,comment)=>{
     return (dispatch) => {
-        dispatch(createDislikeStarted());
-        fetch("http://localhost:3000/like", {
+        dispatch(createCommentStarted());
+        fetch("http://localhost:3000/comment", {
             credentials: "include",
             method: "post",
             headers:{'Accept': 'application/json',
                 'Content-Type': 'application/json'},
-            body:JSON.stringify({data:postid,status:status})
+            body:JSON.stringify({data:comment,id:postid})
         })
             .then(response => response.json())
             .then(numOfDislikes => {
-                dispatch(createDislikeSuccess(numOfDislikes))
+                dispatch(createCommentSuccess())
             }).catch((err) => {
-            dispatch(createDislikeFailure(err))
+            dispatch(createCommentFailure(err))
         })
     }
 };

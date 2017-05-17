@@ -23,7 +23,7 @@ exports.populateUserData = () => {
             .sort({createdAt: -1})
             .populate("postedBy")
             .exec(function (err, posts) {
-                if (err) reject({messge: "Unable to fetch all posts from the database", error: err})
+                if (err) reject({messge: "Unable to fetch all posts from the database", error: err});
                 resolve(posts)
             });
     })

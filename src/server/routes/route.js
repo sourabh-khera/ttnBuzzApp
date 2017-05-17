@@ -8,6 +8,7 @@ let passport=require("passport");
 const postController=require("../api/post/post.controller");
 const userController=require("../api/users/users.controller");
 const likeController=require("../api/likes/likes.controller");
+const commentController=require("../api/comment/comment.controller")
 const multer=require("multer");
 
 const storage=multer.diskStorage({
@@ -64,10 +65,9 @@ module.exports=(app) => {
 
     app.post("/post",upload.single('image_path'),postController.createPost);
     app.get("/post", loggedIn, postController.fetchPostData);
-
     app.get("/user",userController.fetchUserData);
     app.post("/like",likeController.createLike);
-   // app.put("/like",likeController.createDisLike)
-
+    app.get("/like",likeController.fetchlikesData)
+    app.post("/comment",commentController.createComment)
 
 };

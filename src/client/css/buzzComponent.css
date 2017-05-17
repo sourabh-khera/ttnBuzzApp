@@ -262,7 +262,7 @@ input[type="text"]::-webkit-input-placeholder {
     padding-top: 5px;
 }
 
-.postcomment input[type="submit"] {
+.commentButton {
     float: right;
     background-color: black;
     color: #ffffff;

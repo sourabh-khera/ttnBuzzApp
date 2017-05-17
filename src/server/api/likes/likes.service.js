@@ -21,28 +21,17 @@ exports.likes = (postid, userid,Likestatus) => {
 };
 
 
-exports.numofLikes=(postid,status)=>{
-
+exports.getUserData=()=>{
     return new Promise((resolve,reject)=>{
-         likesModel.count({postId:postid,status:status},(error,count)=>{
-             if(error){
-                  reject({message:"likes could not be fetch",error:error})
-              }else{
-                  resolve(count)
-              }
-         })
-    })
-};
-
-exports.numofDisLikes=(postid,status)=>{
-
-    return new Promise((resolve,reject)=>{
-        likesModel.count({postId:postid,status:status},(error,count)=>{
-            if(error){
-                reject({message:"likes could not be fetch",error:error})
-            }else{
-                resolve(count)
-            }
-        })
+        likesModel
+            .find({})
+            .populate('likedBy')
+            .exec((err,data)=>{
+                if(err){
+                    reject({message:"unable to fetch user data with likes nd dislikes",error:err})
+                }else{
+                    resolve(data)
+                }
+            })
     })
 };

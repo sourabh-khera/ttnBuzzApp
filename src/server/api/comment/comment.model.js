@@ -2,18 +2,20 @@
  * Created by sourabh on 8/5/17.
  */
 
-const mongoose=require("mongoose");
+const Mongoose=require("mongoose");
 
-const commentSchema=new mongoose.Schema({
+const CommentSchema=new Mongoose.Schema({
 
     postId:{
-        type:mongoose.Schema.Types.ObjectId,ref:"posts"
+        type:String,
     },
-    commentedBy:{
-        type:mongoose.Schema.Types.ObjectId,ref:"users"
+    userId:{
+        type:Mongoose.Schema.Types.ObjectId,ref:"User"
     },
     commentBody:{
         type:String,
     }
 
-},{versionKey:false})
+},{versionKey:false,timestamps:true});
+
+module.exports=Mongoose.model('Comment',CommentSchema);
