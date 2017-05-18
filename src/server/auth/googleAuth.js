@@ -4,7 +4,7 @@
 const googleAuthConstants = require("../constants/constant");
 const passport = require("passport");
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const userSchema=require("../api/users/users.model")
+const userSchema=require("../api/users/users.model");
 exports.useGoogle = () => {
     passport.use(new GoogleStrategy({
 
@@ -38,11 +38,11 @@ exports.useGoogle = () => {
              return done(null);
          }
 
-        }))
+        }));
 
     passport.serializeUser(function (userdata, done) {
         done(null, userdata._id);
-    })
+    });
 
     passport.deserializeUser(function (_id, done) {
 
@@ -58,7 +58,7 @@ exports.useGoogle = () => {
 
     });
 
-}
+};
 
 
 

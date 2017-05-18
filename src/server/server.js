@@ -8,31 +8,46 @@ require("./configuration/datasource");
 const app = express();
 const webpack = require("webpack");
 const webpackmiddleware = require("webpack-dev-middleware");
-const webpackconfig = require("../../webpack.config")
+const webpackconfig = require("../../webpack.config");
 const path = require("path");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
 console.log("+++", process.cwd(), __dirname);
 
 app.use(express.static('./src/server/public'));
 const compiler = webpack(webpackconfig);
-app.use(bodyParser())
+app.use(bodyParser());
 app.use(webpackmiddleware(compiler, {
     hot: true,
     publicPath: '/',
     stats: {
         color: true,
     },
-    historyApiFallback: true,
+    historyApiFallback:true,
 }));
 router(app);
 
-app.get("/*",(req, res) => {
-    res.sendFile(path.resolve('src/client', './index.html'));
-})
+
+authenticate=(req,res,next)=>{
+    if(req.url=="/"){
+        if(req.user){
+            res.redirect("/buzz")
+        }
+        next();
+    }else{
+        if(req.user){
+            next()
+        }else{
+            res.redirect("/")
+        }
+    }
+};
+    app.get("/*",authenticate,(req, res) =>{
+        res.sendFile(path.resolve('src/client','./index.html'));
+    });
 
 
 const server = app.listen(3000, () => {
     const Port = server.address().port;
     console.log("serverListening=============", Port);
-})
+});

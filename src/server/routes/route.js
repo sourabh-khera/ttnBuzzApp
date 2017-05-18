@@ -23,14 +23,8 @@ const storage=multer.diskStorage({
 
 
 const loggedIn = (req, res, next) => {
-    if (req.url == "/") {
-        if (req.user) {
-            res.redirect("/buzz")
 
-        } else {
-            res.send('not found')
-        }
-    } else if (req.user) {
+    if (req.user) {
         next()
     } else {
         res.redirect("/")
@@ -65,10 +59,10 @@ module.exports=(app) => {
 
     app.post("/post",upload.single('image_path'),postController.createPost);
     app.get("/post", loggedIn, postController.fetchPostData);
-    app.get("/user",userController.fetchUserData);
+    app.get("/user",loggedIn,userController.fetchUserData);
     app.post("/like",likeController.createLike);
-    app.get("/like",likeController.fetchlikesData);
+    app.get("/like",loggedIn,likeController.fetchlikesData);
     app.post("/comment",commentController.createComment);
-    app.get("/comment",commentController.fetchCommentsData);
+    app.get("/comment",loggedIn,commentController.fetchCommentsData);
 
 };

@@ -29,10 +29,12 @@ class Post extends React.Component {
     toggleComment=()=>{
         this.setState({
             commentTextArea:!this.state.toggle,
-            toggle: !this.state.toggle});
-        // }, () => {
-        //     this.refs.nameInput.focus();
-        // })
+            toggle: !this.state.toggle
+        }, () => {
+            if(this.nameInput) {
+                this.nameInput.focus();
+            }
+        })
 
     };
 
@@ -95,7 +97,7 @@ class Post extends React.Component {
                             {
                                 (this.state.commentTextArea)?
                                     <div className="postcomment">
-                                        <textarea className="comment-area" ref={(input)=>{this.nameInput=input}} value={this.state.commentBody} type="text" placeholder="Type Here" onChange={this.onchange} />
+                                        <textarea className="comment-area" ref={(input)=> this.nameInput=input } value={this.state.commentBody} type="text" placeholder="Type Here" onChange={this.onchange} />
                                         <button className="commentButton" onClick={()=>this.postComment(this.state.commentBody,this.props.posts._id)}>POST</button>
                                     </div>
                                     : null
