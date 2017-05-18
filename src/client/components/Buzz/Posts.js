@@ -11,6 +11,7 @@ class Post extends React.Component {
             disableLike:false,
             disableDisLike:false,
             commentTextArea:false,
+            toggle: false,
             commentBody:"",
         }
     }
@@ -26,7 +27,13 @@ class Post extends React.Component {
     };
 
     toggleComment=()=>{
-        this.setState({commentTextArea:true})
+        this.setState({
+            commentTextArea:!this.state.toggle,
+            toggle: !this.state.toggle});
+        // }, () => {
+        //     this.refs.nameInput.focus();
+        // })
+
     };
 
     onchange=(event)=>{
@@ -35,7 +42,7 @@ class Post extends React.Component {
 
     postComment=(comment,postid)=>{
         this.props.dispatch(createComment(comment,postid));
-        this.setState({commentBody:""})
+        this.setState({commentBody:"",commentTextArea:false})
     };
 
     render () {
@@ -43,6 +50,7 @@ class Post extends React.Component {
         const { disableLike, disableDisLike } = this.state;
         const likes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'liked').length;
         const dislikes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'disliked').length;
+        const comments=this.props.commentsData;
         return (
             <div>
                 <div>
@@ -74,7 +82,7 @@ class Post extends React.Component {
                                 (this.props.posts.image)?
                                     <div className="postimage">
                                         <img src={"/upload/" + this.props.posts.image}/>
-                                    </div>:<span></span>
+                                    </div>:null
                             }
                         </div>
 
@@ -87,13 +95,25 @@ class Post extends React.Component {
                             {
                                 (this.state.commentTextArea)?
                                     <div className="postcomment">
-                                        <input value={this.state.commentBody} type="text" placeholder="Type Here" onChange={this.onchange} />
+                                        <textarea className="comment-area" ref={(input)=>{this.nameInput=input}} value={this.state.commentBody} type="text" placeholder="Type Here" onChange={this.onchange} />
                                         <button className="commentButton" onClick={()=>this.postComment(this.state.commentBody,this.props.posts._id)}>POST</button>
                                     </div>
-                                    :
-                                    <span></span>
+                                    : null
                             }
 
+                            {
+                                comments.map((items,i)=>(
+                                (items.postId===this.props.posts._id)?
+                                <div className="row comment-box" key={i}>
+                                    <div className="col-md-1 pull-left">
+                                        <img src={items.userId.image} className="image-responsive"/></div>
+                                        <div className="col-md-11 pull-right">
+                                            <h5>{items.userId.name}</h5>
+                                            <p className="comments">{items.commentBody}</p>
+                                        </div>
+                                </div>
+                                :null
+                                ))}
                         </div>
                     </div>
                 </div>
@@ -103,7 +123,8 @@ class Post extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    LikeAndDislikeData:state.LikeAndDislikeData
+    LikeAndDislikeData:state.LikeAndDislikeData,
+    commentsData:state.commentsData
 });
 
 export default connect(mapStateToProps)(Post)

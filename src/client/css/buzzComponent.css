@@ -288,3 +288,15 @@ input[type="file"] {
     width:50px;
     height:50px;
 }
+.comment-box{
+    margin: 5px 0;
+}
+
+.comments{
+    font-size:10px;
+}
+
+.comment-area{
+    overflow: hidden;
+    width: 80%;
+}

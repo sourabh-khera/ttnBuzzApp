@@ -18,24 +18,23 @@ class Creatbuzz extends React.Component {
 
     onImageChange = (event) => {
         this.setState({[event.target.name]:event.target.files[0], showError:false});
-    }
+    };
 
     onPostchange = (event) => {
         this.setState({[event.target.name]:event.target.value, showError:false});
-    }
+    };
 
     setValue = (event) => {
         this.setState({post_value: event.target.value, showError:false})
-    }
+    };
     onCreatePost = (e) => {
         e.preventDefault();
-        console.log(this.state)
         if(!this.state.postBody && !this.state.image_path){
-            this.setState({showError:true,errorMessage:"post can not be empty"})
+            this.setState({showError:true,errorMessage:"post can not be empty"});
             return
         }
         if(!this.state.post_value){
-            this.setState({showError: true, errorMessage: 'please select a category '})
+            this.setState({showError: true, errorMessage: 'please select a category '});
             return
         }
         const multipartFormData=new FormData();
@@ -44,12 +43,12 @@ class Creatbuzz extends React.Component {
         multipartFormData.append("image_path",this.state.image_path);
         this.props.dispatch(createPost(multipartFormData));
         this.setState({postBody: "",image_path:""})
-    }
+    };
     render() {
-        const { showError, errorMessage } = this.state
+        const { showError, errorMessage } = this.state;
         const renderError = showError
             ? (<div>{errorMessage}</div>)
-            : null
+            : null;
         return (
             <div>
                 <form>
@@ -66,7 +65,6 @@ class Creatbuzz extends React.Component {
                         <div className="buzzfooter">
                             <div className="category">
                                 <select onChange={this.setValue}>
-                                    {/*<option selected disabled hidden>Category</option>*/}
                                     <option value="Activity">Activity</option>
                                     <option value="Lost n Found">Lost n Found</option>
                                 </select>

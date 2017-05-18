@@ -126,7 +126,6 @@ export const fetchCommentsDetails = () => {
         })
             .then(response => response.json())
             .then(comments => {
-                console.log("========================",comments)
                 dispatch(fetchCommentsSuccess(comments.data))
             }).catch((err) => {
             dispatch(fetchCommentsFailure(err))
