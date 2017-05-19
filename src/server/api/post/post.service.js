@@ -16,16 +16,20 @@ exports.post = (postData, user, Postimage,res) => {
     })
 };
 
-exports.populateUserData = () => {
+exports.populateUserData = (skipRecords,fetchLimit) => {
     return new Promise(function(resolve, reject) {
+        const skip=parseInt(skipRecords);
+        const limit=parseInt(fetchLimit)
         postModel
             .find({})
+            .limit(limit)
+            .skip(skip)
             .sort({createdAt: -1})
             .populate("postedBy")
             .exec(function (err, posts) {
-                if (err) reject({messge: "Unable to fetch all posts from the database", error: err});
+                if (err) reject({message: "Unable to fetch all posts from the database", error: err});
                 resolve(posts)
             });
     })
-}
+};
 

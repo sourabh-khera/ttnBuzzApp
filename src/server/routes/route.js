@@ -5,34 +5,10 @@
 let GoogleStrategy=require("../auth/googleAuth");
 let expressSession=require("express-session");
 let passport=require("passport");
-const postController=require("../api/post/post.controller");
-const userController=require("../api/users/users.controller");
-const likeController=require("../api/likes/likes.controller");
-const commentController=require("../api/comment/comment.controller")
-const multer=require("multer");
-
-const storage=multer.diskStorage({
-    destination: (req,file,cb)=>{
-        cb(null,"/home/sourabh/Desktop/ttndbuzzapp/src/server/public/upload")
-    },
-
-    filename: (req,file,cb)=>{
-        cb(null, Date.now()+file.originalname)
-    }
-});
-
-
-const loggedIn = (req, res, next) => {
-
-    if (req.user) {
-        next()
-    } else {
-        res.redirect("/")
-    }
-};
-
-const upload=multer({storage:storage});
-
+const commentRoutes=require("../api/comment/comment.route");
+const postsRoute=require("../api/post/posts.route");
+const userRoute=require("../api/users/users.route");
+const likesRoute=require("../api/likes/likes.route");
 
 
 module.exports=(app) => {
@@ -56,13 +32,10 @@ module.exports=(app) => {
         res.redirect("/");
     });
 
+    commentRoutes(app);
+    postsRoute(app);
+    likesRoute(app);
+    userRoute(app);
 
-    app.post("/post",upload.single('image_path'),postController.createPost);
-    app.get("/post", loggedIn, postController.fetchPostData);
-    app.get("/user",loggedIn,userController.fetchUserData);
-    app.post("/like",likeController.createLike);
-    app.get("/like",loggedIn,likeController.fetchlikesData);
-    app.post("/comment",commentController.createComment);
-    app.get("/comment",loggedIn,commentController.fetchCommentsData);
 
 };

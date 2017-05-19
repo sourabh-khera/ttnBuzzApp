@@ -41,11 +41,18 @@ export const createPost = (postData) => {
 };
 
 
-export const fetchPostDetails = () => {
+export const fetchPostDetails = (skip,limit) => {
 
+    const baseUrl = "http://localhost:3000/";
+    const path = "post";
+    const skipRecords = "skip=" + skip;
+    const fetchLimit = "limit=" + limit;
+    const and = "&";
+    const queryString = "?" + skipRecords + and + fetchLimit;
+    const url = baseUrl + path + queryString;
     return (dispatch) => {
         dispatch(fetchPostStarted());
-        fetch("http://localhost:3000/post", {
+        fetch(url, {
             credentials: "include",
             method: "get",
         })

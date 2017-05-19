@@ -16,27 +16,31 @@ class Buzzcomponent extends React.Component {
         this.state = {
 
             edit: true,
-            value: ""
+            value: "",
+            skip:0,
+            limit:10,
         }
     }
 
     componentDidMount() {
+        document.addEventListener('scroll',(event)=>{
+              if(document.body.scrollHeight-30 < document.body.scrollTop + window.innerHeight){
+                  this.setState({skip:this.state.skip+10},()=>{this.props.dispatch(fetchPostDetails(this.state.skip,this.state.limit));})
+              }
+          });
+          this.props.dispatch(fetchPostDetails(this.state.skip,this.state.limit));
 
-           this.props.dispatch(fetchPostDetails())
-           this.props.dispatch(fetchLikesAndDiislikesDetails())
-            this.props.dispatch(fetchCommentsDetails())
+
+        //this.props.dispatch(fetchLikesAndDiislikesDetails())
+           //this.props.dispatch(fetchCommentsDetails())
     }
 
     updateOnComplaint = () => {
-        this.setState({edit: false}, () => {
-            console.log("compalint=====", this.state.edit)
-        })
-    }
+        this.setState({edit: false})
+    };
     updateOnBuzz = () => {
-        this.setState({edit: true}, () => {
-            console.log("edit=====", this.state.edit)
-        })
-    }
+        this.setState({edit: true})
+    };
 
 
     render() {

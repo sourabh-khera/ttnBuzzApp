@@ -23,7 +23,9 @@ exports.createPost = (req,res) => {
 }
 
 exports.fetchPostData = (req,res) => {
-    postService.populateUserData()
+    const skipRecords=req.query.skip;
+    const fetchLimit=req.query.limit;
+    postService.populateUserData(skipRecords,fetchLimit)
         .then((posts) => {
             res.send({posts})
         }).catch((error) => {
