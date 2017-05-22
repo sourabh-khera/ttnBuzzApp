@@ -6,7 +6,7 @@ const Mongoose=require("mongoose");
 const UsersSchema=new Mongoose.Schema({
 
     name:{
-       type:String,
+        type:String,
     },
     image:{
         type:String,

@@ -1,38 +1,42 @@
 import React from 'react'
-import BannerImg1 from "../../assets/images/tothenew.jpg"
-import BannerImg2 from "../../assets/images/Road_Trip-cover-photo-26153.jpg"
 import LeftComponent from "./Leftcomponent"
 import CreateBuzz from "./Createbuzz"
 import Post from "./Posts"
 import Banner from "./Banner"
 import Createcomplaint from "../complaints/createComplaint"
 import {connect} from "react-redux"
-import {fetchPostDetails,fetchUserDetails,fetchLikesAndDiislikesDetails,fetchCommentsDetails} from "../../action/index"
+import {
+    fetchPostDetails,
+    fetchUserDetails,
+    fetchLikesAndDiislikesDetails,
+    fetchCommentsDetails
+} from "../../action/index"
 
 
 class Buzzcomponent extends React.Component {
     constructor() {
         super();
+        console.log('asddasddadasdasdadas');
         this.state = {
 
             edit: true,
             value: "",
-            skip:0,
-            limit:10,
+            skip: 0,
+            limit: 10,
         }
     }
 
     componentDidMount() {
-        document.addEventListener('scroll',(event)=>{
-              if(document.body.scrollHeight-30 < document.body.scrollTop + window.innerHeight){
-                  this.setState({skip:this.state.skip+10},()=>{this.props.dispatch(fetchPostDetails(this.state.skip,this.state.limit));})
-              }
-          });
-          this.props.dispatch(fetchPostDetails(this.state.skip,this.state.limit));
-
-
-        //this.props.dispatch(fetchLikesAndDiislikesDetails())
-           //this.props.dispatch(fetchCommentsDetails())
+        // document.addEventListener('scroll', (event) => {
+        //     if (document.body.scrollHeight - 30 < document.body.scrollTop + window.innerHeight) {
+        //         this.setState({skip: this.state.skip + 10}, () => {
+        //             this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
+        //         })
+        //     }
+        // });
+        this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
+        this.props.dispatch(fetchLikesAndDiislikesDetails());
+        this.props.dispatch(fetchCommentsDetails())
     }
 
     updateOnComplaint = () => {
@@ -44,6 +48,7 @@ class Buzzcomponent extends React.Component {
 
 
     render() {
+        console.log("state",this.state);
         return (
             <div className="Component">
                 <Banner/>
@@ -54,16 +59,14 @@ class Buzzcomponent extends React.Component {
                         {
                             (this.state.edit) ?
                                 <div>
-                                    <CreateBuzz changeValue={this.updateValue}/>
+                                    <CreateBuzz/>
                                     {
                                         this.props.postData.map((post, i) => (
-                                            <Post posts= {post} key={i}/>
+                                            <Post posts={post} key={i}/>
                                         ))
                                     }
                                 </div>
-                                :
-
-                                <Createcomplaint/>
+                                : <Createcomplaint/>
                         }
                     </div>
                 </div>
@@ -72,9 +75,9 @@ class Buzzcomponent extends React.Component {
     }
 }
 
-
 const mapStateToProps = (state) => ({
-    postData: state.postData,
-})
+
+    postData: state.postReducer.postData,
+});
 
 export default connect(mapStateToProps)(Buzzcomponent)

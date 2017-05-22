@@ -12,8 +12,6 @@ const webpackconfig = require("../../webpack.config");
 const path = require("path");
 const bodyParser = require("body-parser");
 
-console.log("+++", process.cwd(), __dirname);
-
 app.use(express.static('./src/server/public'));
 const compiler = webpack(webpackconfig);
 app.use(bodyParser());
@@ -23,28 +21,28 @@ app.use(webpackmiddleware(compiler, {
     stats: {
         color: true,
     },
-    historyApiFallback:true,
+    historyApiFallback: true,
 }));
 router(app);
 
 
-authenticate=(req,res,next)=>{
-    if(req.url=="/"){
-        if(req.user){
+authenticate = (req, res, next) => {
+    if (req.url == "/") {
+        if (req.user) {
             res.redirect("/buzz")
         }
         next();
-    }else{
-        if(req.user){
+    } else {
+        if (req.user) {
             next()
-        }else{
+        } else {
             res.redirect("/")
         }
     }
 };
-    app.get("/*",authenticate,(req, res) =>{
-        res.sendFile(path.resolve('src/client','./index.html'));
-    });
+app.get("/*", authenticate, (req, res) => {
+    res.sendFile(path.resolve('src/client', './index.html'));
+});
 
 
 const server = app.listen(3000, () => {

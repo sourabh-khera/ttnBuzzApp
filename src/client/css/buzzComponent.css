@@ -103,10 +103,10 @@
     padding-left: 10px;
 }
 
-textarea::-webkit-input-placeholder {
-    padding-left: 5px;
-    padding-top: 5px;
-}
+/*textarea::-webkit-input-placeholder {*/
+    /*padding-left: 5px;*/
+    /*padding-top: 5px;*/
+/*}*/
 
 .buzzfooter {
     height:60px;

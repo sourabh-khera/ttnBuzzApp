@@ -1,0 +1,141 @@
+/**
+ * Created by sourabh on 20/5/17.
+ */
+.complaintContainer{
+    width:600px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.department{
+    width:200px;
+    float:left;
+    margin-left:20px;
+}
+
+.department h5,select {
+    height: 100%;
+    width: 100%;
+}
+.department select{
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    padding-left: 4px;
+    outline: none;
+    background-color: white;
+    color:orange;
+    cursor: pointer;
+    float: left;
+}
+.department select option{
+    background-color: #fff;
+    color: #000000;
+    cursor: pointer ;
+}
+
+
+.title{
+    width:200px;
+    float:right;
+    margin-right: 20px;
+
+}
+
+
+.title h5,select{
+    height:100%;
+    width:100%
+}
+.title select{
+    height: 40px;
+    outline: none;
+    width: 100%;
+    border-radius: 5px;
+    padding-left: 4px;
+    background-color:white;
+    color:orange;
+    cursor: pointer;
+    float: left;
+}
+.title select option{
+    background-color: #fff;
+    color: #000000;
+    cursor: pointer ;
+}
+.name{
+    clear:right;
+    width:200px;
+    float:left;
+    margin-left: 20px;
+
+}
+.name h5,input[type="text"]{
+    height:100%;
+    width:100%;
+}
+.name input[type="text"]{
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+}
+
+.emailid{
+    width:200px;
+    float:right;
+    margin-right: 20px;
+}
+
+.emailid h5,input[type="text"]{
+    width:100%;
+    height:100%;
+}
+
+.emailid input[type="text"]{
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+}
+
+.concern{
+    width:500px;
+    clear:both;
+    margin-left: 20px;
+}
+
+.concern textarea{
+    resize: none;
+    border: 1px solid lightgray;
+    height:100px;
+    margin: 0;
+    overflow: hidden;
+    width: 100%;
+    padding-left: 10px;
+}
+.complaintfooter{
+    height:60px;
+    border-top: 1px solid lightgray;
+}
+
+.submitcomplaint button{
+    float: right;
+    margin-top: 15px;
+    margin-right: 10px;
+    background-color: white;
+    color:orange;
+    border: none;
+    text-transform: uppercase;
+    padding: 5px;
+    border-radius: 5px;
+}
+.complaintheader{
+    background-color: aliceblue;
+    height: 42px;
+    font-size: 21px;
+    padding-left: 7px;
+    line-height: 42px;
+}

@@ -14,9 +14,7 @@ exports.useGoogle = () => {
         },
         (accessToken, refreshToken, profile, done) => {
 
-       // console.log(profile.displayName)
-
-         if(profile._json.domain==="tothenew.com"){
+            if(profile._json.domain==="tothenew.com"){
 
              userSchema.findOne({email:profile.emails[0].value},(err,user)=>{
 

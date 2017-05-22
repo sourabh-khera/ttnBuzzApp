@@ -9,9 +9,7 @@ import LoginImg3 from "../assets/images/google3.png"
 import {link} from "react-router-dom"
 
 export default class Login extends React.Component {
-
     render() {
-
         return (
             <div className="loginParentContainer">
                 <img className="loginImg1" src={LoginImg1}/>
@@ -24,7 +22,6 @@ export default class Login extends React.Component {
                 </div>
 
             </div>
-
         )
     }
 }

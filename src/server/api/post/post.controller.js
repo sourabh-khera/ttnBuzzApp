@@ -2,10 +2,10 @@
  * Created by sourabh on 8/5/17.
  */
 
-const postService = require("./post.service")
+const postService = require("./post.service");
 exports.createPost = (req,res) => {
     const postData = req.body;
-    let Postimage=null
+    let Postimage=null;
     if(req.file && req.file.filename) {
         Postimage=req.file.filename;
     }
@@ -20,7 +20,7 @@ exports.createPost = (req,res) => {
             res.send(error)
         })
 
-}
+};
 
 exports.fetchPostData = (req,res) => {
     const skipRecords=req.query.skip;

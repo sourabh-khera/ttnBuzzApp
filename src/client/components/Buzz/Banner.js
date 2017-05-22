@@ -5,7 +5,6 @@
 import React from "react"
 import BannerImg1 from "../../assets/images/tothenew.jpg"
 import BannerImg2 from "../../assets/images/Road_Trip-cover-photo-26153.jpg"
-import {Link} from "react-router-dom"
 export default class Banner extends React.Component{
 
     render(){

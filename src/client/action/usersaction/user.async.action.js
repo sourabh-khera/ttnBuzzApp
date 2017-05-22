@@ -7,10 +7,11 @@ import {
     fetchUserSuccess,
     fetchUserFailure
 } from "./user.actions"
+import fetch from "isomorphic-fetch";
 export const fetchUserDetails = () => {
 
     return (dispatch) => {
-        dispatch(fetchUserStarted())
+        dispatch(fetchUserStarted());
         fetch("http://localhost:3000/user", {
             credentials: "include",
             method: "get",
@@ -22,5 +23,5 @@ export const fetchUserDetails = () => {
             dispatch(fetchUserFailure(err))
         })
     }
-}
+};
 

@@ -1,8 +1,6 @@
 import React from 'react'
-import UserIcon from "../../assets/images/user-icon-png-pnglogocom.png"
-import Guy from "../../assets/images/guy.jpg"
-import {connect} from "react-redux"
-import {createLikes,createDisLikes,createComment} from "../../action/index"
+import { connect } from "react-redux"
+import { createLikesAndDislikes, createComment } from "../../action/index"
 class Post extends React.Component {
 
     constructor(){
@@ -16,17 +14,17 @@ class Post extends React.Component {
         }
     }
 
-    likes = (postid,status)=>{
+    likes = (postid,status) => {
         this.setState({ disableLike: true, disableDisLike:false });
-        this.props.dispatch(createLikes(postid,status))
+        this.props.dispatch( createLikesAndDislikes(postid,status))
     };
 
-    disLikes=(postid,status)=>{
+    disLikes = (postid,status) => {
         this.setState({disableDisLike:true},()=>{this.setState({disableLike:false})});
-        this.props.dispatch(createLikes(postid,status))
+        this.props.dispatch( createLikesAndDislikes(postid,status))
     };
 
-    toggleComment=()=>{
+    toggleComment = () => {
         this.setState({
             commentTextArea:!this.state.toggle,
             toggle: !this.state.toggle
@@ -38,11 +36,11 @@ class Post extends React.Component {
 
     };
 
-    onchange=(event)=>{
+    onchange = (event) => {
         this.setState({commentBody:event.target.value})
     };
 
-    postComment=(comment,postid)=>{
+    postComment = (comment,postid) => {
         this.props.dispatch(createComment(comment,postid));
         this.setState({commentBody:"",commentTextArea:false})
     };
@@ -53,6 +51,11 @@ class Post extends React.Component {
         const likes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'liked').length;
         const dislikes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'disliked').length;
         const comments=this.props.commentsData;
+        // const commentsData=comments.map=(items)=>{
+        //    if(items.postId===this.props.posts._id){
+        //        return items;
+        //    }
+        // };
         return (
             <div>
                 <div>
@@ -105,16 +108,16 @@ class Post extends React.Component {
 
                             {
                                 comments.map((items,i)=>(
-                                (items.postId===this.props.posts._id)?
-                                <div className="row comment-box" key={i}>
-                                    <div className="col-md-1 pull-left">
-                                        <img src={items.userId.image} className="image-responsive"/></div>
-                                        <div className="col-md-11 pull-right">
-                                            <h5>{items.userId.name}</h5>
-                                            <p className="comments">{items.commentBody}</p>
+                                    (items.postId===this.props.posts._id)?
+                                        <div className="row comment-box" key={i}>
+                                            <div className="col-md-1 pull-left">
+                                                <img src={items.userId.image} className="image-responsive"/></div>
+                                            <div className="col-md-11 pull-right">
+                                                <h5>{items.userId.name}</h5>
+                                                <p className="comments">{items.commentBody}</p>
+                                            </div>
                                         </div>
-                                </div>
-                                :null
+                                        :null
                                 ))}
                         </div>
                     </div>
@@ -125,8 +128,8 @@ class Post extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    LikeAndDislikeData:state.LikeAndDislikeData,
-    commentsData:state.commentsData
+    LikeAndDislikeData:state.LikesAndDislikesReducer.LikeAndDislikeData,
+    commentsData:state.commentsReducer.commentsData
 });
 
 export default connect(mapStateToProps)(Post)

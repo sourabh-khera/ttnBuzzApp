@@ -3,15 +3,15 @@
  */
 const userController=require("./users.controller");
 
-
 const loggedIn = (req, res, next) => {
 
     if (req.user) {
         next()
     } else {
-        res.redirect("/")
+        res.sendStatus("unauthorised access",403);
     }
 };
+
 
 
 module.exports=(app)=>{

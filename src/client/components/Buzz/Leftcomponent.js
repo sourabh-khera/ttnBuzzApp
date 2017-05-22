@@ -1,18 +1,18 @@
 import React from 'react'
 
 export default class Leftcomponent extends React.Component {
-    render(){
+    render() {
         return (
             <div>
                 <div className="leftPanel">
                     <div className="buzzCom">
                         <ul>
-                            <a href="#" id="buzz" onClick={this.props.updateOnEdit.bind(this)}>
-                                <li>BUZZ</li>
+                            <a href="#" id="buzz">
+                                <li onClick={this.props.updateOnEdit.bind(this)}>BUZZ</li>
                             </a>
-                            <a href="#" onClick={this.props.updateOnComplaint.bind(this)}>
-                                <li>COMPLAINTS</li>
-                            </a>
+
+                                <li onClick={this.props.updateOnComplaint.bind(this)}>COMPLAINTS</li>
+
                         </ul>
                     </div>
                     <div className="leftfooter">

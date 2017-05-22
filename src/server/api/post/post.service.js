@@ -18,12 +18,12 @@ exports.post = (postData, user, Postimage,res) => {
 
 exports.populateUserData = (skipRecords,fetchLimit) => {
     return new Promise(function(resolve, reject) {
-        const skip=parseInt(skipRecords);
-        const limit=parseInt(fetchLimit)
+        // const skip=parseInt(skipRecords);
+        // const limit=parseInt(fetchLimit)
         postModel
             .find({})
-            .limit(limit)
-            .skip(skip)
+            // .limit(limit)
+            // .skip(skip)
             .sort({createdAt: -1})
             .populate("postedBy")
             .exec(function (err, posts) {

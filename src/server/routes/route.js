@@ -9,7 +9,17 @@ const commentRoutes=require("../api/comment/comment.route");
 const postsRoute=require("../api/post/posts.route");
 const userRoute=require("../api/users/users.route");
 const likesRoute=require("../api/likes/likes.route");
+const complaintRoute=require("../api/complaint/complaint.route");
 
+//
+// const loggedIn = (req, res, next) => {
+//
+//     if (req.user) {
+//         next()
+//     } else {
+//         res.sendStatus("unauthorised access",403);
+//     }
+// };
 
 module.exports=(app) => {
 
@@ -36,6 +46,7 @@ module.exports=(app) => {
     postsRoute(app);
     likesRoute(app);
     userRoute(app);
+    complaintRoute(app);
 
 
 };
