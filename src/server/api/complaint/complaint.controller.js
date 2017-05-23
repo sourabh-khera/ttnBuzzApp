@@ -4,12 +4,24 @@
 
 const complaintservice = require("./complaint.service");
 exports.createComplaint = (req, res) => {
-    console.log("body------", req.body);
-    complaintservice.complaint(req.body)
+    complaintservice.complaint(req.body, req.user)
+        .then(
+            complaintservice.getUserComplaint(req.user)
+        ).then((data) => {
+        res.send({data})
+    }).catch((error) => {
+        res.send(error)
+    })
+
+};
+
+
+exports.fetchComplaints = (req, res) => {
+    complaintservice.getUserComplaint(req.user)
         .then((data) => {
             res.send({data})
         }).catch((error) => {
-        res.send(error);
+        res.send(error)
     })
 
 };

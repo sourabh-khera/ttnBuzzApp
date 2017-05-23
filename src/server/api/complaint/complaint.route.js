@@ -5,7 +5,8 @@
 const ComplaintController=require("./complaint.controller");
 
 
-module.exports=(app)=>{
+module.exports=(app,loggedIn)=>{
 
     app.post("/complaint",ComplaintController.createComplaint);
+    app.get("/complaint",loggedIn,ComplaintController.fetchComplaints)
 };

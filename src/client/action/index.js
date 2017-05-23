@@ -2,4 +2,4 @@ export {createLikesAndDislikes,fetchLikesAndDiislikesDetails} from "./likesactio
 export {createComment, fetchCommentsDetails} from "./commentsaction/comments.async.action"
 export {createPost,fetchPostDetails} from "./postaction/posts.async.action"
 export {fetchUserDetails} from "./usersaction/user.async.action"
-export {createComplaint} from "./complaintsaction/complaints.async"
+export {createComplaint,fetchComplaint} from "./complaintsaction/complaints.async"

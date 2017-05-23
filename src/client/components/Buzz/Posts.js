@@ -1,35 +1,37 @@
 import React from 'react'
-import { connect } from "react-redux"
-import { createLikesAndDislikes, createComment } from "../../action/index"
+import {connect} from "react-redux"
+import {createLikesAndDislikes, createComment} from "../../action/index"
 class Post extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            disableLike:false,
-            disableDisLike:false,
-            commentTextArea:false,
+            disableLike: false,
+            disableDisLike: false,
+            commentTextArea: false,
             toggle: false,
-            commentBody:"",
+            commentBody: "",
         }
     }
 
-    likes = (postid,status) => {
-        this.setState({ disableLike: true, disableDisLike:false });
-        this.props.dispatch( createLikesAndDislikes(postid,status))
+    likes = (postid, status) => {
+        this.setState({disableLike: true, disableDisLike: false});
+        this.props.dispatch(createLikesAndDislikes(postid, status))
     };
 
-    disLikes = (postid,status) => {
-        this.setState({disableDisLike:true},()=>{this.setState({disableLike:false})});
-        this.props.dispatch( createLikesAndDislikes(postid,status))
+    disLikes = (postid, status) => {
+        this.setState({disableDisLike: true}, () => {
+            this.setState({disableLike: false})
+        });
+        this.props.dispatch(createLikesAndDislikes(postid, status))
     };
 
     toggleComment = () => {
         this.setState({
-            commentTextArea:!this.state.toggle,
+            commentTextArea: !this.state.toggle,
             toggle: !this.state.toggle
         }, () => {
-            if(this.nameInput) {
+            if (this.nameInput) {
                 this.nameInput.focus();
             }
         })
@@ -37,25 +39,20 @@ class Post extends React.Component {
     };
 
     onchange = (event) => {
-        this.setState({commentBody:event.target.value})
+        this.setState({commentBody: event.target.value})
     };
 
-    postComment = (comment,postid) => {
-        this.props.dispatch(createComment(comment,postid));
-        this.setState({commentBody:"",commentTextArea:false})
+    postComment = (comment, postid) => {
+        this.props.dispatch(createComment(comment, postid));
+        this.setState({commentBody: "", commentTextArea: false})
     };
 
-    render () {
+    render() {
         const LikeAndDislike = this.props.LikeAndDislikeData;
-        const { disableLike, disableDisLike } = this.state;
+        const {disableLike, disableDisLike} = this.state;
         const likes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'liked').length;
         const dislikes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'disliked').length;
-        const comments=this.props.commentsData;
-        // const commentsData=comments.map=(items)=>{
-        //    if(items.postId===this.props.posts._id){
-        //        return items;
-        //    }
-        // };
+        const comments = this.props.commentsData;
         return (
             <div>
                 <div>
@@ -84,31 +81,38 @@ class Post extends React.Component {
                                 </p>
                             </div>
                             {
-                                (this.props.posts.image)?
+                                (this.props.posts.image) ?
                                     <div className="postimage">
                                         <img src={"/upload/" + this.props.posts.image}/>
-                                    </div>:null
+                                    </div> : null
                             }
                         </div>
 
                         <div className="postfooter">
                             <div className="likediscom">
-                                <span  className="glyphicon glyphicon-thumbs-up" onClick={disableLike ? () => {} : ()=>this.likes(this.props.posts._id,"liked")}></span><span>{likes}</span>
-                                <span  className="glyphicon glyphicon-thumbs-down" onClick={disableDisLike ?()=>{}: ()=>this.disLikes(this.props.posts._id,"disliked")}></span><span>{dislikes}</span>
+                                <span className="glyphicon glyphicon-thumbs-up" onClick={disableLike ? () => {
+                                    } : () => this.likes(this.props.posts._id, "liked")}></span><span>{likes}</span>
+                                <span className="glyphicon glyphicon-thumbs-down" onClick={disableDisLike ? () => {
+                                    } : () => this.disLikes(this.props.posts._id, "disliked")}></span><span>{dislikes}</span>
                                 <span className="glyphicon glyphicon-comment" onClick={this.toggleComment}></span>
                             </div>
                             {
-                                (this.state.commentTextArea)?
+                                (this.state.commentTextArea) ?
                                     <div className="postcomment">
-                                        <textarea className="comment-area" ref={(input)=> this.nameInput=input } value={this.state.commentBody} type="text" placeholder="Type Here" onChange={this.onchange} />
-                                        <button className="commentButton" onClick={()=>this.postComment(this.state.commentBody,this.props.posts._id)}>POST</button>
+                                        <textarea className="comment-area" ref={(input) => this.nameInput = input }
+                                                  value={this.state.commentBody} type="text" placeholder="Type Here"
+                                                  onChange={this.onchange}/>
+                                        <button className="commentButton"
+                                                onClick={() => this.postComment(this.state.commentBody, this.props.posts._id)}>
+                                            POST
+                                        </button>
                                     </div>
                                     : null
                             }
 
                             {
-                                comments.map((items,i)=>(
-                                    (items.postId===this.props.posts._id)?
+                                comments.map((items, i) => (
+                                    (items.postId === this.props.posts._id) ?
                                         <div className="row comment-box" key={i}>
                                             <div className="col-md-1 pull-left">
                                                 <img src={items.userId.image} className="image-responsive"/></div>
@@ -117,7 +121,7 @@ class Post extends React.Component {
                                                 <p className="comments">{items.commentBody}</p>
                                             </div>
                                         </div>
-                                        :null
+                                        : null
                                 ))}
                         </div>
                     </div>
@@ -128,8 +132,8 @@ class Post extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    LikeAndDislikeData:state.LikesAndDislikesReducer.LikeAndDislikeData,
-    commentsData:state.commentsReducer.commentsData
+    LikeAndDislikeData: state.LikesAndDislikesReducer.LikeAndDislikeData,
+    commentsData: state.commentsReducer.commentsData
 });
 
 export default connect(mapStateToProps)(Post)

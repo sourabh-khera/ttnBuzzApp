@@ -6,10 +6,15 @@ import {
     createComplaintStarted,
     createComplaintSuccess,
     createComplaintFailure,
+    fetchComplaintStarted,
+    fetchComplaintSuccess,
+    fetchComplaintFailure
+
 } from "./complaints.action";
 import fetch from "isomorphic-fetch";
 
 export const createComplaint = (ComplaintData) => {
+    console.log("-------------",ComplaintData);
 
     return (dispatch) => {
         dispatch(createComplaintStarted());
@@ -20,6 +25,7 @@ export const createComplaint = (ComplaintData) => {
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify(ComplaintData),
+            credentials:"include"
         })
             .then(response => response.json())
             .then(complaint => {
@@ -27,6 +33,25 @@ export const createComplaint = (ComplaintData) => {
             })
             .catch(error => {
                 dispatch(createComplaintFailure(error))
+            })
+    }
+
+};
+
+
+export const fetchComplaint = () => {
+    return (dispatch) => {
+        dispatch(fetchComplaintStarted());
+        fetch("http://localhost:3000/complaint", {
+            method: 'get',
+            credentials:"include",
+        })
+            .then(response => response.json())
+            .then(complaint => {
+                dispatch(fetchComplaintSuccess(complaint.data))
+            })
+            .catch(error => {
+                dispatch(fetchComplaintFailure(error))
             })
     }
 

@@ -7,7 +7,7 @@ exports.createComment = (req, res) => {
     const userid = req.user._id;
     const postid = req.body.id;
     const comment = req.body.data;
-    console.log(userid, postid, comment)
+    console.log(userid, postid, comment);
 
     commentService.comment(postid, userid, comment)
         .then(

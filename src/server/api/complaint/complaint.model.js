@@ -5,13 +5,11 @@
 const Mongoose = require("mongoose");
 
 const ComplaintSchema = new Mongoose.Schema({
-
-    UserName:{type:String,},
-    EmailId:{type:String,},
-    Complainttype: {type: String,},
-    Complaintbody: {type: String,},
-    Department: {type: String},
-    Status: {
+    userId:{type:Mongoose.Schema.Types.ObjectId,ref:"User"},
+    complaintType: {type: String,},
+    complaintBody: {type: String,},
+    department: {type: String},
+    status: {
         type: String,
         enum: ['open', 'resolved', 'closed'],
         default: 'open'

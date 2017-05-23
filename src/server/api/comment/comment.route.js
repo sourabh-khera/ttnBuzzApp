@@ -5,16 +5,7 @@
 const commentController=require("./comment.controller");
 
 
-const loggedIn = (req, res, next) => {
-
-    if (req.user) {
-        next()
-    } else {
-        res.sendStatus("unauthorised access",403);
-    }
-};
-
-module.exports=(app)=>{
+module.exports=(app,loggedIn)=>{
 
     app.post("/comment",commentController.createComment);
     app.get("/comment",loggedIn,commentController.fetchCommentsData);

@@ -11,15 +11,15 @@ const userRoute=require("../api/users/users.route");
 const likesRoute=require("../api/likes/likes.route");
 const complaintRoute=require("../api/complaint/complaint.route");
 
-//
-// const loggedIn = (req, res, next) => {
-//
-//     if (req.user) {
-//         next()
-//     } else {
-//         res.sendStatus("unauthorised access",403);
-//     }
-// };
+
+const loggedIn = (req, res, next) => {
+
+    if (req.user) {
+        next()
+    } else {
+        res.sendStatus("unauthorised access",403);
+    }
+};
 
 module.exports=(app) => {
 
@@ -42,11 +42,11 @@ module.exports=(app) => {
         res.redirect("/");
     });
 
-    commentRoutes(app);
-    postsRoute(app);
-    likesRoute(app);
-    userRoute(app);
-    complaintRoute(app);
+    commentRoutes(app,loggedIn);
+    postsRoute(app,loggedIn);
+    likesRoute(app,loggedIn);
+    userRoute(app,loggedIn);
+    complaintRoute(app,loggedIn);
 
 
 };

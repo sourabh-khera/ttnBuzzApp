@@ -65,43 +65,9 @@
     color: #000000;
     cursor: pointer ;
 }
-.name{
-    clear:right;
-    width:200px;
-    float:left;
-    margin-left: 20px;
-
-}
-.name h5,input[type="text"]{
-    height:100%;
-    width:100%;
-}
-.name input[type="text"]{
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid lightgray;
-    margin-bottom: 10px;
-}
-
-.emailid{
-    width:200px;
-    float:right;
-    margin-right: 20px;
-}
-
-.emailid h5,input[type="text"]{
-    width:100%;
-    height:100%;
-}
-
-.emailid input[type="text"]{
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid lightgray;
-    margin-bottom: 10px;
-}
 
 .concern{
+    margin-top: 90px;
     width:500px;
     clear:both;
     margin-left: 20px;
@@ -109,6 +75,7 @@
 
 .concern textarea{
     resize: none;
+    border-radius: 5px;
     border: 1px solid lightgray;
     height:100px;
     margin: 0;
@@ -123,14 +90,14 @@
 
 .submitcomplaint button{
     float: right;
+    outline: none;
     margin-top: 15px;
     margin-right: 10px;
-    background-color: white;
-    color:orange;
+    background-color: black;
+    color: orange;
     border: none;
     text-transform: uppercase;
     padding: 5px;
-    border-radius: 5px;
 }
 .complaintheader{
     background-color: aliceblue;
@@ -139,3 +106,31 @@
     padding-left: 7px;
     line-height: 42px;
 }
+.displayComplaint{
+    width:600px;
+}
+
+.panel {
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+table{
+    background-color: darkslategray;
+}
+
+table tr , td {
+    color: #ffffff;
+}
+
+ table,tr,td,th{
+     border:1px solid lightgray;
+     padding: 5px;
+}
+
+
+thead tr{
+     color: yellow;
+     text-transform: uppercase
+ }

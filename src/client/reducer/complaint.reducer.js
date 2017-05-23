@@ -4,7 +4,10 @@
 import {
     CREATE_COMPLAINT_STARTED,
     CREATE_COMPLAINT_SUCCESS,
-    CREATE_COMPLAINT_FAILURE
+    CREATE_COMPLAINT_FAILURE,
+    FETCH_COMPLAINTS_STARTED,
+    FETCH_COMPLAINTS_SUCCESS,
+    FETCH_COMPLAINTS_FAILURE
 } from "../constants/constants"
 
 const complaintState={
@@ -25,7 +28,7 @@ export const complaintReducer=(state=complaintState,action)=>{
         case CREATE_COMPLAINT_SUCCESS:{
             return{
                 ...state,
-                complaintData:action.ComplaintData,
+                complaintData:state.complaintData.concat(action.ComplaintData),
             }
         }
         case CREATE_COMPLAINT_FAILURE:{
@@ -34,6 +37,24 @@ export const complaintReducer=(state=complaintState,action)=>{
                 error:action.err
             }
         }
+        case FETCH_COMPLAINTS_STARTED:{
+            return{
+                ...state,
+            }
+        }
+        case FETCH_COMPLAINTS_SUCCESS:{
+            return{
+                ...state,
+                complaintData:state.complaintData.concat(action.ComplaintData),
+            }
+        }
+        case FETCH_COMPLAINTS_FAILURE:{
+            return{
+                ...state,
+                error:action.err
+            }
+        }
+
         default:return state;
     }
 

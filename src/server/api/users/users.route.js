@@ -3,18 +3,9 @@
  */
 const userController=require("./users.controller");
 
-const loggedIn = (req, res, next) => {
-
-    if (req.user) {
-        next()
-    } else {
-        res.sendStatus("unauthorised access",403);
-    }
-};
 
 
-
-module.exports=(app)=>{
+module.exports=(app,loggedIn)=>{
 
     app.get("/user",loggedIn,userController.fetchUserData);
 

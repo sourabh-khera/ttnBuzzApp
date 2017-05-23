@@ -31,4 +31,4 @@ exports.fetchPostData = (req,res) => {
         }).catch((error) => {
             res.send(error)
         })
-}
+};

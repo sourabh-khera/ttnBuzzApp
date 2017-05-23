@@ -5,20 +5,20 @@ import Post from "./Posts"
 import Banner from "./Banner"
 import Createcomplaint from "../complaints/createComplaint"
 import {connect} from "react-redux"
+import {Accordion} from "react-bootstrap"
 import {
     fetchPostDetails,
     fetchUserDetails,
     fetchLikesAndDiislikesDetails,
-    fetchCommentsDetails
+    fetchCommentsDetails,
+    fetchComplaint
 } from "../../action/index"
 
 
 class Buzzcomponent extends React.Component {
     constructor() {
         super();
-        console.log('asddasddadasdasdadas');
         this.state = {
-
             edit: true,
             value: "",
             skip: 0,
@@ -27,16 +27,19 @@ class Buzzcomponent extends React.Component {
     }
 
     componentDidMount() {
-        // document.addEventListener('scroll', (event) => {
-        //     if (document.body.scrollHeight - 30 < document.body.scrollTop + window.innerHeight) {
-        //         this.setState({skip: this.state.skip + 10}, () => {
-        //             this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
-        //         })
-        //     }
-        // });
+        document.addEventListener('scroll', (event) => {
+            if (document.body.scrollHeight === document.body.scrollTop + window.innerHeight) {
+                    this.setState({skip: this.state.skip + 10}, () => {
+                    this.props.dispatch(fetchPostDetails(this.state.skip + 10, this.state.limit));
+                })
+            }
+        });
+        this.props.dispatch(fetchUserDetails());
         this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
         this.props.dispatch(fetchLikesAndDiislikesDetails());
-        this.props.dispatch(fetchCommentsDetails())
+        this.props.dispatch(fetchCommentsDetails());
+        this.props.dispatch(fetchComplaint());
+
     }
 
     updateOnComplaint = () => {
@@ -48,7 +51,6 @@ class Buzzcomponent extends React.Component {
 
 
     render() {
-        console.log("state",this.state);
         return (
             <div className="Component">
                 <Banner/>
@@ -67,6 +69,7 @@ class Buzzcomponent extends React.Component {
                                     }
                                 </div>
                                 : <Createcomplaint/>
+
                         }
                     </div>
                 </div>
@@ -78,6 +81,8 @@ class Buzzcomponent extends React.Component {
 const mapStateToProps = (state) => ({
 
     postData: state.postReducer.postData,
+    complaintData: state.complaintReducer.complaintData,
+    userData: state.complaintReducer.complaintData,
 });
 
 export default connect(mapStateToProps)(Buzzcomponent)

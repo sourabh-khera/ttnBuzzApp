@@ -4,14 +4,6 @@
 const postController=require("./post.controller");
 const multer=require("multer");
 
-const loggedIn = (req, res, next) => {
-    if (req.user) {
-        next()
-    } else {
-        res.sendStatus("unauthorised access",403);
-    }
-};
-
 const storage=multer.diskStorage({
     destination: (req,file,cb)=>{
         cb(null,"/home/sourabh/Desktop/ttndbuzzapp/src/server/public/upload")
@@ -25,7 +17,7 @@ const upload=multer({storage:storage});
 
 
 
-module.exports=(app)=>{
+module.exports=(app,loggedIn)=>{
 
 
     app.post("/post",upload.single('image_path'),postController.createPost);
