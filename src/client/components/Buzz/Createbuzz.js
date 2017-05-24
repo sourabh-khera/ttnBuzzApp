@@ -2,6 +2,7 @@ import React from 'react'
 import Cameraicon from "../../assets/images/Camera-icon.png"
 import {connect} from "react-redux"
 import {createPost, fetchPost} from "../../action/index"
+import AlertContainer from "react-alert"
 class Creatbuzz extends React.Component {
 
     constructor() {
@@ -10,27 +11,36 @@ class Creatbuzz extends React.Component {
             postBody: "",
             post_value: "Activity",
             image_path: "",
-            errorMessage: "",
-            showError: false,
         }
     }
+
+    alertOptions = {
+        position: 'top right',
+        theme: 'dark',
+        time: 3000,
+        transition: 'scale',
+    };
+
+    showErrorAlert = () => {
+        this.msg.show('You can not create an empty post ',
+            {
+                type: 'error'
+            });
+    };
+
     onImageChange = (event) => {
-        this.setState({[event.target.name]: event.target.files[0], showError: false});
+        this.setState({[event.target.name]: event.target.files[0]});
     };
     onPostchange = (event) => {
-        this.setState({[event.target.name]: event.target.value, showError: false});
+        this.setState({[event.target.name]: event.target.value});
     };
     setValue = (event) => {
-        this.setState({post_value: event.target.value, showError: false})
+        this.setState({post_value: event.target.value})
     };
     onCreatePost = (e) => {
         e.preventDefault();
         if (!this.state.postBody && !this.state.image_path) {
-            this.setState({showError: true, errorMessage: "post can not be empty"});
-            return
-        }
-        if (!this.state.post_value) {
-            this.setState({showError: true, errorMessage: 'please select a category '});
+            this.showErrorAlert();
             return
         }
         const multipartFormData = new FormData();
@@ -42,10 +52,6 @@ class Creatbuzz extends React.Component {
     };
 
     render() {
-        const {showError, errorMessage} = this.state;
-        const renderError = showError
-            ? (<div>{errorMessage}</div>)
-            : null;
         return (
             <div>
                 <form>
@@ -61,7 +67,6 @@ class Creatbuzz extends React.Component {
                                 onChange={this.onPostchange}
                             />
                         </div>
-                        {renderError}
                         <div className="buzzfooter">
                             <div className="category">
                                 <select onChange={this.setValue}>
@@ -71,7 +76,8 @@ class Creatbuzz extends React.Component {
                                 <div className="imCamera">
                                     <input type="file" name="image_path" onChange={this.onImageChange}/>
                                 </div>
-                                <input type="submit" value="submit" onClick={this.onCreatePost}/>
+                                <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
+                                <button type="button" className="btn btn-danger"onClick={this.onCreatePost}>Submit</button>
                             </div>
                         </div>
                     </div>

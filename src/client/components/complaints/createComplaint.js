@@ -9,40 +9,47 @@ import {Accordion, Panel} from "react-bootstrap";
 
 class Createcomplaint extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            Department: "Accounts&Finance",
+            complaintType: "Hardware",
+            complaintBody: "",
+        }
+    }
+
     alertOptions = {
-        offset: 14,
         position: 'top right',
         theme: 'dark',
         time: 3000,
         transition: 'scale',
     };
-
-    showAlert = () => {
+    showSuccessAlert = () => {
         this.msg.show('your complaint has been successfully logged',
             {
                 type: 'success'
             });
     };
 
-    constructor() {
-        super();
-        this.state = {
-            Department: "",
-            complaintType: "",
-            complaintBody: "",
-            hide: true,
-        }
-    }
-
+    showErrorAlert = () => {
+        this.msg.show('Plz mention your concern ',
+            {
+                type: 'error'
+            });
+    };
     onchange = (event) => {
         this.setState({[event.target.name]: event.target.value});
     };
     onSubmit = (complaintData) => {
+
+        if (!(this.state.complaintBody)) {
+            this.showErrorAlert();
+            return;
+        }
         this.props.dispatch(createComplaint(complaintData));
-        this.showAlert();
+        this.showSuccessAlert();
         this.setState({complaintBody: ""})
     };
-
 
     render() {
         const complaintInfo = this.props.complaintData;
@@ -50,17 +57,15 @@ class Createcomplaint extends React.Component {
         complaintInfo.map((items) => {
             console.log("!", items)
             if (items.complaintType === "Hardware") {
-                     items.assignedto = "yatin";
+                items.assignedto = "yatin";
             }
             else if (items.complaintType === "Software") {
-                        items.assignedto = "Manoj";
+                items.assignedto = "Manoj";
             }
             else if (items.complaintType === "Infrastructure") {
-                         items.assignedto = "Gaurav";
-
+                items.assignedto = "Gaurav";
             }
         });
-
         return (
             <div>
                 <div className="complaintContainer">
@@ -114,26 +119,19 @@ class Createcomplaint extends React.Component {
                                         }
                                         </tbody>
                                     </table>
-
                                 </Panel>
-
                             </Accordion>
                             <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
                             <button onClick={() => this.onSubmit(this.state)}>Submit</button>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         )
     }
-
 }
 
 const mapStateToProps = (state) => ({
-
     complaintData: state.complaintReducer.complaintData,
 });
-
 export default connect(mapStateToProps)(Createcomplaint);

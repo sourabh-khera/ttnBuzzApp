@@ -5,7 +5,6 @@ import Post from "./Posts"
 import Banner from "./Banner"
 import Createcomplaint from "../complaints/createComplaint"
 import {connect} from "react-redux"
-import {Accordion} from "react-bootstrap"
 import {
     fetchPostDetails,
     fetchUserDetails,
@@ -26,20 +25,26 @@ class Buzzcomponent extends React.Component {
         }
     }
 
+    pageEnd = (event) => {
+        if (document.body.scrollHeight === document.body.scrollTop + window.innerHeight) {
+            this.setState({skip: this.state.skip + 10}, () => {
+                this.props.dispatch(fetchPostDetails(this.state.skip + 10, this.state.limit));
+            })
+        }
+    };
+
     componentDidMount() {
-        document.addEventListener('scroll', (event) => {
-            if (document.body.scrollHeight === document.body.scrollTop + window.innerHeight) {
-                    this.setState({skip: this.state.skip + 10}, () => {
-                    this.props.dispatch(fetchPostDetails(this.state.skip + 10, this.state.limit));
-                })
-            }
-        });
+        document.addEventListener('scroll', this.pageEnd);
         this.props.dispatch(fetchUserDetails());
         this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
         this.props.dispatch(fetchLikesAndDiislikesDetails());
         this.props.dispatch(fetchCommentsDetails());
         this.props.dispatch(fetchComplaint());
 
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('scroll', this.pageEnd, true);
     }
 
     updateOnComplaint = () => {
@@ -55,7 +60,7 @@ class Buzzcomponent extends React.Component {
             <div className="Component">
                 <Banner/>
                 <div className="containers">
-                    <LeftComponent updateOnComplaint={this.updateOnComplaint} updateOnEdit={this.updateOnBuzz}/>
+                    <LeftComponent updateOnComplaint={this.updateOnComplaint} updateOnBuzz={this.updateOnBuzz}/>
 
                     <div className="rightpanel">
                         {
@@ -69,7 +74,6 @@ class Buzzcomponent extends React.Component {
                                     }
                                 </div>
                                 : <Createcomplaint/>
-
                         }
                     </div>
                 </div>

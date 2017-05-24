@@ -5,19 +5,19 @@
 import React from "react"
 import BannerImg1 from "../../assets/images/tothenew.jpg"
 import BannerImg2 from "../../assets/images/Road_Trip-cover-photo-26153.jpg"
-export default class Banner extends React.Component{
+export default class Banner extends React.Component {
 
-    render(){
+    render() {
 
-        return(
+        return (
             <div className="bannerParentContainer">
                 <div>
-                  <div className="bannerChildContainer1">
-                      <img className="bannerImg1" src={BannerImg1}/>
+                    <div className="bannerChildContainer1">
+                        <img className="bannerImg1" src={BannerImg1}/>
 
-                  </div>
+                    </div>
                     <div className="bannerChildContainer2">
-                        <button type="button" className="btn btn-success"><a href="/logout">Logout</a></button>
+                        <button type="button" className="btn btn-danger"><a href="/logout">Logout</a></button>
                     </div>
                     <div className="bannerChildContainer3">
                         <img className="bannerImg2" src={BannerImg2}/>
@@ -27,8 +27,6 @@ export default class Banner extends React.Component{
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
         )

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux"
 import {createLikesAndDislikes, createComment} from "../../action/index"
+import {Popover,OverlayTrigger} from "react-bootstrap"
 class Post extends React.Component {
 
     constructor() {
@@ -35,24 +36,52 @@ class Post extends React.Component {
                 this.nameInput.focus();
             }
         })
-
     };
-
     onchange = (event) => {
         this.setState({commentBody: event.target.value})
     };
-
     postComment = (comment, postid) => {
         this.props.dispatch(createComment(comment, postid));
         this.setState({commentBody: "", commentTextArea: false})
     };
-
     render() {
         const LikeAndDislike = this.props.LikeAndDislikeData;
         const {disableLike, disableDisLike} = this.state;
         const likes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'liked').length;
+        const peopleWhoLikes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'liked');
         const dislikes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'disliked').length;
+        const peopleWhoDisLikes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'disliked');
         const comments = this.props.commentsData;
+        const popoverhoverlikes=(
+            <Popover id="popover-hover-like">
+                {
+                    peopleWhoLikes.map((items,i)=>(
+                        <div className="row comment-box" key={i}>
+                            <div className="col-md-3 pull-left">
+                                <img src={items.likedBy.image} className="image-responsive"/></div>
+                            <div className="col-md-8 pull-right item_name">
+                                <h5>{items.likedBy.name}</h5>
+                            </div>
+                        </div>
+                        ))
+                }
+            </Popover>
+        );
+        const popoverhoverdislikes=(
+            <Popover id="popover-hover-dislike">
+                {
+                    peopleWhoDisLikes.map((items,i)=>(
+                        <div className="row comment-box" key={i}>
+                            <div className="col-md-3 pull-left">
+                                <img src={items.likedBy.image} className="image-responsive"/></div>
+                            <div className="col-md-8 pull-right item_name">
+                                <h5>{items.likedBy.name}</h5>
+                            </div>
+                        </div>
+                    ))
+                }
+            </Popover>
+        );
         return (
             <div>
                 <div>
@@ -89,12 +118,15 @@ class Post extends React.Component {
                         </div>
 
                         <div className="postfooter">
-                            <div className="likediscom">
-                                <span className="glyphicon glyphicon-thumbs-up" onClick={disableLike ? () => {
-                                    } : () => this.likes(this.props.posts._id, "liked")}></span><span>{likes}</span>
-                                <span className="glyphicon glyphicon-thumbs-down" onClick={disableDisLike ? () => {
-                                    } : () => this.disLikes(this.props.posts._id, "disliked")}></span><span>{dislikes}</span>
-                                <span className="glyphicon glyphicon-comment" onClick={this.toggleComment}></span>
+                                <OverlayTrigger trigger={['hover']} placement="bottom" overlay={popoverhoverlikes}>
+                                <span className="glyphicon glyphicon-thumbs-up icon-success" onClick={disableLike ? () => {
+                                    } : () => this.likes(this.props.posts._id, "liked")}></span>
+                                </OverlayTrigger><span>{likes}</span>
+                                <OverlayTrigger trigger={['hover']} placement="bottom" overlay={popoverhoverdislikes}>
+                                <span className="glyphicon glyphicon-thumbs-down icon-warning" onClick={disableDisLike ? () => {
+                                    } : () => this.disLikes(this.props.posts._id, "disliked")}></span>
+                                </OverlayTrigger><span>{dislikes}</span>
+                                <span className="glyphicon glyphicon-comment icon-comment" onClick={this.toggleComment}></span>
                             </div>
                             {
                                 (this.state.commentTextArea) ?
@@ -126,7 +158,6 @@ class Post extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }

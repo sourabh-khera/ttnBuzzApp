@@ -8,11 +8,11 @@ export default class Leftcomponent extends React.Component {
                     <div className="buzzCom">
                         <ul>
                             <a href="#" id="buzz">
-                                <li onClick={this.props.updateOnEdit.bind(this)}>BUZZ</li>
+                                <li onClick={()=>this.props.updateOnBuzz()}>BUZZ</li>
                             </a>
-
-                                <li onClick={this.props.updateOnComplaint.bind(this)}>COMPLAINTS</li>
-
+                            <a href="#" >
+                                <li onClick={()=>this.props.updateOnComplaint()}>COMPLAINTS</li>
+                            </a>
                         </ul>
                     </div>
                     <div className="leftfooter">

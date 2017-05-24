@@ -33,6 +33,11 @@
     margin-right: 30px;
 }
 
+.bannerChildContainer2 button a{
+    text-decoration: none;
+    color:white;
+}
+
 .bannerImg2{
 
     height:100%;
