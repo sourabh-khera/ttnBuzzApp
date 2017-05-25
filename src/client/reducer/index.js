@@ -10,5 +10,5 @@ export default combineReducers({
     postReducer: postReducer,
     LikesAndDislikesReducer: LikesAndDislikesReducer,
     commentsReducer: commentsReducer,
-    complaintReducer:complaintReducer,
+    complaintReducer: complaintReducer,
 });

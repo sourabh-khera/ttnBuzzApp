@@ -2,11 +2,11 @@
  * Created by sourabh on 21/5/17.
  */
 
-const ComplaintController=require("./complaint.controller");
+const ComplaintController = require("./complaint.controller");
 
 
-module.exports=(app,loggedIn)=>{
+module.exports = (app, loggedIn) => {
 
-    app.post("/complaint",ComplaintController.createComplaint);
-    app.get("/complaint",loggedIn,ComplaintController.fetchComplaints)
+    app.post("/complaint", ComplaintController.createComplaint);
+    app.get("/complaint", loggedIn, ComplaintController.fetchComplaints)
 };

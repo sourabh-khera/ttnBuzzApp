@@ -2,24 +2,26 @@
  * Created by sourabh on 5/5/17.
  */
 
-const Mongoose=require("mongoose");
-const UsersSchema=new Mongoose.Schema({
+const Mongoose = require("mongoose");
+const UsersSchema = new Mongoose.Schema({
 
-    name:{
-        type:String,
+    name: {
+        type: String,
     },
-    image:{
-        type:String,
+    image: {
+        type: String,
     },
-    email:{
-        type:String,
+    email: {
+        type: String,
     },
-    role:{
-        type:String,
-        default:"Developer"
+    role: {
+        type: String,
+        default: "Developer"
     },
 
-},{versionKey:false,timestamps:true})
+}, {
+    versionKey: false,
+    timestamps: true
+})
 
-module.exports=Mongoose.model('User',UsersSchema)
-
+module.exports = Mongoose.model('User', UsersSchema)

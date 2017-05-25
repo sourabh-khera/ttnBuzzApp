@@ -13,6 +13,7 @@
     "async": "^2.4.0",
     "body-parser": "^1.17.1",
     "concurrently": "^3.4.0",
+    "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.1",
     "express": "^4.15.2",
     "express-session": "^1.15.2",

@@ -13,20 +13,23 @@ exports.createLike = (req, res) => {
             likesService.getUserData
         ).then((data) => {
         console.log(data)
-                res.send({data})
-        }).catch(function (error) {
-                res.send(error)
+        res.send({
+            data
         })
+    }).catch(function(error) {
+        res.send(error)
+    })
 };
 
 
 exports.fetchlikesData = (req, res) => {
     likesService.getUserData()
         .then((data) => {
-                res.send({data})
+            res.send({
+                data
+            })
         }).catch((error) => {
-                res.send(error)
-        })
+        res.send(error)
+    })
 
 };
-

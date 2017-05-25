@@ -13,19 +13,22 @@ exports.createComment = (req, res) => {
         .then(
             commentService.getUserData
         ).then((data) => {
-        res.send({data})
+        res.send({
+            data
+        })
     }).catch((error) => {
         res.send(error)
     })
 };
 
-exports.fetchCommentsData = (req,res) => {
+exports.fetchCommentsData = (req, res) => {
 
     commentService.getUserData()
         .then((data) => {
-            res.send({data})
+            res.send({
+                data
+            })
         }).catch((error) => {
         res.send(error)
     })
 };
-

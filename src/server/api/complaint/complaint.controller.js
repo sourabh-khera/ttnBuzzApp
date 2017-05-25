@@ -8,7 +8,9 @@ exports.createComplaint = (req, res) => {
         .then(
             complaintservice.getUserComplaint(req.user)
         ).then((data) => {
-        res.send({data})
+        res.send({
+            data
+        })
     }).catch((error) => {
         res.send(error)
     })
@@ -19,7 +21,9 @@ exports.createComplaint = (req, res) => {
 exports.fetchComplaints = (req, res) => {
     complaintservice.getUserComplaint(req.user)
         .then((data) => {
-            res.send({data})
+            res.send({
+                data
+            })
         }).catch((error) => {
         res.send(error)
     })

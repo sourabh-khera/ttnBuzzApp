@@ -11,9 +11,11 @@ const webpackmiddleware = require("webpack-dev-middleware");
 const webpackconfig = require("../../webpack.config");
 const path = require("path");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 
 app.use(express.static('./src/server/public'));
 const compiler = webpack(webpackconfig);
+app.use(cookieParser());
 app.use(bodyParser());
 app.use(webpackmiddleware(compiler, {
     hot: true,
@@ -47,5 +49,5 @@ app.get("/*", authenticate, (req, res) => {
 
 const server = app.listen(3000, () => {
     const Port = server.address().port;
-    console.log("serverListening=============", Port);
+    console.log("serverListening =============", Port);
 });

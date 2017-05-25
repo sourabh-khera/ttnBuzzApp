@@ -2,51 +2,67 @@
  * Created by sourabh on 4/5/17.
  */
 
-let GoogleStrategy=require("../auth/googleAuth");
-let expressSession=require("express-session");
-let passport=require("passport");
-const commentRoutes=require("../api/comment/comment.route");
-const postsRoute=require("../api/post/posts.route");
-const userRoute=require("../api/users/users.route");
-const likesRoute=require("../api/likes/likes.route");
-const complaintRoute=require("../api/complaint/complaint.route");
+let GoogleStrategy = require("../auth/googleAuth");
+let expressSession = require("express-session");
+let passport = require("passport");
+const commentRoutes = require("../api/comment/comment.route");
+const postsRoute = require("../api/post/posts.route");
+const userRoute = require("../api/users/users.route");
+const likesRoute = require("../api/likes/likes.route");
+const complaintRoute = require("../api/complaint/complaint.route");
 
 
 const loggedIn = (req, res, next) => {
-
     if (req.user) {
-        next()
+        next();
     } else {
-        res.sendStatus("unauthorised access",403);
+        res.status(403);
+        res.send("unauthorised access");
     }
 };
 
-module.exports=(app) => {
+module.exports = (app) => {
 
-    app.use(expressSession({secret: '4235234643frsdfd'}),
+    app.use(expressSession({
+        secret: '4235234643frsdfd',
+    }));
+    app.use(
         passport.initialize(),
         passport.session());
 
     GoogleStrategy.useGoogle();
-
-    app.get("/login/google", passport.authenticate('google', {scope: ['profile', 'email']}));
-
-
-    app.get("/oauth2callback", passport.authenticate('google', {
-        successRedirect: "/buzz",
-        failureRedirect: "/"
+    app.get("/login/google", passport.authenticate('google', {
+        scope: ['profile', 'email']
     }));
 
-    app.get("/logout",(req,res) => {
-        req.logout();
-        res.redirect("/");
+
+
+    app.get("/oauth2callback", passport.authenticate('google'), (req, res) => {
+        if (req.user) {
+            res.cookie('username', req.user.email, {
+                maxAge: 900000,
+                httpOnly: false
+            });
+            res.redirect('/buzz')
+        } else {
+            res.redirect('/')
+        }
     });
 
-    commentRoutes(app,loggedIn);
-    postsRoute(app,loggedIn);
-    likesRoute(app,loggedIn);
-    userRoute(app,loggedIn);
-    complaintRoute(app,loggedIn);
-
+    app.get('/logout', function(req, res) {
+        res.cookie('username', '', {
+            maxAge: 900000,
+            httpOnly: false
+        });
+        req.logout();
+        res.send({
+            loggedOut: true
+        });
+    });
+    commentRoutes(app, loggedIn);
+    postsRoute(app, loggedIn);
+    likesRoute(app, loggedIn);
+    userRoute(app, loggedIn);
+    complaintRoute(app, loggedIn);
 
 };

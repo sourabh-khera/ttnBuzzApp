@@ -5,11 +5,18 @@
 const commentModel = require("./comment.model");
 
 
-exports.comment = (postid,userid,comment) => {
+exports.comment = (postid, userid, comment) => {
     return new Promise((resolve, reject) => {
-        commentModel.create({postId:postid,userId:userid,commentBody:comment}, (error, data) => {
+        commentModel.create({
+            postId: postid,
+            userId: userid,
+            commentBody: comment
+        }, (error, data) => {
             if (error) {
-                reject({message: "comment can not be created", error: error})
+                reject({
+                    message: "comment can not be created",
+                    error: error
+                })
             } else
                 resolve(data)
 
@@ -18,14 +25,17 @@ exports.comment = (postid,userid,comment) => {
 };
 
 
-exports.getUserData=()=>{
-    return new Promise((resolve,reject)=>{
+exports.getUserData = () => {
+    return new Promise((resolve, reject) => {
         commentModel
             .find({})
             .populate("userId")
-            .exec((error,data)=>{
-                if(error){
-                    reject({message:"unable to get user comments",error:error})
+            .exec((error, data) => {
+                if (error) {
+                    reject({
+                        message: "unable to get user comments",
+                        error: error
+                    })
                 }
                 resolve(data)
             })

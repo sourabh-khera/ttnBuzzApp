@@ -2,20 +2,23 @@
  * Created by sourabh on 15/5/17.
  */
 
-const Mongoose=require("mongoose");
+const Mongoose = require("mongoose");
 
 
-const LikesSchema=new Mongoose.Schema({
-    postId:{
-        type:String,
+const LikesSchema = new Mongoose.Schema({
+    postId: {
+        type: String,
     },
-    likedBy:{
-        type:Mongoose.Schema.Types.ObjectId,
-        ref:'User'
+    likedBy: {
+        type: Mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
-    status:{
-        type:String
+    status: {
+        type: String
     }
-},{versionKey:false,timestamps:true});
+}, {
+    versionKey: false,
+    timestamps: true
+});
 
-module.exports=Mongoose.model('Like',LikesSchema);
+module.exports = Mongoose.model('Like', LikesSchema);

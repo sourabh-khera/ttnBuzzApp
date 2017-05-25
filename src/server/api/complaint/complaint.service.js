@@ -13,7 +13,10 @@ exports.complaint = (body, user) => {
             userId: user._id
         }, (err, data) => {
             if (err) {
-                reject({message: "can not create complaint", error: err});
+                reject({
+                    message: "can not create complaint",
+                    error: err
+                });
             }
             resolve(data);
         })
@@ -24,11 +27,16 @@ exports.complaint = (body, user) => {
 exports.getUserComplaint = (user) => {
     return new Promise((resolve, reject) => {
         ComplaintSchema
-            .find({userId:user._id})
+            .find({
+                userId: user._id
+            })
             .populate('userId')
             .exec((err, data) => {
                 if (err) {
-                    reject({message: "unable to get user complaints", error: err})
+                    reject({
+                        message: "unable to get user complaints",
+                        error: err
+                    })
                 }
                 resolve(data)
             })
