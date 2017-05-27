@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from "react-redux"
 import {createLikesAndDislikes, createComment} from "../../action/index"
-import {Popover,OverlayTrigger} from "react-bootstrap"
+import {Popover, OverlayTrigger} from "react-bootstrap"
+import AlertContainer from "react-alert";
 class Post extends React.Component {
 
     constructor() {
@@ -14,6 +15,20 @@ class Post extends React.Component {
             commentBody: "",
         }
     }
+
+    alertOptions = {
+        position: 'top right',
+        theme: 'dark',
+        time: 3000,
+        transition: 'scale',
+    };
+
+    showErrorAlert = () => {
+        this.msg.show('You can not post an empty comment ',
+            {
+                type: 'error'
+            });
+    };
 
     likes = (postid, status) => {
         this.setState({disableLike: true, disableDisLike: false});
@@ -41,9 +56,14 @@ class Post extends React.Component {
         this.setState({commentBody: event.target.value})
     };
     postComment = (comment, postid) => {
+        if (!this.state.commentBody.trim()) {
+            this.showErrorAlert();
+            return
+        }
         this.props.dispatch(createComment(comment, postid));
         this.setState({commentBody: "", commentTextArea: false})
     };
+
     render() {
         const LikeAndDislike = this.props.LikeAndDislikeData;
         const {disableLike, disableDisLike} = this.state;
@@ -52,10 +72,10 @@ class Post extends React.Component {
         const dislikes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'disliked').length;
         const peopleWhoDisLikes = LikeAndDislike.filter((like) => like.postId === this.props.posts._id && like.status === 'disliked');
         const comments = this.props.commentsData;
-        const popoverhoverlikes=(
+        const popoverhoverlikes = (
             <Popover id="popover-hover-like">
                 {
-                    peopleWhoLikes.map((items,i)=>(
+                    peopleWhoLikes.map((items, i) => (
                         <div className="row comment-box" key={i}>
                             <div className="col-md-3 pull-left">
                                 <img src={items.likedBy.image} className="image-responsive"/></div>
@@ -63,14 +83,14 @@ class Post extends React.Component {
                                 <h5>{items.likedBy.name}</h5>
                             </div>
                         </div>
-                        ))
+                    ))
                 }
             </Popover>
         );
-        const popoverhoverdislikes=(
+        const popoverhoverdislikes = (
             <Popover id="popover-hover-dislike">
                 {
-                    peopleWhoDisLikes.map((items,i)=>(
+                    peopleWhoDisLikes.map((items, i) => (
                         <div className="row comment-box" key={i}>
                             <div className="col-md-3 pull-left">
                                 <img src={items.likedBy.image} className="image-responsive"/></div>
@@ -118,46 +138,50 @@ class Post extends React.Component {
                         </div>
 
                         <div className="postfooter">
-                                <OverlayTrigger trigger={['hover']} placement="bottom" overlay={popoverhoverlikes}>
-                                <span className="glyphicon glyphicon-thumbs-up icon-success" onClick={disableLike ? () => {
-                                    } : () => this.likes(this.props.posts._id, "liked")}></span>
-                                </OverlayTrigger><span>{likes}</span>
-                                <OverlayTrigger trigger={['hover']} placement="bottom" overlay={popoverhoverdislikes}>
-                                <span className="glyphicon glyphicon-thumbs-down icon-warning" onClick={disableDisLike ? () => {
-                                    } : () => this.disLikes(this.props.posts._id, "disliked")}></span>
-                                </OverlayTrigger><span>{dislikes}</span>
-                                <span className="glyphicon glyphicon-comment icon-comment" onClick={this.toggleComment}></span>
-                            </div>
-                            {
-                                (this.state.commentTextArea) ?
-                                    <div className="postcomment">
+                            <OverlayTrigger trigger={['hover']} placement="bottom" overlay={popoverhoverlikes}>
+                                <span className="glyphicon glyphicon-thumbs-up icon-success"
+                                      onClick={disableLike ? () => {
+                                          } : () => this.likes(this.props.posts._id, "liked")}></span>
+                            </OverlayTrigger><span>{likes}</span>
+                            <OverlayTrigger trigger={['hover']} placement="bottom" overlay={popoverhoverdislikes}>
+                                <span className="glyphicon glyphicon-thumbs-down icon-warning"
+                                      onClick={disableDisLike ? () => {
+                                          } : () => this.disLikes(this.props.posts._id, "disliked")}></span>
+                            </OverlayTrigger><span>{dislikes}</span>
+                            <span className="glyphicon glyphicon-comment icon-comment"
+                                  onClick={this.toggleComment}></span>
+                        </div>
+                        {
+                            (this.state.commentTextArea) ?
+                                <div className="postcomment">
                                         <textarea className="comment-area" ref={(input) => this.nameInput = input }
                                                   value={this.state.commentBody} type="text" placeholder="Type Here"
                                                   onChange={this.onchange}/>
-                                        <button className="commentButton"
-                                                onClick={() => this.postComment(this.state.commentBody, this.props.posts._id)}>
-                                            POST
-                                        </button>
+                                    <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
+                                    <button className="commentButton"
+                                            onClick={() => this.postComment(this.state.commentBody.trim(), this.props.posts._id)}>
+                                        POST
+                                    </button>
+                                </div>
+                                : null
+                        }
+
+                        {
+                            comments.map((items, i) => (
+                                (items.postId === this.props.posts._id) ?
+                                    <div className="row comment-box" key={i}>
+                                        <div className="col-md-1 pull-left">
+                                            <img src={items.userId.image} className="image-responsive"/></div>
+                                        <div className="col-md-11 pull-right">
+                                            <h5>{items.userId.name}</h5>
+                                            <p className="comments">{items.commentBody}</p>
+                                        </div>
                                     </div>
                                     : null
-                            }
-
-                            {
-                                comments.map((items, i) => (
-                                    (items.postId === this.props.posts._id) ?
-                                        <div className="row comment-box" key={i}>
-                                            <div className="col-md-1 pull-left">
-                                                <img src={items.userId.image} className="image-responsive"/></div>
-                                            <div className="col-md-11 pull-right">
-                                                <h5>{items.userId.name}</h5>
-                                                <p className="comments">{items.commentBody}</p>
-                                            </div>
-                                        </div>
-                                        : null
-                                ))}
-                        </div>
+                            ))}
                     </div>
                 </div>
+            </div>
         )
     }
 }

@@ -7,6 +7,6 @@ const ComplaintController = require("./complaint.controller");
 
 module.exports = (app, loggedIn) => {
 
-    app.post("/complaint", ComplaintController.createComplaint);
+    app.post("/complaint",loggedIn, ComplaintController.createComplaint);
     app.get("/complaint", loggedIn, ComplaintController.fetchComplaints)
 };

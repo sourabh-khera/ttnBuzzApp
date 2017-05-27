@@ -4,13 +4,13 @@
 
 const ComplaintSchema = require("./complaint.model");
 
-exports.complaint = (body, user) => {
+exports.complaint = (complaintType,complaintBody, department,userId) => {
     return new Promise((resolve, reject) => {
         ComplaintSchema.create({
-            complaintType: body.complaintType,
-            complaintBody: body.complaintBody,
-            department: body.Department,
-            userId: user._id
+            complaintType:complaintType,
+            complaintBody:complaintBody,
+            department:department,
+            userId: userId
         }, (err, data) => {
             if (err) {
                 reject({

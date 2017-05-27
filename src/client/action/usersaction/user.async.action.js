@@ -13,9 +13,6 @@ export const fetchUserDetails = () => {
 
     return (dispatch) => {
         dispatch(fetchUserStarted());
-        var myHeaders = new Headers();
-        myHeaders.append('pragma', 'no-cache');
-        myHeaders.append('cache-control', 'no-cache');
         fetch("http://localhost:3000/user", {
             credentials: "include",
             method: "get",
@@ -24,8 +21,8 @@ export const fetchUserDetails = () => {
             },
         })
             .then(response => response.json())
-            .then(userData => {
-                dispatch(fetchUserSuccess(userData))
+            .then(data => {
+                dispatch(fetchUserSuccess(data.userData))
             }).catch((err) => {
             dispatch(fetchUserFailure(err))
         })
@@ -52,4 +49,4 @@ export const logout = () => (dispatch) => {
         method: 'get',
         credentials: "include",
     })
-}
+};

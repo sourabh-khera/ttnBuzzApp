@@ -5,8 +5,10 @@
 import React from "react"
 import BannerImg1 from "../../assets/images/tothenew.jpg"
 import BannerImg2 from "../../assets/images/Road_Trip-cover-photo-26153.jpg"
-import { logout } from '../../action/usersaction/user.async.action'
-import { connect } from 'react-redux'
+import {logout} from '../../action/usersaction/user.async.action'
+import {connect} from 'react-redux'
+import {OverlayTrigger, Popover} from "react-bootstrap"
+import Viewprofile from "../../container/Viewprofile"
 
 class Banner extends React.Component {
     logout = (e) => {
@@ -14,7 +16,13 @@ class Banner extends React.Component {
         this.props.logout();
         this.props.history.push('/')
     };
+
     render() {
+        // const popoverhover = (
+        //     <Popover id="popover-hover" className="pop-over">
+        //         <Viewprofile/>
+        //     </Popover>
+        // );
         return (
             <div className="bannerParentContainer">
                 <div>
@@ -22,7 +30,10 @@ class Banner extends React.Component {
                         <img className="bannerImg1" src={BannerImg1}/>
                     </div>
                     <div className="bannerChildContainer2">
-                        <button type="button" className="btn btn-danger"><a href="#" onClick={this.logout}>Logout</a></button>
+                        <span className="userinfo">{this.props.userData.name}</span>
+
+                        <button type="button" className="btn btn-danger"><a href="#" onClick={this.logout}>Logout</a>
+                        </button>
                     </div>
                     <div className="bannerChildContainer3">
                         <img className="bannerImg2" src={BannerImg2}/>
@@ -40,5 +51,7 @@ class Banner extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
     logout: () => dispatch(logout())
 });
-
-export default connect(null, mapDispatchToProps)(Banner)
+const mapStateToProps = (state) => ({
+    userData: state.userReducer.userData,
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Banner)

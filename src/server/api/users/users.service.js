@@ -4,14 +4,18 @@
 
 const userModel = require("./users.model");
 exports.userData = (userId, res) => {
-    userModel.findOne({
-        _id: userId
-    }, (err, userData) => {
-        if (err)
-            res.send(err);
-        else {
+    return new Promise((resolve, reject) => {
+        userModel.findOne({
+            _id: userId
+        }, (err, userData) => {
+            if (err)
+                reject({message: "not able to fetch user", error: err});
+            else {
 
-            res.send(userData)
-        }
+                resolve(userData);
+            }
+        })
+
     })
+
 };

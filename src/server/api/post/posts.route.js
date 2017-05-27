@@ -22,7 +22,7 @@ const upload = multer({
 module.exports = (app, loggedIn) => {
 
 
-    app.post("/post", upload.single('image_path'), postController.createPost);
+    app.post("/post",loggedIn,upload.single('image_path'), postController.createPost);
     app.get("/post", loggedIn, postController.fetchPostData);
 
 };

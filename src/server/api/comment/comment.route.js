@@ -7,7 +7,7 @@ const commentController = require("./comment.controller");
 
 module.exports = (app, loggedIn) => {
 
-    app.post("/comment", commentController.createComment);
+    app.post("/comment",loggedIn, commentController.createComment);
     app.get("/comment", loggedIn, commentController.fetchCommentsData);
 
 };

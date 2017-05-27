@@ -1,6 +1,3 @@
-/**
- * Created by sourabh on 8/5/17.
- */
 import React from "react"
 import {createComplaint} from "../../action/index"
 import {connect} from "react-redux"
@@ -41,8 +38,7 @@ class Createcomplaint extends React.Component {
         this.setState({[event.target.name]: event.target.value});
     };
     onSubmit = (complaintData) => {
-
-        if (!(this.state.complaintBody)) {
+        if (!(this.state.complaintBody.trim())) {
             this.showErrorAlert();
             return;
         }
@@ -55,7 +51,6 @@ class Createcomplaint extends React.Component {
         const complaintInfo = this.props.complaintData;
         let assignedto = "";
         complaintInfo.map((items) => {
-            console.log("!", items)
             if (items.complaintType === "Hardware") {
                 items.assignedto = "yatin";
             }

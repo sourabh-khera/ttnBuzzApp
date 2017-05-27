@@ -15,7 +15,7 @@ const loggedIn = (req, res, next) => {
 
 module.exports = (app) => {
 
-    app.post("/like", likeController.createLike);
+    app.post("/like", loggedIn,likeController.createLike);
     app.get("/like", loggedIn, likeController.fetchlikesData);
 
 

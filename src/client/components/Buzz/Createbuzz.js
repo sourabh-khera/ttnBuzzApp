@@ -39,12 +39,12 @@ class Creatbuzz extends React.Component {
     };
     onCreatePost = (e) => {
         e.preventDefault();
-        if (!this.state.postBody && !this.state.image_path) {
+        if (!this.state.postBody.trim() && !this.state.image_path) {
             this.showErrorAlert();
             return
         }
         const multipartFormData = new FormData();
-        multipartFormData.append("postBody", this.state.postBody);
+        multipartFormData.append("postBody", this.state.postBody.trim());
         multipartFormData.append("post_value", this.state.post_value);
         multipartFormData.append("image_path", this.state.image_path);
         this.props.dispatch(createPost(multipartFormData));

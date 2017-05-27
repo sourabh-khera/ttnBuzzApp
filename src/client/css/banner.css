@@ -33,6 +33,10 @@
     margin-right: 30px;
 }
 
+.pop-over {
+    color:red;
+}
+
 .bannerChildContainer2 button a{
     text-decoration: none;
     color:white;
@@ -50,3 +54,15 @@
     position:relative;
 }
 
+
+ .modal-container {
+      position: relative;
+     }
+ .modal-container .modal, .modal-container .modal-backdrop {
+       position: absolute;
+     }
+.userinfo {
+    text-transform: uppercase;
+    margin-right: 10px;
+    font-weight: bold;
+}
