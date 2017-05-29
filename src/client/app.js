@@ -3,15 +3,15 @@
  * Created by sourabh on 3/5/17.
  */
 import React from "react"
-import Login from "./container/Login"
+import Login from "./components/Login"
 import  "./css/login.css"
 import "./css/banner.css"
 import "./css/buzzComponent.css"
 import "./css/profile.css"
 import "./css/complaint.css"
+import "./css/footer.css"
+import "../server/public/views/error.css"
 import {BrowserRouter as Router,Route} from "react-router-dom"
-import Profile from "./container/Viewprofile"
-import Post from "./components/Buzz/Posts"
 import BuzzComponent from "../client/components/Buzz/BuzzComponent"
 
 export default class App extends React.Component{

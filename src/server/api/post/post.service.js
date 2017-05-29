@@ -36,7 +36,7 @@ exports.populateUserData = (skipRecords, fetchLimit) => {
                 createdAt: -1
             })
             .populate("postedBy")
-            .exec(function(err, posts) {
+            .exec((err, posts) =>  {
                 if (err) reject({
                     message: "Unable to fetch all posts from the database",
                     error: err

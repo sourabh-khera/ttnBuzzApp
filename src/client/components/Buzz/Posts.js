@@ -148,7 +148,7 @@ class Post extends React.Component {
                                       onClick={disableDisLike ? () => {
                                           } : () => this.disLikes(this.props.posts._id, "disliked")}></span>
                             </OverlayTrigger><span>{dislikes}</span>
-                            <span className="glyphicon glyphicon-comment icon-comment"
+                            <span title="comment" className="glyphicon glyphicon-comment icon-comment"
                                   onClick={this.toggleComment}></span>
                         </div>
                         {

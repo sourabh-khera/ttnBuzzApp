@@ -1,15 +1,15 @@
 
 .bannerChildContainer1{
 
-    height:100px;
-    width:100px;
-    float:left;
+    height: 100px;
+    width: 168px;
+    float: left;
+    position: absolute;
 
 }
 
 .bannerImg1{
-    max-height:100%;
-    max-width: 100%;
+
     position: relative;
     top:30px;
     left:40px;
@@ -19,27 +19,36 @@
 .textOnBanner {
     color: #ffffff;
     font-size: 25px;
-    font-family: Tahoma;
     position: absolute;
-    top: 40%;
-    left: 10%;
+    top: 66%;
+    left: 3%;
     font-weight: bold;
 }
 
 .bannerChildContainer2{
-
-    float:right;
-    margin-top: 30px;
-    margin-right: 30px;
+    float: right;
+    position: absolute;
+    top: 9%;
+    z-index: 999999;
+    right: 4%;
+    color: white;
+    font-weight: bold;
 }
 
 .pop-over {
     color:red;
 }
 
+.bannerChildContainer2 button {
+ padding: 0;
+}
+
 .bannerChildContainer2 button a{
     text-decoration: none;
     color:white;
+    padding: 4px;
+    display: inherit;
+    outline: none;
 }
 
 .bannerImg2{
@@ -50,7 +59,7 @@
 .bannerChildContainer3{
 
     clear:both;
-    height:270px;
+    height:400px;
     position:relative;
 }
 

@@ -5,10 +5,8 @@
 const Joi = require("joi");
 
 exports.schema = Joi.object().keys({
-    postBody: Joi.string().trim().allow(''),
+    postBody: Joi.string().allow(''),
     status: Joi.string().valid(['Activity','Lost n Found']).required(),
     userId: Joi.required(),
     Postimage: Joi.string().allow(null),
-
-
 });

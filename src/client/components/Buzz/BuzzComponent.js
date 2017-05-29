@@ -5,11 +5,10 @@ import Post from "./Posts"
 import Banner from "./Banner"
 import Createcomplaint from "../complaints/createComplaint"
 import {connect} from "react-redux"
+import Footer from "./Footer"
 import {
     fetchPostDetails,
     fetchUserDetails,
-
-
     fetchLikesAndDiislikesDetails,
     fetchCommentsDetails,
     fetchComplaint,
@@ -34,7 +33,6 @@ class Buzzcomponent extends React.Component {
             })
         }
     };
-
     componentDidMount() {
         let email;
         const emailCookieString = document.cookie.split(',').find((cookie) => cookie.includes('username'));
@@ -66,7 +64,6 @@ class Buzzcomponent extends React.Component {
         this.setState({edit: true})
     };
 
-
     render() {
         return (
             <div className="Component">
@@ -89,6 +86,7 @@ class Buzzcomponent extends React.Component {
                         }
                     </div>
                 </div>
+            <Footer/>
             </div>
         )
     }

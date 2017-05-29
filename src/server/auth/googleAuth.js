@@ -29,25 +29,20 @@ exports.useGoogle = () => {
                             email: profile.emails[0].value,
                             image: profile._json.image.url,
 
-                        }, function(err, user) {
+                        }, (err, user) => {
                             return done(null, user);
                         })
-
                     }
-
                 })
             } else {
                 return done(null);
             }
-
         }));
 
-    passport.serializeUser(function(userdata, done) {
+    passport.serializeUser((userdata, done)=> {
         done(null, userdata._id);
     });
-
-    passport.deserializeUser(function(_id, done) {
-
+    passport.deserializeUser((_id, done)=> {
         userSchema.findById({
             _id
         }, (err, user) => {

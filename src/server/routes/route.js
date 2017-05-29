@@ -17,7 +17,7 @@ const loggedIn = (req, res, next) => {
         next();
     } else {
         res.status(403);
-        res.send("unauthorised access");
+        res.sendFile("/home/sourabh/Desktop/ttndbuzzapp/src/server/public/views/Error.html");
     }
 };
 
@@ -34,9 +34,6 @@ module.exports = (app) => {
     app.get("/login/google", passport.authenticate('google', {
         scope: ['profile', 'email']
     }));
-
-
-
     app.get("/oauth2callback", passport.authenticate('google'), (req, res) => {
         if (req.user) {
             res.cookie('username', req.user.email, {
@@ -49,7 +46,7 @@ module.exports = (app) => {
         }
     });
 
-    app.get('/logout', function(req, res) {
+    app.get('/logout', (req, res) => {
         res.cookie('username', '', {
             maxAge: 900000,
             httpOnly: false

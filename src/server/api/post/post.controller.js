@@ -11,10 +11,8 @@ exports.createPost = (req, res) => {
     const status = postData.post_value;
     const userId = req.user._id;
     let Postimage = null;
-    if (req.file && req.file.filename) {
-
+    if(req.file && req.file.filename) {
         const imageExtension = req.file.filename.split('.')[1];
-        console.log("extension-----", typeof imageExtension);//jpg
         if ((imageExtension == 'png') || (imageExtension == 'jpg' || (imageExtension == 'gif'))) {
             Postimage = req.file.filename;
         } else {
@@ -28,6 +26,7 @@ exports.createPost = (req, res) => {
         Postimage: Postimage
     }, valiDateSchema.schema, (err, data) => {
         if (err) {
+            console.log("eroor-------",err)
             res.status(403);
         } else {
             postService.post(data.postBody, data.status, data.userId, data.Postimage, res)

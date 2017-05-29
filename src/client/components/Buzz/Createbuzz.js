@@ -27,6 +27,11 @@ class Creatbuzz extends React.Component {
                 type: 'error'
             });
     };
+    showExtensionAlert = () => {
+        this.msg.show('Plz select image with the following extension : jpg,png,gif', {
+            type: 'error'
+        })
+    };
 
     onImageChange = (event) => {
         this.setState({[event.target.name]: event.target.files[0]});
@@ -42,6 +47,15 @@ class Creatbuzz extends React.Component {
         if (!this.state.postBody.trim() && !this.state.image_path) {
             this.showErrorAlert();
             return
+        }
+        if (this.state.image_path) {
+            const imageExtension = this.state.image_path.name.split('.')[1];
+            if ((imageExtension == 'jpg') || (imageExtension == 'gif') || (imageExtension == 'png')) {
+                //do nothing
+            } else {
+                this.showExtensionAlert();
+                return
+            }
         }
         const multipartFormData = new FormData();
         multipartFormData.append("postBody", this.state.postBody.trim());
@@ -77,7 +91,8 @@ class Creatbuzz extends React.Component {
                                     <input type="file" name="image_path" onChange={this.onImageChange}/>
                                 </div>
                                 <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
-                                <button type="button" className="btn btn-danger"onClick={this.onCreatePost}>Submit</button>
+                                <button type="button" className="btn btn-danger" onClick={this.onCreatePost}>Submit
+                                </button>
                             </div>
                         </div>
                     </div>

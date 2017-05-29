@@ -29,21 +29,6 @@ export const fetchUserDetails = () => {
     }
 };
 
-
-export const getLoggedInUser = () => (dispatch) => {
-    fetch("http://localhost:3000/authuser", {
-        method: 'get',
-        credentials: "include",
-    })
-        .then(response => response.json())
-        .then(userEmail => {
-            localStorage.setItem('Email', userEmail.email);
-            dispatch(setLogginUser(userEmail))
-        })
-        .catch((error) => console.log(error))
-};
-
-
 export const logout = () => (dispatch) => {
     fetch("http://localhost:3000/logout", {
         method: 'get',

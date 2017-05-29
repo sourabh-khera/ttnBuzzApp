@@ -3,7 +3,6 @@
  */
 
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
@@ -17,7 +16,6 @@ module.exports = {
             { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
             {test:/\.css$/, loader:'style-loader!css-loader'},
             {
-
                 test: /\.(png|jpg|jpeg|gif|webp|svg|ico)?$/,
                 use: [
                     {
@@ -25,10 +23,7 @@ module.exports = {
 
                     },
                 ],
-
-
             },
-
         ]
     },
 };

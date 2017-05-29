@@ -45,9 +45,8 @@ authenticate = (req, res, next) => {
 app.get("/*", authenticate, (req, res) => {
     res.sendFile(path.resolve('src/client', './index.html'));
 });
-
-const server = app.listen(3000, () => {
-    const Port = server.address().port;
+const Port = 3000;
+app.listen(Port, () => {
     console.log("serverListening =============", Port);
 });
 

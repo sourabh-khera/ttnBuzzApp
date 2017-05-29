@@ -1,0 +1,56 @@
+/*  user panel */
+.user-panel {
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
+
+/* left panel */
+.left-panel {
+    background-image: url(dummy.jpg);
+    text-align: center
+    
+}
+
+.left-panel img{
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.left-panel .company-name {
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.right-panel {
+    text-align: center;
+}
+
+.user-details h4 {
+    text-transform: uppercase;
+    display: block
+}
+
+.user-info {
+    margin-top: 40px;
+}
+
+.user-info ul{
+    padding: 0;
+    margin: 0;
+}
+
+.user-info ul li {
+    list-style: none;
+    display: inline-block;
+    width:40px;
+    margin-right: 38px;
+    text-align: center
+}
+
+.user-info ul li .title {
+    text-transform: uppercase;
+    font-weight: bold;
+}
