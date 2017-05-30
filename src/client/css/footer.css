@@ -15,8 +15,12 @@ footer {
 .companyname {
     font-weight: bold;
     float: left;
+    font-size: 25px;
+    text-transform: uppercase;
 }
 
 .appname {
     float: right;
+    margin-top: 3px;
+    font-size: 20px;
 }

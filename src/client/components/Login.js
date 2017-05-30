@@ -20,7 +20,6 @@ export default class Login extends React.Component {
                         <a href="/login/google"><img src={LoginImg3}/></a>
                     </div>
                 </div>
-
             </div>
         )
     }

@@ -1,11 +1,12 @@
 import React from 'react'
 import LeftComponent from "./Leftcomponent"
-import CreateBuzz from "./Createbuzz"
-import Post from "./Posts"
+import Createpost from "./createPost"
 import Banner from "./Banner"
-import Createcomplaint from "../complaints/createComplaint"
 import {connect} from "react-redux"
 import Footer from "./Footer"
+import Complaint from "../complaints/createComplaint"
+import {Route} from "react-router-dom"
+
 import {
     fetchPostDetails,
     fetchUserDetails,
@@ -25,7 +26,6 @@ class Buzzcomponent extends React.Component {
             limit: 10,
         }
     }
-
     pageEnd = (event) => {
         if (document.body.scrollHeight === document.body.scrollTop + window.innerHeight) {
             this.setState({skip: this.state.skip + 10}, () => {
@@ -51,39 +51,21 @@ class Buzzcomponent extends React.Component {
         }
 
     }
-
     componentWillUnmount() {
-        console.log("unmount-----------------");
         document.removeEventListener('scroll', this.pageEnd, true);
     }
-
-    updateOnComplaint = () => {
-        this.setState({edit: false})
-    };
-    updateOnBuzz = () => {
-        this.setState({edit: true})
-    };
-
     render() {
         return (
             <div className="Component">
                 <Banner history={this.props.history}/>
-                <div className="containers">
-                    <LeftComponent updateOnComplaint={this.updateOnComplaint} updateOnBuzz={this.updateOnBuzz}/>
+                <div className="mainPanel">
+                    <div className="left-part">
+                        <LeftComponent/>
+                    </div>
+                    <div className="right-part">
+                        <Route path="/buzz/create-post" component={Createpost}/>
+                        <Route path="/buzz/complaints" component={Complaint}/>
 
-                    <div className="rightpanel">
-                        {
-                            (this.state.edit) ?
-                                <div>
-                                    <CreateBuzz/>
-                                    {
-                                        this.props.postData.map((post, i) => (
-                                            <Post posts={post} key={i}/>
-                                        ))
-                                    }
-                                </div>
-                                : <Createcomplaint/>
-                        }
                     </div>
                 </div>
             <Footer/>
@@ -91,7 +73,6 @@ class Buzzcomponent extends React.Component {
         )
     }
 }
-
 const mapStateToProps = (state) => ({
     postData: state.postReducer.postData,
 });

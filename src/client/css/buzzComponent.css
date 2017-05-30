@@ -1,17 +1,21 @@
-.containers {
-    /*overflow: hidden;*/
-}
 
-.leftPanel {
+
+.mainPanel {
+    padding: 30px;
+}
+.left-part{
     width: 30%;
-    float: left;
-    margin-left: 15px;
+    float: left;;
+}
+.right-part{
+    width:65%;
+    float: right;
 }
 
 .userProfile {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     margin-bottom: 20px;
-    border: 1px solid crimson;
+    border: 1px solid #000000;
     border-radius: 5px;
 }
 
@@ -53,7 +57,7 @@
 }
 
 .buzzCom {
-    border: 1px solid crimson;
+    border: 1px solid #000000;
     border-radius: 5px;
     margin-top: 15px;
 
@@ -152,6 +156,8 @@
 .category select {
     height: 40px;
     width: 120px;
+    font-weight: bold;
+    font-size:18px;
     border-radius: 5px;
     padding-left: 4px;
     margin: 10px;

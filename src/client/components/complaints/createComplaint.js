@@ -3,7 +3,7 @@ import {createComplaint} from "../../action/index"
 import {connect} from "react-redux"
 import AlertContainer from "react-alert"
 import {Accordion, Panel} from "react-bootstrap";
-
+import  ScrollUpButton from "react-scroll-up-button"
 class Createcomplaint extends React.Component {
 
     constructor() {
@@ -85,7 +85,8 @@ class Createcomplaint extends React.Component {
                     </div>
                     <div className="concern">
                         <h5>Your Concern</h5>
-                        <textarea value={this.state.complaintBody} name="complaintBody" placeholder="enter your concern"
+                        <textarea value={this.state.complaintBody} name="complaintBody"
+                                  placeholder="enter your concern"
                                   onChange={this.onchange}></textarea>
                     </div>
                     <div className="complaintfooter">
@@ -122,6 +123,7 @@ class Createcomplaint extends React.Component {
                     </div>
                 </div>
             </div>
+
         )
     }
 }

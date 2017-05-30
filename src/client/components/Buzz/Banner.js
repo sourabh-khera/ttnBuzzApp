@@ -28,7 +28,8 @@ class Banner extends React.Component {
                     <div className="bannerChildContainer2">
                         <span className="userinfo">{this.props.userData.name}</span>
 
-                        <button type="button" className="btn btn-danger"><a href="#" onClick={this.logout}>Logout</a>
+                        <button type="button" className="btn btn-danger"><a href="#" onClick={this.logout}>
+                            Logout&nbsp;<span className="glyphicon glyphicon-log-out"></span></a>
                         </button>
                     </div>
                     <div className="bannerChildContainer3">

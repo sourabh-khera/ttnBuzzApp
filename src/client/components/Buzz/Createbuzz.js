@@ -4,7 +4,6 @@ import {connect} from "react-redux"
 import {createPost, fetchPost} from "../../action/index"
 import AlertContainer from "react-alert"
 class Creatbuzz extends React.Component {
-
     constructor() {
         super();
         this.state = {
@@ -101,7 +100,5 @@ class Creatbuzz extends React.Component {
         )
     }
 }
-
-
 const CreateBuzzContainer = connect(state => state)(Creatbuzz);
 export default CreateBuzzContainer

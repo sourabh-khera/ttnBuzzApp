@@ -35,6 +35,7 @@
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-scroll-up-button": "^1.5.9",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "style-loader": "^0.17.0",

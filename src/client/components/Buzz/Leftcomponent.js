@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from "react-redux"
-
- class Leftcomponent extends React.Component {
+import {Link} from "react-router-dom"
+class Leftcomponent extends React.Component {
     render() {
         const userDetails = this.props.userData;
         const LikesDetails = this.props.LikesAndDislikeData;
@@ -11,7 +11,7 @@ import {connect} from "react-redux"
         const userCommentsCount = commentsDetails.filter((comments) => comments.userId._id === userDetails._id).length;
         return (
             <div>
-                <div className="leftPanel">
+                <div>
 
                     <div className="userProfile">
                         <div className="userimage">
@@ -38,12 +38,12 @@ import {connect} from "react-redux"
                     <div className="">
                         <div className="buzzCom">
                             <ul>
-                                <a href="#" id="buzz">
-                                    <li onClick={()=>this.props.updateOnBuzz()}>BUZZ</li>
-                                </a>
-                                <a href="#" >
-                                    <li onClick={()=>this.props.updateOnComplaint()}>COMPLAINTS</li>
-                                </a>
+                                <Link to="/buzz/create-post">
+                                    <li>BUZZ</li>
+                                </Link>
+                                <Link to="/buzz/complaints" >
+                                    <li>COMPLAINTS</li>
+                                </Link>
                             </ul>
                             </div>
                         <div className="leftfooter">
