@@ -40,7 +40,7 @@ module.exports = (app) => {
                 maxAge: 900000,
                 httpOnly: false
             });
-            res.redirect('/buzz')
+            res.redirect('/buzz/create-post')
         } else {
             res.redirect('/')
         }

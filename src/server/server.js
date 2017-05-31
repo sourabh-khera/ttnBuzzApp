@@ -14,6 +14,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 
 app.use(express.static('./src/server/public'));
+app.use('/buzz', express.static('./dist'));
 const compiler = webpack(webpackconfig);
 app.use(cookieParser());
 app.use(bodyParser());
@@ -31,7 +32,7 @@ router(app);
 authenticate = (req, res, next) => {
     if (req.url == "/") {
         if (req.user) {
-            res.redirect("/buzz")
+            res.redirect("/buzz/create-post")
         }
         next();
     } else {
