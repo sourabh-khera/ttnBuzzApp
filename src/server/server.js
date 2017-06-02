@@ -46,7 +46,7 @@ authenticate = (req, res, next) => {
 app.get("/*", authenticate, (req, res) => {
     res.sendFile(path.resolve('src/client', './index.html'));
 });
-const Port = 3000;
+const Port = process.env.PORT || 3000;
 app.listen(Port, () => {
     console.log("serverListening =============", Port);
 });
