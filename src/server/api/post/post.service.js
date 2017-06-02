@@ -28,6 +28,7 @@ exports.populateUserData = (skipRecords, fetchLimit) => {
     return new Promise(function(resolve, reject) {
         const skip = parseInt(skipRecords);
         const limit = parseInt(fetchLimit);
+
         postModel
             .find({})
             .limit(limit)

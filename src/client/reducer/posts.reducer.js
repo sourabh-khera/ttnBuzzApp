@@ -49,7 +49,7 @@ export const postReducer = (state = postState, action) => {
         case FETCH_POST_SUCCESS: {
             return {
                 ...state,
-                postData: state.postData.concat(action.postData)
+                postData: [...state.postData, ...action.postData],
 
             }
         }
@@ -59,8 +59,6 @@ export const postReducer = (state = postState, action) => {
                 error: action.err
             }
         }
-
-
         default: {
             return state
         }
