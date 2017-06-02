@@ -4,7 +4,7 @@
 
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/buzzapp");
+mongoose.connect("mongodb://sourabh:restinpeace1910@ds161021.mlab.com:61021/ttnd_buzz");
 (function() {
     mongoose.connection.on("open", (err, data) => {
 
