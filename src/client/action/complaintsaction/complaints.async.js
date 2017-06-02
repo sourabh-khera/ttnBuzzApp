@@ -42,7 +42,7 @@ export const createComplaint = (ComplaintData) => {
 export const fetchComplaint = () => {
     return (dispatch) => {
         dispatch(fetchComplaintStarted());
-        fetch("http://localhost:3000/complaint", {
+        fetch("/complaint", {
             method: 'get',
             credentials:"include",
         })
