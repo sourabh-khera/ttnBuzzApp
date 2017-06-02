@@ -3,7 +3,7 @@ import {createComplaint} from "../../action/index"
 import {connect} from "react-redux"
 import AlertContainer from "react-alert"
 import {Accordion, Panel} from "react-bootstrap";
-import  ScrollUpButton from "react-scroll-up-button"
+import {fetchComplaint} from "../../action/complaintsaction/complaints.async"
 class Createcomplaint extends React.Component {
 
     constructor() {
@@ -15,6 +15,9 @@ class Createcomplaint extends React.Component {
         }
     }
 
+    componentDidMount(){
+        this.props.dispatch(fetchComplaint())
+    }
     alertOptions = {
         position: 'top right',
         theme: 'dark',

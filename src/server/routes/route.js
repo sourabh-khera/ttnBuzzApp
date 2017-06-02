@@ -17,7 +17,7 @@ const loggedIn = (req, res, next) => {
         next();
     } else {
         res.status(403);
-        res.sendFile("/home/sourabh/Desktop/ttndbuzzapp/src/server/public/views/Error.html");
+        res.send("unauthorised access");
     }
 };
 
