@@ -13,7 +13,7 @@ export const fetchUserDetails = () => {
 
     return (dispatch) => {
         dispatch(fetchUserStarted());
-        fetch("http://localhost:3000/user", {
+        fetch("/user", {
             credentials: "include",
             method: "get",
             headers: {
@@ -30,7 +30,7 @@ export const fetchUserDetails = () => {
 };
 
 export const logout = () => (dispatch) => {
-    fetch("http://localhost:3000/logout", {
+    fetch("/logout", {
         method: 'get',
         credentials: "include",
     })

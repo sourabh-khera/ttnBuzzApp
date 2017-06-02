@@ -18,7 +18,7 @@ export const createComplaint = (ComplaintData) => {
 
     return (dispatch) => {
         dispatch(createComplaintStarted());
-        fetch("http://localhost:3000/complaint", {
+        fetch("/complaint", {
             method: 'post',
             headers: {
                 'Accept': 'application/json',

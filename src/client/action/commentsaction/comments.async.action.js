@@ -15,7 +15,7 @@ import fetch from "isomorphic-fetch";
 export const createComment = (comment, postid) => {
     return (dispatch) => {
         dispatch(createCommentStarted());
-        fetch("http://localhost:3000/comment", {
+        fetch("/comment", {
             credentials: "include",
             method: "post",
             headers: {
@@ -37,7 +37,7 @@ export const createComment = (comment, postid) => {
 export const fetchCommentsDetails = () => {
     return (dispatch) => {
         dispatch(fetchCommentsStarted());
-        fetch("http://localhost:3000/comment", {
+        fetch("/comment", {
             credentials: "include",
             method: "get",
         })

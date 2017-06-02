@@ -16,7 +16,7 @@ import fetch from "isomorphic-fetch";
 export const createLikesAndDislikes = (postid, status) => {
     return (dispatch) => {
         dispatch(createLikeAndDislikeStarted());
-        fetch("http://localhost:3000/like", {
+        fetch("/like", {
             credentials: "include",
             method: "post",
             headers: {
@@ -39,7 +39,7 @@ export const fetchLikesAndDiislikesDetails = () => {
 
     return (dispatch) => {
         dispatch(fetchLikesAndDislikeStarted());
-        fetch("http://localhost:3000/like", {
+        fetch("/like", {
             credentials: "include",
             method: "get",
         })

@@ -14,7 +14,7 @@ import fetch from "isomorphic-fetch";
 export const createPost = (postData) => {
     return (dispatch) => {
         dispatch(createPostStarted());
-        fetch("http://localhost:3000/post", {
+        fetch("/post", {
             credentials: "include",
             method: "post",
             body: postData,
@@ -29,13 +29,13 @@ export const createPost = (postData) => {
 };
 export const fetchPostDetails = (skip, limit) => {
 
-    const baseUrl = "http://localhost:3000/";
-    const path = "post";
+
+    const path = "/post";
     const skipRecords = "skip=" + skip;
     const fetchLimit = "limit=" + limit;
     const and = "&";
     const queryString = "?" + skipRecords + and + fetchLimit;
-    const url = baseUrl + path + queryString;
+    const url =   path + queryString;
     return (dispatch) => {
         dispatch(fetchPostStarted());
         fetch(url, {
