@@ -9,6 +9,9 @@ import {Route} from "react-router-dom"
 
 import {
     fetchUserDetails,
+    fetchPostDetails,
+    fetchLikesAndDiislikesDetails,
+    fetchCommentsDetails,
 } from "../../action/index"
 
 
@@ -21,6 +24,9 @@ class Buzzcomponent extends React.Component {
         }
         if (email) {
             this.props.dispatch(fetchUserDetails());
+            this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
+            this.props.dispatch(fetchLikesAndDiislikesDetails());
+            this.props.dispatch(fetchCommentsDetails());
         } else {
             this.props.history.push('/')
         }

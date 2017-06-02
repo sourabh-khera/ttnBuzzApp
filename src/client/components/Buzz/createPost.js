@@ -9,8 +9,6 @@ import ScrollUpButton from "react-scroll-up-button"
 
 import {
     fetchPostDetails,
-    fetchLikesAndDiislikesDetails,
-    fetchCommentsDetails,
 } from "../../action/index"
 class Createpost extends React.Component {
     constructor() {
@@ -31,9 +29,6 @@ class Createpost extends React.Component {
 
     componentDidMount() {
         document.addEventListener('scroll', this.pageEnd);
-        this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
-        this.props.dispatch(fetchLikesAndDiislikesDetails());
-        this.props.dispatch(fetchCommentsDetails());
     }
 
     componentWillUnmount() {

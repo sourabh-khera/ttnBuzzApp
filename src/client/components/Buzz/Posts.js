@@ -138,7 +138,7 @@ class Post extends React.Component {
                         </div>
 
                         <div className="postfooter">
-                            <OverlayTrigger trigger={['hover']} placement="bottom" overlay={popoverhoverlikes}>
+                            <OverlayTrigger className="popover-likes" trigger={['hover']} placement="bottom" overlay={popoverhoverlikes}>
                                 <span className="glyphicon glyphicon-thumbs-up icon-success"
                                       onClick={disableLike ? () => {
                                           } : () => this.likes(this.props.posts._id, "liked")}></span>

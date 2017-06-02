@@ -271,7 +271,10 @@
     float: left;
     width:100%;
 }
-
+.popover-likes {
+    max-height: 300px;
+    overflow-y: scroll;
+}
 
 .postfooter {
     clear: both;
