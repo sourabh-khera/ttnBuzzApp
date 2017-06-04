@@ -1,5 +1,4 @@
 import React from 'react'
-import Cameraicon from "../../assets/images/Camera-icon.png"
 import {connect} from "react-redux"
 import {createPost, fetchPost} from "../../action/index"
 import AlertContainer from "react-alert"

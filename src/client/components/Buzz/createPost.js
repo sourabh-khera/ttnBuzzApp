@@ -21,8 +21,9 @@ class Createpost extends React.Component {
 
     pageEnd = (event) => {
         if (document.body.scrollHeight === document.body.scrollTop + window.innerHeight) {
-            this.setState({skip: this.state.skip + 10})
-            this.props.dispatch(fetchPostDetails(this.state.skip + 10, this.state.limit))
+            this.setState({skip: this.state.skip + 10}), () => {
+                this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit))
+            }
         }
     };
 
