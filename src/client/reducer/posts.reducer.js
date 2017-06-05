@@ -50,13 +50,11 @@ export const postReducer = (state = postState, action) => {
             return {
                 ...state,
                 postData: [...action.postData],
-                // postData:action.postData,
             }
         case FETCH_POST_SUCCESS: {
             return {
                 ...state,
                 postData: [...state.postData, ...action.postData],
-              // postData:action.postData,
             }
         }
         case FETCH_POST_FAILURE: {

@@ -23303,9 +23303,9 @@ var Createpost = function (_React$Component) {
 
         _this.pageEnd = function (event) {
             if (document.body.scrollHeight === document.body.scrollTop + window.innerHeight) {
-                _this.setState({ skip: _this.state.skip + 10 }), function () {
+                _this.setState({ skip: _this.state.skip + 10 }, function () {
                     _this.props.dispatch((0, _index.fetchPostDetails)(_this.state.skip, _this.state.limit));
-                };
+                });
             }
         };
 
@@ -23320,7 +23320,6 @@ var Createpost = function (_React$Component) {
         key: "componentDidMount",
         value: function componentDidMount() {
             document.addEventListener('scroll', this.pageEnd);
-            console.log(this.props.postData, '#######################');
             if (!this.props.postData.length) {
                 this.props.dispatch((0, _index.fetchPostDetails)(this.state.skip, this.state.limit));
                 this.props.dispatch((0, _index.fetchLikesAndDiislikesDetails)());
@@ -23330,7 +23329,6 @@ var Createpost = function (_React$Component) {
     }, {
         key: "componentWillUnmount",
         value: function componentWillUnmount() {
-            console.log("----------unmount");
             document.removeEventListener('scroll', this.pageEnd, true);
         }
     }, {

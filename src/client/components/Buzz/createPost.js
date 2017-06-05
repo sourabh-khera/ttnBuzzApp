@@ -21,17 +21,13 @@ class Createpost extends React.Component {
 
     pageEnd = (event) => {
         if (document.body.scrollHeight === document.body.scrollTop + window.innerHeight) {
-            this.setState({skip: this.state.skip + 10}), () => {
-                this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit))
-                this.props.dispatch(fetchLikesAndDiislikesDetails());
-                this.props.dispatch(fetchCommentsDetails());
-            }
+            this.setState({skip: this.state.skip + 10},() => {
+                this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit))})
         }
     };
 
     componentDidMount() {
         document.addEventListener('scroll', this.pageEnd);
-        console.log(this.props.postData, '#######################');
         if(!this.props.postData.length){
             this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
             this.props.dispatch(fetchLikesAndDiislikesDetails());
@@ -39,9 +35,7 @@ class Createpost extends React.Component {
         }
 
     }
-
     componentWillUnmount() {
-        console.log("----------unmount");
         document.removeEventListener('scroll', this.pageEnd, true);
     }
 
@@ -59,8 +53,6 @@ class Createpost extends React.Component {
         )
     }
 }
-
-
 const mapStateToProps = (state) => ({
     postData: state.postReducer.postData,
 });
