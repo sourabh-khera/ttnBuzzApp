@@ -44,6 +44,13 @@ export const fetchPostDetails = (skip, limit) => {
         })
             .then(response => response.json())
             .then(data => {
+                if(skip == 0) {
+                    dispatch({
+                        type: 'INITIAL_FETCH_SUCCESS',
+                        postData: data.posts,
+                    });
+                    return;
+                }
                 dispatch(fetchPostSuccess(data.posts))
             }).catch((err) => {
             dispatch(fetchPostFailure(err))

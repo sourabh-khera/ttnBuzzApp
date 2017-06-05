@@ -13,10 +13,11 @@ import "./css/footer.css"
 import "../server/public/views/error.css"
 import {BrowserRouter as Router,Route} from "react-router-dom"
 import BuzzComponent from "../client/components/Buzz/BuzzComponent"
+
 export default class App extends React.Component{
 
-    render(){
 
+        render(){
         return(
             <Router>
             <div>
@@ -27,3 +28,4 @@ export default class App extends React.Component{
         )
     }
 }
+

@@ -23,15 +23,20 @@ class Createpost extends React.Component {
         if (document.body.scrollHeight === document.body.scrollTop + window.innerHeight) {
             this.setState({skip: this.state.skip + 10}), () => {
                 this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit))
+                this.props.dispatch(fetchLikesAndDiislikesDetails());
+                this.props.dispatch(fetchCommentsDetails());
             }
         }
     };
 
     componentDidMount() {
         document.addEventListener('scroll', this.pageEnd);
-        this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
-        this.props.dispatch(fetchLikesAndDiislikesDetails());
-        this.props.dispatch(fetchCommentsDetails());
+        console.log(this.props.postData, '#######################');
+        if(!this.props.postData.length){
+            this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit));
+            this.props.dispatch(fetchLikesAndDiislikesDetails());
+            this.props.dispatch(fetchCommentsDetails());
+        }
 
     }
 

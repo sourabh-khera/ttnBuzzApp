@@ -7,4 +7,4 @@ exports.CLIENT_SECRET = 'Yy7kviJI_L6pcWd_WBvmPYCv';
 
 exports.CALLBACK_URL = process.env.NODE_ENV === 'development'
     ?  'http://localhost:3000/oauth2callback'
-    :  'https://limitless-garden-41467.herokuapp.com/oauth2callback';
+    :  'http://localhost:3000/oauth2callback';

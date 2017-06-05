@@ -16,6 +16,7 @@ class Createcomplaint extends React.Component {
     }
 
     componentDidMount(){
+        console.log('called')
         this.props.dispatch(fetchComplaint())
     }
     alertOptions = {

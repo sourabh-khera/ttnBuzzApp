@@ -9,6 +9,7 @@ class Creatbuzz extends React.Component {
             postBody: "",
             post_value: "Activity",
             image_path: "",
+            image_preview: "",
         }
     }
 
@@ -32,10 +33,11 @@ class Creatbuzz extends React.Component {
     };
 
     onImageChange = (event) => {
-        this.setState({[event.target.name]: event.target.files[0]});
+        this.setState({[event.target.name]: event.target.files[0]},()=>{console.log("-----",this.state.image_path.name)});
     };
     onPostchange = (event) => {
-        this.setState({[event.target.name]: event.target.value});
+        this.setState({[event.target.name]: event.target.value})
+
     };
     setValue = (event) => {
         this.setState({post_value: event.target.value})
