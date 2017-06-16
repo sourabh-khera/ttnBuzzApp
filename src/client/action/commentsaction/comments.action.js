@@ -8,7 +8,10 @@ import {
 
     FETCH_COMMENTS_STARTED,
     FETCH_COMMENTS_SUCCESS,
-    FETCH_COMMENTS_FAILURE
+    FETCH_COMMENTS_FAILURE,
+
+    DELETE_COMMENT_SUCCESS,
+    DELETE_COMMENT_FAILURE,
 } from "../../constants/constants"
 
 
@@ -36,3 +39,12 @@ export const fetchCommentsSuccess = (comments) => {
 export const fetchCommentsFailure = (err) => {
     return {type: FETCH_COMMENTS_FAILURE, err}
 };
+
+export const deleteCommentSuccess = (comments) => {
+    return {type: DELETE_COMMENT_SUCCESS, comments}
+};
+
+export const deleteCommentFailure = (err) => {
+    return {type: DELETE_COMMENT_FAILURE, err}
+};
+

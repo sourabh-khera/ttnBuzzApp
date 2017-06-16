@@ -7,7 +7,9 @@ import {
     createCommentFailure,
     fetchCommentsStarted,
     fetchCommentsSuccess,
-    fetchCommentsFailure
+    fetchCommentsFailure,
+    deleteCommentSuccess,
+    deleteCommentFailure,
 } from "./comments.action"
 import fetch from "isomorphic-fetch";
 
@@ -24,10 +26,10 @@ export const createComment = (comment, postid) => {
             },
             body: JSON.stringify({data: comment, id: postid})
         })
-        .then(response => response.json())
-        .then(comments => {
-            dispatch(createCommentSuccess(comments.data))
-        }).catch((err) => {
+            .then(response => response.json())
+            .then(comments => {
+                dispatch(createCommentSuccess(comments.data))
+            }).catch((err) => {
             dispatch(createCommentFailure(err))
         })
     }
@@ -41,12 +43,36 @@ export const fetchCommentsDetails = () => {
             credentials: "include",
             method: "get",
         })
-        .then(response => response.json())
-        .then(comments => {
-            dispatch(fetchCommentsSuccess(comments.data))
-        }).catch((err) => {
+            .then(response => response.json())
+            .then(comments => {
+                dispatch(fetchCommentsSuccess(comments.data))
+            }).catch((err) => {
             dispatch(fetchCommentsFailure(err))
         })
     }
+};
+
+export const deleteComment = (commentId) => {
+    console.log("comment-------",commentId)
+    return (dispatch) => {
+        fetch("/comment", {
+            method: 'delete',
+            header: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({data:commentId})
+        })
+            .then(response => response.json())
+            .then(data => {
+                dispatch(deleteCommentSuccess(data.comments))
+            })
+            .catch(err => {
+                    dispatch(deleteCommentFailure(err))
+                }
+            )
+    }
+
+
 };
 

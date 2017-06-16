@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "async": "~2.4.0",
+    "axios": "^0.16.2",
     "body-parser": "^1.17.1",
     "concurrently": "^3.4.0",
     "cookie-parser": "^1.4.3",

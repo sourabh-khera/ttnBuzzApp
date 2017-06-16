@@ -7,7 +7,7 @@ import App from "./app"
 import React from "react"
 import store from "./store/index"
 import {Provider} from "react-redux"
-const app=document.getElementById("app")
+const app=document.getElementById("app");
 render(
     <Provider store={store} >
         <App/>

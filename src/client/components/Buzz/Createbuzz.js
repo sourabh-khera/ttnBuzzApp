@@ -2,13 +2,16 @@ import React from 'react'
 import {connect} from "react-redux"
 import {createPost, fetchPost} from "../../action/index"
 import AlertContainer from "react-alert"
+const CLOUDINARY_URL='https://api.cloudinary.com/v1_1/dcs4tfpha/upload';
+const CLOUDINARY_UPLOAD_PRESET="rrawwml0";
+const axios=require("axios");
 class Creatbuzz extends React.Component {
     constructor() {
         super();
         this.state = {
             postBody: "",
             post_value: "Activity",
-            image_path: "",
+            file: "",
             image_preview: "",
         }
     }
@@ -33,7 +36,24 @@ class Creatbuzz extends React.Component {
     };
 
     onImageChange = (event) => {
-        this.setState({[event.target.name]: event.target.files[0]},()=>{console.log("-----",this.state.image_path.name)});
+        //this.setState({[event.target.name]: event.target.files[0]},()=>{console.log("-----",this.state.file)});
+        let file=event.target.files[0];
+        const formData = new FormData();
+        formData.append('file',file);
+        formData.append('upload_preset',CLOUDINARY_UPLOAD_PRESET);
+
+        axios({
+            url:CLOUDINARY_URL,
+            method:'POST',
+            data:formData,
+
+        }).then((res)=>{
+            this.setState({file:res.data.secure_url});
+            console.log("file------",this.state.file);
+        }).catch((error)=>{
+            console.log(error);
+        });
+
     };
     onPostchange = (event) => {
         this.setState({[event.target.name]: event.target.value})
@@ -44,12 +64,12 @@ class Creatbuzz extends React.Component {
     };
     onCreatePost = (e) => {
         e.preventDefault();
-        if (!this.state.postBody.trim() && !this.state.image_path) {
+        if (!this.state.postBody.trim() && !this.state.file) {
             this.showErrorAlert();
             return
         }
-        if (this.state.image_path) {
-            const imageExtension = this.state.image_path.name.split('.')[1];
+        if (this.state.file) {
+            const imageExtension = this.state.file.name.split('.')[1];
             if ((imageExtension == 'jpg') || (imageExtension == 'gif') || (imageExtension == 'png')) {
                 //do nothing
             } else {
@@ -57,12 +77,13 @@ class Creatbuzz extends React.Component {
                 return
             }
         }
-        const multipartFormData = new FormData();
-        multipartFormData.append("postBody", this.state.postBody.trim());
-        multipartFormData.append("post_value", this.state.post_value);
-        multipartFormData.append("image_path", this.state.image_path);
-        this.props.dispatch(createPost(multipartFormData));
-        this.setState({postBody: "", image_path: ""})
+       // const multipartFormData = new FormData();
+       // multipartFormData.append("postBody", this.state.postBody.trim());
+        //multipartFormData.append("post_value", this.state.post_value);
+      //  multipartFormData.append("image_path", this.state.image_path);
+
+        this.props.dispatch(createPost(this.state));
+        this.setState({postBody: "", file: ""})
     };
 
     render() {
@@ -88,7 +109,7 @@ class Creatbuzz extends React.Component {
                                     <option value="Lost n Found">Lost n Found</option>
                                 </select>
                                 <div className="imCamera">
-                                    <input type="file" name="image_path" onChange={this.onImageChange}/>
+                                    <input type="file" name="file" onChange={this.onImageChange}/>
                                 </div>
                                 <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
                                 <button type="button" className="btn btn-danger" onClick={this.onCreatePost}>Submit

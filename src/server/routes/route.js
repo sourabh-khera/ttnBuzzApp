@@ -11,7 +11,6 @@ const userRoute = require("../api/users/users.route");
 const likesRoute = require("../api/likes/likes.route");
 const complaintRoute = require("../api/complaint/complaint.route");
 
-
 const loggedIn = (req, res, next) => {
     if (req.user) {
         next();
@@ -61,5 +60,4 @@ module.exports = (app) => {
     likesRoute(app, loggedIn);
     userRoute(app, loggedIn);
     complaintRoute(app, loggedIn);
-
 };

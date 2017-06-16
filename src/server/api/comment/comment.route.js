@@ -9,5 +9,6 @@ module.exports = (app, loggedIn) => {
 
     app.post("/comment",loggedIn, commentController.createComment);
     app.get("/comment", loggedIn, commentController.fetchCommentsData);
+    app.delete("/comment",commentController.deletecomment);
 
 };

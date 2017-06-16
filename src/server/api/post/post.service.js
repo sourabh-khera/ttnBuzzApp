@@ -5,7 +5,7 @@
 
 const postModel = require("./post.model");
 
-exports.post = (postBody,status, userId, Postimage, res) => {
+exports.post = (postBody,status, userId, Postimage) => {
     return new Promise(function(resolve, reject) {
         postModel.create({
             postBody:postBody,

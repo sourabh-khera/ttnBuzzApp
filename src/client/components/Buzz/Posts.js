@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from "react-redux"
-import {createLikesAndDislikes, createComment} from "../../action/index"
+import {createLikesAndDislikes, createComment, deleteComment} from "../../action/index"
 import {Popover, OverlayTrigger} from "react-bootstrap"
 import AlertContainer from "react-alert";
 class Post extends React.Component {
@@ -62,6 +62,9 @@ class Post extends React.Component {
         }
         this.props.dispatch(createComment(comment, postid));
         this.setState({commentBody: "", commentTextArea: false})
+    };
+    deletecomment = (commentId) => {
+        this.props.dispatch(deleteComment(commentId))
     };
 
     render() {
@@ -132,13 +135,14 @@ class Post extends React.Component {
                             {
                                 (this.props.posts.image) ?
                                     <div className="postimage">
-                                        <img src={"/upload/" + this.props.posts.image}/>
+                                        <img src={this.props.posts.image}/>
                                     </div> : null
                             }
                         </div>
 
                         <div className="postfooter">
-                            <OverlayTrigger className="popover-likes" trigger={['hover']} placement="bottom" overlay={popoverhoverlikes}>
+                            <OverlayTrigger className="popover-likes" trigger={['hover']} placement="bottom"
+                                            overlay={popoverhoverlikes}>
                                 <span className="glyphicon glyphicon-thumbs-up icon-success"
                                       onClick={disableLike ? () => {
                                           } : () => this.likes(this.props.posts._id, "liked")}></span>
@@ -170,11 +174,13 @@ class Post extends React.Component {
                             comments.map((items, i) => (
                                 (items.postId === this.props.posts._id) ?
                                     <div className="row comment-box" key={i}>
-                                        <div className="col-md-1 pull-left">
+                                        <div className="col-md-1">
                                             <img src={items.userId.image} className="image-responsive"/></div>
-                                        <div className="col-md-11 pull-right">
+                                        <div className="col-md-10">
                                             <h5>{items.userId.name}</h5>
                                             <p className="comments">{items.commentBody}</p>
+                                        </div>
+                                        <div className="col-md-1 " id="commentdelete">
                                         </div>
                                     </div>
                                     : null
@@ -185,10 +191,13 @@ class Post extends React.Component {
         )
     }
 }
-
 const mapStateToProps = (state) => ({
     LikeAndDislikeData: state.LikesAndDislikesReducer.LikeAndDislikeData,
     commentsData: state.commentsReducer.commentsData
 });
 
 export default connect(mapStateToProps)(Post)
+
+
+// <span className="glyphicon glyphicon-remove"
+// onClick={() => this.deletecomment(items._id)}></span>

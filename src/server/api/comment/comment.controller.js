@@ -41,3 +41,16 @@ exports.fetchCommentsData = (req, res) => {
         res.send(error)
     })
 };
+
+exports.deletecomment=(req,res)=>{
+     const commentId=req.body.data;
+     console.log("++++++++",commentId)
+    commentService.removeComment(commentId)
+        .then(
+            commentService.getUserData
+        ).then(data=>{
+            res.send(data.comments)
+    }).catch(error=>{
+        res.send(error)
+    })
+};

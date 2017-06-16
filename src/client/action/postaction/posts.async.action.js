@@ -12,12 +12,17 @@ import {
 import fetch from "isomorphic-fetch";
 
 export const createPost = (postData) => {
+    console.log("postdata..........",postData)
     return (dispatch) => {
         dispatch(createPostStarted());
         fetch("/post", {
             credentials: "include",
             method: "post",
-            body: postData,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData),
         })
             .then(response => response.json())
             .then(data => {

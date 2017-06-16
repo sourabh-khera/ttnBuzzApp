@@ -13,7 +13,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 
-app.use(express.static('./src/server/public'));
+// app.use(express.static('./src/server/public'));
 app.use('/buzz', express.static('./dist'));
 const compiler = webpack(webpackconfig);
 app.use(cookieParser());

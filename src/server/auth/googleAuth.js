@@ -51,10 +51,6 @@ exports.useGoogle = () => {
             } else {
                 return done(null, user)
             }
-
-
         })
-
     });
-
 };

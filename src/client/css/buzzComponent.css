@@ -371,8 +371,8 @@ input[type="file"] {
     height:50px;
 }
 .comment-box{
-    float: left;
     width: 100%;
+    margin: 0;
 }
 
 .comment-box > div {
@@ -386,4 +386,8 @@ input[type="file"] {
 .comment-area{
     overflow: hidden;
     width: 80%;
+}
+#commentdelete{
+    float: right;
+    margin-top: 26px;
 }

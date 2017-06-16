@@ -24,6 +24,17 @@ exports.comment = (postid, userid, comment) => {
     })
 };
 
+exports.removeComment = (commentId) => {
+    return new Promise((resolve, reject) => {
+        commentModel.delete({_id: commentId}, (err, data) => {
+            if (err) {
+                reject(err)
+            }
+            resolve({data})
+        })
+    })
+};
+
 
 exports.getUserData = () => {
     return new Promise((resolve, reject) => {

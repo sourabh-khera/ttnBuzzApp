@@ -48,10 +48,10 @@ class Leftcomponent extends React.Component {
                             </div>
                         <div className="leftfooter">
                             <p>&copy;&nbsp;&nbsp;2017 To The New Digital</p>
-                            <ul>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Help</a></li>
-                            </ul>
+                            {/*<ul>*/}
+                                {/*<li><a href="#">About</a></li>*/}
+                                {/*<li><a href="#">Help</a></li>*/}
+                            {/*</ul>*/}
                         </div>
                     </div>
                 </div>
