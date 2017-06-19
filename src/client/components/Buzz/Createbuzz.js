@@ -36,12 +36,11 @@ class Creatbuzz extends React.Component {
     };
 
     onImageChange = (event) => {
-        //this.setState({[event.target.name]: event.target.files[0]},()=>{console.log("-----",this.state.file)});
         let file=event.target.files[0];
+
         const formData = new FormData();
         formData.append('file',file);
         formData.append('upload_preset',CLOUDINARY_UPLOAD_PRESET);
-
         axios({
             url:CLOUDINARY_URL,
             method:'POST',
@@ -49,7 +48,7 @@ class Creatbuzz extends React.Component {
 
         }).then((res)=>{
             this.setState({file:res.data.secure_url});
-            console.log("file------",this.state.file);
+            console.log("state-------",this.state.file);
         }).catch((error)=>{
             console.log(error);
         });
@@ -69,6 +68,7 @@ class Creatbuzz extends React.Component {
             return
         }
         if (this.state.file) {
+            console.log("split--------",this.state.file);
             const imageExtension = this.state.file.name.split('.')[1];
             if ((imageExtension == 'jpg') || (imageExtension == 'gif') || (imageExtension == 'png')) {
                 //do nothing

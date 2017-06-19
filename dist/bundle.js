@@ -24112,12 +24112,11 @@ var Creatbuzz = function (_React$Component) {
         };
 
         _this.onImageChange = function (event) {
-            //this.setState({[event.target.name]: event.target.files[0]},()=>{console.log("-----",this.state.file)});
             var file = event.target.files[0];
+
             var formData = new FormData();
             formData.append('file', file);
             formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
             axios({
                 url: CLOUDINARY_URL,
                 method: 'POST',
@@ -24125,7 +24124,7 @@ var Creatbuzz = function (_React$Component) {
 
             }).then(function (res) {
                 _this.setState({ file: res.data.secure_url });
-                console.log("file------", _this.state.file);
+                console.log("state-------", _this.state.file);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -24145,8 +24144,10 @@ var Creatbuzz = function (_React$Component) {
                 _this.showErrorAlert();
                 return;
             }
-            if (_this.state.image_path) {
-                var imageExtension = _this.state.file.name.split('.')[1];
+            if (_this.state.file) {
+                console.log("split--------", _this.state.file);
+                var imageExtension = _this.state.file.split('.')[1];
+                console.log("image--------", imageExtension);
                 if (imageExtension == 'jpg' || imageExtension == 'gif' || imageExtension == 'png') {
                     //do nothing
                 } else {
