@@ -26,6 +26,8 @@ class Buzzcomponent extends React.Component {
         }
     }
     render() {
+
+        console.log(jwt_token, '########################3')
         return (
             <div className="Component">
                 <Banner history={this.props.history}/>
@@ -34,7 +36,7 @@ class Buzzcomponent extends React.Component {
                         <LeftComponent/>
                     </div>
                     <div className="right-part">
-                        <Route path="/buzz/create-post" render={(props)=><{...props} token={jwt_token} Createpost/>}/>
+                        <Route path="/buzz/create-post" render={(props)=> (<Createpost {...props} token={jwt_token}/>)}/>
                         <Route path="/buzz/complaints" component={Complaint}/>
                     </div>
                 </div>

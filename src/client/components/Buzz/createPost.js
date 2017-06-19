@@ -27,7 +27,7 @@ class Createpost extends React.Component {
     };
 
     componentDidMount() {
-        console.log('props-------',this.props.token);
+        console.log('props-------',this.props);
         document.addEventListener('scroll', this.pageEnd);
         if(!this.props.postData.length){
             this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit,this.props.token));
