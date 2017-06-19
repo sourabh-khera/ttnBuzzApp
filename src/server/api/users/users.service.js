@@ -3,7 +3,7 @@
  */
 
 const userModel = require("./users.model");
-exports.userData = (userId, res) => {
+exports.userData = (userId) => {
     return new Promise((resolve, reject) => {
         userModel.findOne({
             _id: userId

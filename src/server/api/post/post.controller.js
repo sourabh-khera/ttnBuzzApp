@@ -9,7 +9,7 @@ exports.createPost = (req, res) => {
     const postData = req.body;
     const postBody = postData.postBody;
     const status = postData.post_value;
-    const userId = req.user._id;
+    const userId = req.user_id;
     let Postimage = null;
     if(req.file && req.file.filename) {
         const imageExtension = req.file.filename.split('.')[1];
@@ -26,7 +26,7 @@ exports.createPost = (req, res) => {
         Postimage: Postimage
     }, valiDateSchema.schema, (err, data) => {
         if (err) {
-            console.log("eroor-------",err)
+            console.log("eroor-------",err);
             res.status(403);
         } else {
             postService.post(data.postBody, data.status, data.userId, data.Postimage, res)

@@ -8,7 +8,7 @@ exports.createLike = (req, res) => {
     const postid = req.body.data;
     console.log("post------", postid)
     const Likestatus = req.body.status;
-    const userid = req.user._id;
+    const userid = req.user_id;
 
 
     Joi.validate({

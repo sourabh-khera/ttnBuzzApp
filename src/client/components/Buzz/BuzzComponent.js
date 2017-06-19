@@ -6,27 +6,25 @@ import {connect} from "react-redux"
 import Footer from "./Footer"
 import Complaint from "../complaints/createComplaint"
 import {Route} from "react-router-dom"
-
 import {
     fetchUserDetails,
 } from "../../action/index"
-
+let jwt_token;
 
 class Buzzcomponent extends React.Component {
     componentDidMount() {
-        let email;
-        const emailCookieString = document.cookie.split(',').find((cookie) => cookie.includes('username'));
-        if (emailCookieString) {
-            email = emailCookieString.split('=')[1]
+        let token;
+        const tokenString = document.cookie.split(',').find((cookie) => cookie.includes('token'));
+        if (tokenString) {
+            token = tokenString.split('=')[1];
+            jwt_token=token;
         }
-        if (email) {
-            this.props.dispatch(fetchUserDetails());
+        if (token) {
+            this.props.dispatch(fetchUserDetails(token));
         } else {
             this.props.history.push('/')
         }
-
     }
-
     render() {
         return (
             <div className="Component">
@@ -36,7 +34,7 @@ class Buzzcomponent extends React.Component {
                         <LeftComponent/>
                     </div>
                     <div className="right-part">
-                        <Route path="/buzz/create-post" component={Createpost}/>
+                        <Route path="/buzz/create-post" render={(props)=><{...props} token={jwt_token} Createpost/>}/>
                         <Route path="/buzz/complaints" component={Complaint}/>
                     </div>
                 </div>

@@ -12,6 +12,8 @@ const webpackconfig = require("../../webpack.config");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
+const jwt_token=require("jsonwebtoken");
+process.env.SECRET_KEY='iwillprovemyself';
 
 app.use(express.static('./src/server/public'));
 app.use('/buzz', express.static('./dist'));
@@ -43,7 +45,7 @@ authenticate = (req, res, next) => {
         }
     }
 };
-app.get("/*", authenticate, (req, res) => {
+app.get("/*", (req, res) => {
     res.sendFile(path.resolve('src/client', './index.html'));
 });
 const Port = process.env.PORT || 3000;

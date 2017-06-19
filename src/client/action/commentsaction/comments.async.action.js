@@ -34,12 +34,15 @@ export const createComment = (comment, postid) => {
 };
 
 
-export const fetchCommentsDetails = () => {
+export const fetchCommentsDetails = (jwt_token) => {
     return (dispatch) => {
         dispatch(fetchCommentsStarted());
         fetch("/comment", {
             credentials: "include",
             method: "get",
+            headers:{
+                'authorization':jwt_token,
+            }
         })
         .then(response => response.json())
         .then(comments => {

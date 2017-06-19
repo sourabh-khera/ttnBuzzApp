@@ -10,7 +10,7 @@ import "./css/buzzComponent.css"
 import "./css/profile.css"
 import "./css/complaint.css"
 import "./css/footer.css"
-import "../server/public/views/error.css"
+//import "../server/public/views/error.css"
 import {BrowserRouter as Router,Route} from "react-router-dom"
 import BuzzComponent from "../client/components/Buzz/BuzzComponent"
 

@@ -21,7 +21,8 @@ export const createLikesAndDislikes = (postid, status) => {
             method: "post",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+
             },
             body: JSON.stringify({data: postid, status: status})
         })
@@ -35,13 +36,16 @@ export const createLikesAndDislikes = (postid, status) => {
 };
 
 
-export const fetchLikesAndDiislikesDetails = () => {
+export const fetchLikesAndDiislikesDetails = (jwt_token) => {
 
     return (dispatch) => {
         dispatch(fetchLikesAndDislikeStarted());
         fetch("/like", {
             credentials: "include",
             method: "get",
+            headers:{
+                'authorization':jwt_token,
+            }
         })
             .then(response => response.json())
             .then(postLikes => {

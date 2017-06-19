@@ -2,7 +2,7 @@ const commentService = require("./comment.service");
 const Joi = require("joi");
 const validateSchema = require("./comment.joi.schema")
 exports.createComment = (req, res) => {
-    const userid = req.user._id;
+    const userid = req.user_id;
     const postid = req.body.id;
     const comment = req.body.data;
     console.log(userid, postid, comment);

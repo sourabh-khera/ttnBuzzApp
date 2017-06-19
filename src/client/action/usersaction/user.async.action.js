@@ -9,15 +9,15 @@ import {
     setLogginUser,
 } from "./user.actions"
 import fetch from "isomorphic-fetch";
-export const fetchUserDetails = () => {
+export const fetchUserDetails = (jwt_token) => {
 
     return (dispatch) => {
         dispatch(fetchUserStarted());
         fetch("/user", {
-            credentials: "include",
             method: "get",
             headers: {
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
+                'authorization':jwt_token,
             },
         })
             .then(response => response.json())

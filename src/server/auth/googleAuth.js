@@ -38,23 +38,7 @@ exports.useGoogle = () => {
                 return done(null);
             }
         }));
-
     passport.serializeUser((userdata, done)=> {
         done(null, userdata._id);
     });
-    passport.deserializeUser((_id, done)=> {
-        userSchema.findById({
-            _id
-        }, (err, user) => {
-            if (err) {
-                return done(null)
-            } else {
-                return done(null, user)
-            }
-
-
-        })
-
-    });
-
 };

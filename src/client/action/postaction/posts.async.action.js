@@ -27,7 +27,7 @@ export const createPost = (postData) => {
         })
     }
 };
-export const fetchPostDetails = (skip, limit) => {
+export const fetchPostDetails = (skip, limit,jwt_token) => {
 
 
     const path = "/post";
@@ -41,6 +41,9 @@ export const fetchPostDetails = (skip, limit) => {
         fetch(url, {
             credentials: "include",
             method: "get",
+            headers:{
+                'authorization':jwt_token
+            }
         })
             .then(response => response.json())
             .then(data => {
