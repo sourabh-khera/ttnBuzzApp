@@ -11,13 +11,16 @@ import {
 } from "./posts.actions"
 import fetch from "isomorphic-fetch";
 
-export const createPost = (postData) => {
+export const createPost = (postData,jwt_token) => {
     return (dispatch) => {
         dispatch(createPostStarted());
         fetch("/post", {
             credentials: "include",
             method: "post",
             body: postData,
+            headers:{
+                'authorization':jwt_token
+            }
         })
             .then(response => response.json())
             .then(data => {

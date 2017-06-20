@@ -43,6 +43,7 @@ class Creatbuzz extends React.Component {
         this.setState({post_value: event.target.value})
     };
     onCreatePost = (e) => {
+        const token=localStorage.getItem('token');
         e.preventDefault();
         if (!this.state.postBody.trim() && !this.state.image_path) {
             this.showErrorAlert();
@@ -61,7 +62,7 @@ class Creatbuzz extends React.Component {
         multipartFormData.append("postBody", this.state.postBody.trim());
         multipartFormData.append("post_value", this.state.post_value);
         multipartFormData.append("image_path", this.state.image_path);
-        this.props.dispatch(createPost(multipartFormData));
+        this.props.dispatch(createPost(multipartFormData,token));
         this.setState({postBody: "", image_path: ""})
     };
 

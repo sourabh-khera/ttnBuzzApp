@@ -31,20 +31,20 @@ app.use(webpackmiddleware(compiler, {
 router(app);
 
 
-authenticate = (req, res, next) => {
-    if (req.url == "/") {
-        if (req.user) {
-            res.redirect("/buzz/create-post")
-        }
-        next();
-    } else {
-        if (req.user) {
-            next()
-        } else {
-            res.redirect("/")
-        }
-    }
-};
+// authenticate = (req, res, next) => {
+//     if (req.url == "/") {
+//         if (req.user_id) {
+//             res.redirect("/buzz/create-post")
+//         }
+//         next();
+//     } else {
+//         if (req.user_id) {
+//             next()
+//         } else {
+//             res.redirect("/")
+//         }
+//     }
+// };
 app.get("/*", (req, res) => {
     res.sendFile(path.resolve('src/client', './index.html'));
 });

@@ -22,34 +22,30 @@ class Createpost extends React.Component {
     pageEnd = (event) => {
         if (document.body.scrollHeight === document.body.scrollTop + window.innerHeight) {
             this.setState({skip: this.state.skip + 10},() => {
-                this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit,this.props.token))})
+                this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit))})
         }
     };
 
     componentDidMount() {
-        console.log('props-------',this.props);
+        const token=localStorage.getItem('token');
         document.addEventListener('scroll', this.pageEnd);
         if(!this.props.postData.length){
-            this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit,this.props.token));
-            this.props.dispatch(fetchLikesAndDiislikesDetails(this.props.token));
-            this.props.dispatch(fetchCommentsDetails(this.props.token));
+            this.props.dispatch(fetchPostDetails(this.state.skip, this.state.limit,token));
+            this.props.dispatch(fetchLikesAndDiislikesDetails(token));
+            this.props.dispatch(fetchCommentsDetails(token));
         }
 
     }
     componentWillUnmount() {
         document.removeEventListener('scroll', this.pageEnd, true);
     }
-
     render() {
+        const renderPosts = this.props.postData.map((post, i) => (<Post posts={post} key={i}/>));
         return (
             <div>
                 <ScrollUpButton />
                 <CreateBuzz/>
-                {
-                    this.props.postData.map((post, i) => (
-                        <Post posts={post} key={i}/>
-                    ))
-                }
+                {renderPosts}
             </div>
         )
     }

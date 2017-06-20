@@ -10,7 +10,7 @@ exports.createComplaint = (req, res) => {
     const complaintType = req.body.complaintType;
     const complaintBody = req.body.complaintBody.trim();
     const department = req.body.Department;
-    const userId = req.user._id;
+    const userId = req.user_id;
 
     Joi.validate({
         complaintType: complaintType,
@@ -23,7 +23,7 @@ exports.createComplaint = (req, res) => {
         } else {
             complaintservice.complaint(complaintType, complaintBody, department, userId)
                 .then(
-                    complaintservice.getUserComplaint(req.user)
+                    complaintservice.getUserComplaint(userId)
                 ).then((data) => {
                 res.send({
                     data
@@ -39,7 +39,8 @@ exports.createComplaint = (req, res) => {
 
 
 exports.fetchComplaints = (req, res) => {
-    complaintservice.getUserComplaint(req.user)
+    const userId=req.user_id;
+    complaintservice.getUserComplaint(userId)
         .then((data) => {
             res.send({
                 data

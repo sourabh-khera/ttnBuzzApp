@@ -4,16 +4,7 @@
 const likeController = require("./likes.controller");
 
 
-const loggedIn = (req, res, next) => {
-
-    if (req.user) {
-        next()
-    } else {
-        res.sendStatus("unauthorised access", 403);
-    }
-};
-
-module.exports = (app) => {
+module.exports = (app,loggedIn) => {
 
     app.post("/like", loggedIn,likeController.createLike);
     app.get("/like", loggedIn, likeController.fetchlikesData);

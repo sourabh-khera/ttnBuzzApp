@@ -16,8 +16,8 @@ class Createcomplaint extends React.Component {
     }
 
     componentDidMount(){
-        console.log('called')
-        this.props.dispatch(fetchComplaint())
+        const token=localStorage.getItem('token');
+        this.props.dispatch(fetchComplaint(token))
     }
     alertOptions = {
         position: 'top right',
@@ -46,7 +46,8 @@ class Createcomplaint extends React.Component {
             this.showErrorAlert();
             return;
         }
-        this.props.dispatch(createComplaint(complaintData));
+        const token=localStorage.getItem('token');
+        this.props.dispatch(createComplaint(complaintData,token));
         this.showSuccessAlert();
         this.setState({complaintBody: ""})
     };

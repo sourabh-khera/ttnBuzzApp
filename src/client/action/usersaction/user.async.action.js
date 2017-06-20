@@ -10,7 +10,7 @@ import {
 } from "./user.actions"
 import fetch from "isomorphic-fetch";
 export const fetchUserDetails = (jwt_token) => {
-
+console.log("user token----------",jwt_token);
     return (dispatch) => {
         dispatch(fetchUserStarted());
         fetch("/user", {

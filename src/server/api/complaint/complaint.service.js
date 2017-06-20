@@ -24,11 +24,11 @@ exports.complaint = (complaintType,complaintBody, department,userId) => {
 };
 
 
-exports.getUserComplaint = (user) => {
+exports.getUserComplaint = (user_id) => {
     return new Promise((resolve, reject) => {
         ComplaintSchema
             .find({
-                userId: user._id
+                userId: user_id
             })
             .populate('userId')
             .exec((err, data) => {

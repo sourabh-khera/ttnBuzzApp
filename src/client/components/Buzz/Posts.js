@@ -31,15 +31,17 @@ class Post extends React.Component {
     };
 
     likes = (postid, status) => {
+        const token=localStorage.getItem('token');
         this.setState({disableLike: true, disableDisLike: false});
-        this.props.dispatch(createLikesAndDislikes(postid, status))
+        this.props.dispatch(createLikesAndDislikes(postid,status,token))
     };
 
     disLikes = (postid, status) => {
+        const token=localStorage.getItem('token');
         this.setState({disableDisLike: true}, () => {
             this.setState({disableLike: false})
         });
-        this.props.dispatch(createLikesAndDislikes(postid, status))
+        this.props.dispatch(createLikesAndDislikes(postid,status,token))
     };
 
     toggleComment = () => {
@@ -56,11 +58,12 @@ class Post extends React.Component {
         this.setState({commentBody: event.target.value})
     };
     postComment = (comment, postid) => {
+        const token=localStorage.getItem('token');
         if (!this.state.commentBody.trim()) {
             this.showErrorAlert();
             return
         }
-        this.props.dispatch(createComment(comment, postid));
+        this.props.dispatch(createComment(comment,postid,token));
         this.setState({commentBody: "", commentTextArea: false})
     };
 

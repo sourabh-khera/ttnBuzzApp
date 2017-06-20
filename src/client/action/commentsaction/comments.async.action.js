@@ -12,7 +12,7 @@ import {
 import fetch from "isomorphic-fetch";
 
 
-export const createComment = (comment, postid) => {
+export const createComment = (comment, postid,jwt_token) => {
     return (dispatch) => {
         dispatch(createCommentStarted());
         fetch("/comment", {
@@ -20,7 +20,9 @@ export const createComment = (comment, postid) => {
             method: "post",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization':jwt_token,
+
             },
             body: JSON.stringify({data: comment, id: postid})
         })
@@ -35,6 +37,7 @@ export const createComment = (comment, postid) => {
 
 
 export const fetchCommentsDetails = (jwt_token) => {
+    console.log("token -----------",jwt_token);
     return (dispatch) => {
         dispatch(fetchCommentsStarted());
         fetch("/comment", {

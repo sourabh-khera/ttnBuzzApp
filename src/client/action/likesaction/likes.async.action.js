@@ -13,7 +13,7 @@ import {
 } from "./likes.action"
 import fetch from "isomorphic-fetch";
 
-export const createLikesAndDislikes = (postid, status) => {
+export const createLikesAndDislikes = (postid, status,jwt_token) => {
     return (dispatch) => {
         dispatch(createLikeAndDislikeStarted());
         fetch("/like", {
@@ -22,7 +22,7 @@ export const createLikesAndDislikes = (postid, status) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-
+                'authorization':jwt_token,
             },
             body: JSON.stringify({data: postid, status: status})
         })

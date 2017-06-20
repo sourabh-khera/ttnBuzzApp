@@ -2,32 +2,28 @@ import React from 'react'
 import LeftComponent from "./Leftcomponent"
 import Createpost from "./createPost"
 import Banner from "./Banner"
-import {connect} from "react-redux"
 import Footer from "./Footer"
 import Complaint from "../complaints/createComplaint"
-import {Route} from "react-router-dom"
-import {
-    fetchUserDetails,
-} from "../../action/index"
-let jwt_token;
+import { Route } from "react-router-dom"
+import { fetchUserDetails } from "../../action/index"
+import authenticate from '../HOC/authenticate'
 
-class Buzzcomponent extends React.Component {
+class BuzzComponent extends React.Component {
     componentDidMount() {
         let token;
         const tokenString = document.cookie.split(',').find((cookie) => cookie.includes('token'));
         if (tokenString) {
             token = tokenString.split('=')[1];
-            jwt_token=token;
         }
         if (token) {
-            this.props.dispatch(fetchUserDetails(token));
+          this.props.dispatch(fetchUserDetails(token));
+          localStorage.setItem('token',token);
         } else {
             this.props.history.push('/')
         }
     }
     render() {
 
-        console.log(jwt_token, '########################3')
         return (
             <div className="Component">
                 <Banner history={this.props.history}/>
@@ -36,8 +32,8 @@ class Buzzcomponent extends React.Component {
                         <LeftComponent/>
                     </div>
                     <div className="right-part">
-                        <Route path="/buzz/create-post" render={(props)=> (<Createpost {...props} token={jwt_token}/>)}/>
-                        <Route path="/buzz/complaints" component={Complaint}/>
+                        <Route path="/buzz/create-post" component={authenticate(Createpost)}/>
+                        <Route path="/buzz/complaints" component={authenticate(Complaint)}/>
                     </div>
                 </div>
                 <Footer/>
@@ -45,4 +41,5 @@ class Buzzcomponent extends React.Component {
         )
     }
 }
-export default connect()(Buzzcomponent)
+
+export default BuzzComponent

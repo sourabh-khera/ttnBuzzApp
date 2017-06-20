@@ -13,19 +13,17 @@ import {
 } from "./complaints.action";
 import fetch from "isomorphic-fetch";
 
-export const createComplaint = (ComplaintData) => {
-    console.log("-------------",ComplaintData);
-
+export const createComplaint = (ComplaintData,jwt_token) => {
     return (dispatch) => {
         dispatch(createComplaintStarted());
         fetch("/complaint", {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization':jwt_token,
             },
             body:JSON.stringify(ComplaintData),
-            credentials:"include"
         })
             .then(response => response.json())
             .then(complaint => {
@@ -39,12 +37,14 @@ export const createComplaint = (ComplaintData) => {
 };
 
 
-export const fetchComplaint = () => {
+export const fetchComplaint = (jwt_token) => {
     return (dispatch) => {
         dispatch(fetchComplaintStarted());
         fetch("/complaint", {
             method: 'get',
-            credentials:"include",
+            headers:{
+                'authorization':jwt_token
+            }
         })
             .then(response => response.json())
             .then(complaint => {
