@@ -24146,8 +24146,7 @@ var Creatbuzz = function (_React$Component) {
             }
             if (_this.state.file) {
                 console.log("split--------", _this.state.file);
-                var imageExtension = _this.state.file.split('.')[1];
-                console.log("image--------", imageExtension);
+                var imageExtension = _this.state.file.name.split('.')[1];
                 if (imageExtension == 'jpg' || imageExtension == 'gif' || imageExtension == 'png') {
                     //do nothing
                 } else {
@@ -24225,7 +24224,7 @@ var Creatbuzz = function (_React$Component) {
                                 _react2.default.createElement(
                                     "div",
                                     { className: "imCamera" },
-                                    _react2.default.createElement("input", { type: "file", name: "file", onChange: this.onImageChange })
+                                    _react2.default.createElement("input", { type: "file", name: "file", onChange: this.onImageChange, onClick: this.setState({ file: null }) })
                                 ),
                                 _react2.default.createElement(_reactAlert2.default, _extends({ ref: function ref(a) {
                                         return _this2.msg = a;

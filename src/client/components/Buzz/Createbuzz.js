@@ -124,3 +124,7 @@ class Creatbuzz extends React.Component {
 }
 const CreateBuzzContainer = connect(state => state)(Creatbuzz);
 export default CreateBuzzContainer
+
+
+
+// onClick={this.setState({file:null})
