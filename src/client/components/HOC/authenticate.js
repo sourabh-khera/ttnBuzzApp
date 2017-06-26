@@ -1,13 +1,16 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
-import Login from '../Login'
+import { Route, Redirect } from 'react-router-dom'
 
 export default function (Component) {
-    const token = localStorage.getItem('token');
-    if (token) {
-        return React.createElement(Component)
-    } else {
-        return (<Route path="/" component={Login}/>)
+    return class HOC extends React.Component {
+        render () {
+            const token = localStorage.getItem('token');
+            if (token) {
+                return <Component {...this.props} />
+            } else {
+                return (<Redirect to="/" />)
+            }
+        }
     }
 }
 
