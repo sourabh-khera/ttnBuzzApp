@@ -10,9 +10,8 @@ const userRoute = require("../api/users/users.route");
 const likesRoute = require("../api/likes/likes.route");
 const complaintRoute = require("../api/complaint/complaint.route");
 const jwt_token = require("jsonwebtoken");
-
 const loggedIn = (req, res, next) => {
-    const token = req.headers.authorization;
+const token = req.headers.authorization;
     if (token) {
         jwt_token.verify(token, process.env.SECRET_KEY, (err, decode) => {
                 if (err) {
